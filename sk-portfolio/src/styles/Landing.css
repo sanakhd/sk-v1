@@ -1,71 +1,107 @@
 #landing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding-left: 75%;
-  padding-top: 23%;
-  min-height: 100vh;
-  background-color: black;
+  padding-top: 26%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
-
+.main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .title {
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 200;
   font-size: 30px;
 }
 
-.body{
+.name {
+  color: #fcf3d7;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.body {
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 200;
   font-size: 14px;
   padding-top: 2%;
 }
 
+.text-focus-in {
+	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
 
-
+@-webkit-keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
 
 @media only screen and (max-width: 600px) {
-  #gazi-model {
-    display: none;
-  }
-
-  #intro {
+  #landing {
     min-height: unset;
     padding-left: unset;
     margin: 0;
     align-items: center;
   }
 
-  .intro-title {
+  .title {
     font-size: 46px;
   }
-  .intro-name {
-    font-size: 46px;
-  }
+}
 
-  .Typist {
-    font-size: 36px;
-  }
-
-  .intro-subtitle {
+/*Ajust for larger screen*/
+@media only screen and (max-width: 600px) {
+  #landing {
+    min-height: unset;
+    padding-left: unset;
     margin: 0;
-    font-size: 28px;
-    text-align: center;
+    align-items: center;
   }
 
-  .intro-desc {
-    font-size: 18px;
-    text-align: center;
-    max-width: unset;
-    padding-bottom: 40px;
+  .title {
+    font-size: 46px;
   }
 
-  .intro-contact {
-    font-size: 16px;
-    align-self: center;
-    margin-left: 30%;
+  .body {
+    font-size: 24px;
+    text-align: left;
   }
 }

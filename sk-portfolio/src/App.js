@@ -1,9 +1,8 @@
 // import logo from './logo.svg';
 // import './App.css';
 
-import Navbar from './components/Navbar';
-
-import Landing from './components/Landing';
+import Landing from "./components/Landing";
+import CustomNavbar from "./components/CustomNavbar";
 
 function App() {
   return (
@@ -24,8 +23,8 @@ function App() {
     //   </header>
     // </div>
     <div>
-      <Navbar/>
-      <Landing/>
+      <CustomNavbar/>
+      <Landing />
     </div>
   );
 }

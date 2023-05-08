@@ -1,18 +1,33 @@
 import React from "react";
-// import landing from "../images/landing.png";
+import space from "../images/space.mp4";
+import space2 from "../images/space2.mp4";
 
 import "../styles/Landing.css";
+import Typewriter from "typewriter-effect";
 
 const Landing = () => {
   return (
-    <div id="landing">
+    <div className="main">
+      <video src={space} autoPlay loop muted />
+      <div id="landing">
         <span className="title">
-            hello, I'm <br/>
-            Sana Khademi.
+          <span>hello, I'm</span> <br />
+          <span className="name">
+          <span className="text-focus-in">Sana Khademi.</span>
+          </span>
         </span>
         <span className="body">
-            designing a world I want to see
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter
+                .pauseFor(3000)
+                .start()
+                .typeString("designing a world I want to see")
+                .pauseFor(2500);
+            }}
+          />
         </span>
+      </div>
     </div>
   );
 };
