@@ -3,6 +3,7 @@
 
 import Landing from "./components/Landing";
 import CustomNavbar from "./components/CustomNavbar";
+import About from "./components/About";
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
     //   </header>
     // </div>
     <div>
-      <CustomNavbar/>
+      <CustomNavbar />
       <Landing />
+      <About />
     </div>
   );
 }

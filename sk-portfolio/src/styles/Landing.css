@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 75%;
-  padding-top: 26%;
+  padding-left: 72%;
+  padding-top: 24.8%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 .main {
@@ -26,21 +26,21 @@ video {
   color: white;
   font-family: "Inter", sans-serif;
   font-weight: 200;
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .name {
   color: #fcf3d7;
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .body {
   color: white;
   font-family: "Inter", sans-serif;
   font-weight: 200;
-  font-size: 14px;
+  font-size: 20px;
   padding-top: 2%;
 }
 
