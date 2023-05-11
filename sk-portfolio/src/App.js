@@ -4,6 +4,7 @@
 import Landing from "./components/Landing";
 import CustomNavbar from "./components/CustomNavbar";
 import About from "./components/About";
+import Projects from "./components/Projects";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <CustomNavbar />
       <Landing />
       <About />
+      <Projects/>
     </div>
   );
 }

@@ -7,16 +7,16 @@ import Typewriter from "typewriter-effect";
 
 const Landing = () => {
   return (
-    <div className="main">
+    <div className="landing-main">
       <video src={space} autoPlay loop muted />
       <div id="landing">
-        <span className="title">
+        <span className="landing-title">
           <span>hello, I'm</span> <br />
-          <span className="name">
+          <span className="landing-name">
           <span className="text-focus-in">Sana Khademi.</span>
           </span>
         </span>
-        <span className="body">
+        <span className="landing-body">
           <Typewriter
             onInit={(typewriter) => {
               typewriter
