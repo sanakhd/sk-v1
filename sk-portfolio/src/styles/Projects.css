@@ -22,6 +22,7 @@
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  transform: rotateY(90deg);
 }
 
 /* NEPTUNE */
@@ -54,7 +55,7 @@
   position: absolute;
   top: -24px;
   left: 73%;
-  color: #6897FF;
+  color: #6897ff;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 22px;
@@ -105,7 +106,7 @@
   transform: translateX(-50%);
   border-radius: 100%;
   z-index: 2;
-  max-width: 920px; 
+  max-width: 920px;
   max-height: 920px;
 }
 
@@ -130,7 +131,7 @@
   position: absolute;
   top: -24px;
   left: 10%;
-  color: #B68E68;
+  color: #b68e68;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 22px;
@@ -147,7 +148,6 @@
   padding-left: 10%;
 }
 
-
 .oval-shapes-2 {
   display: flex;
   flex-wrap: wrap;
@@ -161,7 +161,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
-  background-color:rgba(182, 142, 104, 0.8);
+  background-color: rgba(182, 142, 104, 0.8);
   color: white;
   font-family: "Inter", sans-serif;
   font-weight: 300;
@@ -170,7 +170,7 @@
 }
 
 .oval-shape-2:hover {
-  background-color: #B68E68;
+  background-color: #b68e68;
   transform: scale(1.1) perspective(800px) rotateY(10deg);
 }
 
@@ -224,7 +224,6 @@
   padding-left: 12%;
 }
 
-
 .oval-shapes-3 {
   display: flex;
   flex-wrap: wrap;
@@ -238,7 +237,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
-  background-color:rgba(134, 134, 134, 0.8); 
+  background-color: rgba(134, 134, 134, 0.8);
   color: white;
   font-family: "Inter", sans-serif;
   font-weight: 300;
@@ -249,6 +248,40 @@
 .oval-shape-3:hover {
   background-color: #868686;
   transform: scale(1.1) perspective(800px) rotateY(10deg);
+}
+
+.project-line-other-container {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+
+.project-other-title {
+  font-size: 24px;
+  color: #fff;
+  padding: 10px;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+}
+
+.square-shapes {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.square-shape {
+  width: 200px;
+  height: 200px;
+  background-color: #ffffff;
+  opacity: 0.7;
+  margin: 0 10px;
+  border-radius: 20%;
 }
 
 

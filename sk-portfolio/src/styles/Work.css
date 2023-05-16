@@ -1,0 +1,123 @@
+#work {
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    padding-top: 10%;
+    justify-content: center;
+  }
+  
+  .work-container {
+    position: relative;
+  }
+  
+  .work-title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 300;
+    font-family: "Inter", sans-serif;
+    position: relative;
+  }
+  
+  .work-title::before,
+  .work-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 50%;
+    height: 1px;
+    background-color: #fff;
+  }
+  
+  .work-title::before {
+    left: -50%;
+  }
+  
+  .work-title::after {
+    right: -50%;
+  }
+  
+  .workbar-container {
+    position: absolute;
+    top: 120px; /* Adjust the top position as needed */
+    width: 200%;
+    transform: translateX(-50%);
+    left: -100px; /* Adjust the distance from the left */
+  }
+  
+  .workbar {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adjust the gap between items */
+  }
+  
+  .workbar-item {
+    margin-bottom: 40px;
+  }
+  
+  .workbar-item a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 300;
+    font-family: "Inter", sans-serif;
+    padding-left: 5%;
+  }
+  
+  .workbar-item a:hover {
+    color: #6897ff;
+  }
+  
+  .vertical-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    background-color: #fff;
+    height: 100%;
+  }
+  
+  .rectangle {
+    position: absolute;
+    top: 42%;
+    right: -400px;
+    width: 600px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.87);
+    border-radius: 4px;
+    transform: translateY(-50%);
+    display: flex;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .job {
+    /* Adjust the font, font size, font weight, and text alignment as needed */
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding-left: 4%;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  .date {
+    /* Adjust the font, font size, font weight, and text alignment as needed */
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 3;
+    color: #24679a;
+  }
+  
+  .arrow-container {
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+  }
+  
+  .arrow-icon {
+    margin-top: 5px; /* Adjust the vertical spacing between the text and icon as needed */
+  }

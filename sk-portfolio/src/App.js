@@ -7,6 +7,8 @@ import Landing from "./components/Landing";
 import CustomNavbar from "./components/CustomNavbar";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import Work from "./components/Work";
+
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
     </Element>
     <Element name="projects">
       <Projects />
+    </Element>
+    <Element name="work">
+      <Work/>
     </Element>
   </div>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "../styles/Projects.css";
 import stars from "../images/stars.png";
+import starsHD from "../images/starsHD.jpeg";
 import neptune from "../images/neptune.png";
 import jupiter from "../images/jupiter.png";
 import mercury from "../images/mercury.png";
@@ -67,6 +68,15 @@ const Projects = () => {
           <div className="oval-shape-3">Python</div>
           <div className="oval-shape-3">JavaSpring Boot</div>
           <div className="oval-shape-3">MongoDB</div>
+        </div>
+      </div>
+      <div className="project-line-other-container">
+        <div className="project-other-title">other noteworthy projects</div>
+        <div className="square-shapes">
+          <div className="square-shape">1</div>
+          <div className="square-shape">2</div>
+          <div className="square-shape">3</div>
+          <div className="square-shape">4</div>
         </div>
       </div>
     </div>

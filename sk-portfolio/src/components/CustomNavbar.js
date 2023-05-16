@@ -58,13 +58,13 @@ const CustomNavbar = () => {
             <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
               <Link
                 activeClass="active"
-                to="contact"
+                to="work"
                 spy={true}
                 smooth={true}
                 offset={-70}
                 duration={500}
               >
-                contact&nbsp;&nbsp;&nbsp;
+                work&nbsp;&nbsp;&nbsp;
               </Link>
             </Nav.Item>
           </Nav>

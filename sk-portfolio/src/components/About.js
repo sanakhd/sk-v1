@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "../styles/About.css";
 import "../styles/Card.css";
-import sk from "../images/sk.JPG";
-import rocket from "../images/rocket.png";
 import Typewriter from "typewriter-effect";
+
+import window from "../images/window.png";
+import astronautSit from "../images/astronautSit.png";
 
 const About = () => {
   return (
     <div id="about">
-      <div className="card">
-        <img src={rocket} className="about-rocket" />
-        <span className="about-title">A Glimpse Into My World</span>
+      <div className="about-main">
         <div className="about-content">
+          <div className="about-title">A GLIMPSE INTO MY WORLD</div>
+        </div>
+        <img src={window} className="about-window" />
+      </div>
+      <div className="card">
+        <div className="content">
           <span className="about-text-1">
             I'm a <span className="about-bold">software engineer</span> based in
             Toronto, Canada, with a passion for{" "}
@@ -68,7 +73,7 @@ const About = () => {
           </span>
         </div>
       </div>
-      <img src={sk} className="about-image" />
+      <img src={astronautSit} className="about-astronaut" alt="Astronaut" />
     </div>
   );
 };
