@@ -1,5 +1,7 @@
 // import logo from './logo.svg';
 // import './App.css';
+import React from "react";
+import { Element } from "react-scroll";
 
 import Landing from "./components/Landing";
 import CustomNavbar from "./components/CustomNavbar";
@@ -8,28 +10,18 @@ import Projects from "./components/Projects";
 
 function App() {
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
     <div>
-      <CustomNavbar />
+    <CustomNavbar />
+    <Element name="landing">
       <Landing />
+    </Element>
+    <Element name="about">
       <About />
-      <Projects/>
-    </div>
+    </Element>
+    <Element name="projects">
+      <Projects />
+    </Element>
+  </div>
   );
 }
 

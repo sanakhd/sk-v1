@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import "../styles/About.css";
+import "../styles/Card.css";
 import sk from "../images/sk.JPG";
 import rocket from "../images/rocket.png";
 import Typewriter from "typewriter-effect";
@@ -8,9 +9,9 @@ import Typewriter from "typewriter-effect";
 const About = () => {
   return (
     <div id="about">
-      <div className="about-main">
+      <div className="card">
         <img src={rocket} className="about-rocket" />
-        <span className="about-title">---A Glimpse Into My World---</span>
+        <span className="about-title">A Glimpse Into My World</span>
         <div className="about-content">
           <span className="about-text-1">
             I'm a <span className="about-bold">software engineer</span> based in
@@ -67,7 +68,7 @@ const About = () => {
           </span>
         </div>
       </div>
-      <img src={sk} className="about-image fade-in" />
+      <img src={sk} className="about-image" />
     </div>
   );
 };

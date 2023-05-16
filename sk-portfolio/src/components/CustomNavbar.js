@@ -1,8 +1,16 @@
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav } from "rsuite";
 import "../styles/CustomNavbar.css";
 import logo from "../images/logo.ico";
+import { Link } from "react-scroll";
 
 const CustomNavbar = () => {
+  const [showItems, setShowItems] = useState(false);
+
+  useEffect(() => {
+    setShowItems(true);
+  }, []);
+
   return (
     <div className="navbar">
       <Nav appearance="subtle">
@@ -11,14 +19,59 @@ const CustomNavbar = () => {
             <img src={logo} alt="Logo" className="navbar-logo" />
           </Navbar.Brand>
           <Nav className="navbar-items">
-            <Nav.Item>about&nbsp;&nbsp;&nbsp;&nbsp;</Nav.Item>
-            <Nav.Item>projects&nbsp;&nbsp;&nbsp;&nbsp;</Nav.Item>
-            <Nav.Item>work&nbsp;&nbsp;&nbsp;&nbsp;</Nav.Item>
-            <Nav.Item>contact&nbsp;&nbsp;&nbsp;&nbsp;</Nav.Item>
+            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
+              <Link
+                activeClass="active"
+                to="landing"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                home&nbsp;&nbsp;&nbsp;
+              </Link>
+            </Nav.Item>
+            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
+              <Link
+                activeClass="active"
+                to="about"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                about&nbsp;&nbsp;&nbsp;
+              </Link>
+            </Nav.Item>
+            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
+              <Link
+                activeClass="active"
+                to="projects"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                projects&nbsp;&nbsp;&nbsp;
+              </Link>
+            </Nav.Item>
+            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
+              <Link
+                activeClass="active"
+                to="contact"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                contact&nbsp;&nbsp;&nbsp;
+              </Link>
+            </Nav.Item>
           </Nav>
         </Navbar>
       </Nav>
     </div>
   );
 };
+
 export default CustomNavbar;
