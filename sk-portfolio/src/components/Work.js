@@ -163,17 +163,17 @@ const Work = () => {
           <div className="vertical-line"></div>
           <ul className="workbar">
             <li className="workbar-item">
-              <a href="#work1" onClick={() => handleWorkClick("scotiabank")}>
+              <a href="#workscotiabank" onClick={() => handleWorkClick("scotiabank")}>
                 SCOTIABANK
               </a>
             </li>
             <li className="workbar-item">
-              <a href="#work2" onClick={() => handleWorkClick("skinopathy")}>
+              <a href="#workskinopathy" onClick={() => handleWorkClick("skinopathy")}>
                 SKINOPATHY
               </a>
             </li>
             <li className="workbar-item">
-              <a href="#work3" onClick={() => handleWorkClick("turtlejacks")}>
+              <a href="#workturtlejacks" onClick={() => handleWorkClick("turtlejacks")}>
                 TURTLE JACKS
               </a>
             </li>
@@ -181,7 +181,7 @@ const Work = () => {
               className="workbar-item"
               onClick={() => handleWorkClick("discoverygymnastics")}
             >
-              <a href="#work4">DISCOVERY GYMNASTICS</a>
+              <a href="#workdiscoverygymnastics">DISCOVERY GYMNASTICS</a>
             </li>
           </ul>
         </div>
