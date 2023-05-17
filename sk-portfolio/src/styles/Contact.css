@@ -1,0 +1,36 @@
+#contact {
+  background-image: url("../images/touch.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 28px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.oval-contact {
+  width: 130px;
+  height: 40px;
+  background-color: #ffffff;
+  opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.oval-text {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: black;
+}

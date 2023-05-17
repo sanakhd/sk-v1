@@ -8,6 +8,7 @@ import CustomNavbar from "./components/CustomNavbar";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Work from "./components/Work";
+import Contact from "./components/Contact";
 
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
     </Element>
     <Element name="work">
       <Work/>
+    </Element>
+    <Element name="contact">
+      <Contact/>
     </Element>
   </div>
   );

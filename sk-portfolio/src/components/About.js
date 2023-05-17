@@ -6,6 +6,7 @@ import Typewriter from "typewriter-effect";
 
 import window from "../images/window.png";
 import astronautSit from "../images/astronautSit.png";
+import astro from "../images/astro.png";
 
 const About = () => {
   return (
@@ -73,7 +74,7 @@ const About = () => {
           </span>
         </div>
       </div>
-      <img src={astronautSit} className="about-astronaut" alt="Astronaut" />
+      <img src={astro} className="about-astronaut" alt="Astronaut" />
     </div>
   );
 };
