@@ -5,8 +5,8 @@ import "../styles/Card.css";
 import Typewriter from "typewriter-effect";
 
 import window from "../images/window.png";
-import astronautSit from "../images/astronautSit.png";
 import astro from "../images/astro.png";
+import float from "../images/float.png"
 
 const About = () => {
   return (
@@ -15,7 +15,7 @@ const About = () => {
         <div className="about-content">
           <div className="about-title">A GLIMPSE INTO MY WORLD</div>
         </div>
-        <img src={window} className="about-window" />
+        {/* <img src={window} className="about-window" /> */}
       </div>
       <div className="card">
         <div className="content">
@@ -74,7 +74,7 @@ const About = () => {
           </span>
         </div>
       </div>
-      <img src={astro} className="about-astronaut" alt="Astronaut" />
+      <img src={float} className="about-astronaut" alt="Astronaut" />
     </div>
   );
 };

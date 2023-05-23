@@ -8,13 +8,14 @@
   max-width: 650px; /* Adjust the width as desired */
   height: 650px; /* Adjust the height as desired */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  margin-left: 50%;
+  margin-top: 1%;
+  margin-left: 2%;
   overflow: hidden;
   border-radius: 1000px;
   transform-style: preserve-3d; /* Enable 3D transformations */
   transform: perspective(1000px) rotateX(0deg) rotateY(0deg); /* Apply initial perspective and rotations */
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  padding: 20px; /* Add padding to create space between the text and card edges */
+  padding: 30px; /* Add padding to create space between the text and card edges */
   box-sizing: border-box; /* Include padding in the total width and height */
 }
 

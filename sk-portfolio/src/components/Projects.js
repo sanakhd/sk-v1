@@ -9,7 +9,7 @@ import mercury from "../images/mercury.png";
 const Projects = () => {
   return (
     <div id="projects" className="projects-container">
-      <h2 className="projects-heading">Some Things I've Built...</h2>
+      <div className="projects-heading">Some Things I've Built...</div>
       <img src={stars} className="project-stars" alt="Stars" />
       <img src={neptune} className="project-neptune" alt="Neptune" />
       <div className="project-line-1-container">
