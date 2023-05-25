@@ -22,7 +22,6 @@ video {
   padding-left: 72%;
   padding-top: 24.8%;
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
 

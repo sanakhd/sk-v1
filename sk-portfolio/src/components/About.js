@@ -1,21 +1,20 @@
 import React from "react";
+import Typewriter from "typewriter-effect";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 import "../styles/About.css";
 import "../styles/Card.css";
-import Typewriter from "typewriter-effect";
 
-import window from "../images/window.png";
-import astro from "../images/astro.png";
 import float from "../images/float.png"
 
 const About = () => {
+
   return (
     <div id="about">
       <div className="about-main">
         <div className="about-content">
           <div className="about-title">A GLIMPSE INTO MY WORLD</div>
         </div>
-        {/* <img src={window} className="about-window" /> */}
       </div>
       <div className="card">
         <div className="content">

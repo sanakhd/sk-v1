@@ -3,6 +3,7 @@ import { Navbar, Nav } from "rsuite";
 import "../styles/CustomNavbar.css";
 import logo from "../images/logo.ico";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
 
 const CustomNavbar = () => {
   const [showItems, setShowItems] = useState(false);
@@ -20,52 +21,60 @@ const CustomNavbar = () => {
           </Navbar.Brand>
           <Nav className="navbar-items">
             <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <Link
-                activeClass="active"
-                to="landing"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                home&nbsp;&nbsp;&nbsp;
-              </Link>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Link
+                  activeClass="active"
+                  to="landing"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  home&nbsp;&nbsp;&nbsp;
+                </Link>
+              </motion.div>
             </Nav.Item>
             <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <Link
-                activeClass="active"
-                to="about"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                about&nbsp;&nbsp;&nbsp;
-              </Link>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Link
+                  activeClass="active"
+                  to="about"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  about&nbsp;&nbsp;&nbsp;
+                </Link>
+              </motion.div>
             </Nav.Item>
             <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <Link
-                activeClass="active"
-                to="projects"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                projects&nbsp;&nbsp;&nbsp;
-              </Link>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Link
+                  activeClass="active"
+                  to="projects"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  projects&nbsp;&nbsp;&nbsp;
+                </Link>
+              </motion.div>
             </Nav.Item>
             <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <Link
-                activeClass="active"
-                to="work"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                work&nbsp;&nbsp;&nbsp;
-              </Link>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Link
+                  activeClass="active"
+                  to="work"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  work&nbsp;&nbsp;&nbsp;
+                </Link>
+              </motion.div>
             </Nav.Item>
           </Nav>
         </Navbar>

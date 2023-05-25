@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Element } from "react-scroll";
+import { motion, AnimatePresence } from "framer-motion";
 
 import LoadingScreen from "./components/LoadingScreen";
 import Landing from "./components/Landing";
@@ -16,7 +17,7 @@ function App() {
     // Simulate a loading process
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Set the desired loading duration
+    }, 2500); // Set the desired loading duration
   }, []);
 
   return (
