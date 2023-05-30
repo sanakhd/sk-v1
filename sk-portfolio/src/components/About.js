@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Typewriter from "typewriter-effect";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -7,16 +7,22 @@ import "../styles/Card.css";
 
 import float from "../images/float.png"
 
+
 const About = () => {
 
   return (
-    <div id="about">
+    <motion.div id="about" >
       <div className="about-main">
         <div className="about-content">
-          <div className="about-title">A GLIMPSE INTO MY WORLD</div>
+          <div
+            className="about-title"
+
+          >
+            A GLIMPSE INTO MY WORLD
+          </div>
         </div>
       </div>
-      <div className="card">
+      <motion.div className="card" >
         <div className="content">
           <span className="about-text-1">
             I'm a <span className="about-bold">software engineer</span> based in
@@ -72,9 +78,9 @@ const About = () => {
             expertise.
           </span>
         </div>
-      </div>
+      </motion.div>
       <img src={float} className="about-astronaut" alt="Astronaut" />
-    </div>
+    </motion.div>
   );
 };
 

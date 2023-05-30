@@ -1,12 +1,32 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/Projects.css";
 import stars from "../images/stars.png";
-import starsHD from "../images/starsHD.jpeg";
 import neptune from "../images/neptune.png";
 import jupiter from "../images/jupiter.png";
 import mercury from "../images/mercury.png";
 
 const Projects = () => {
+  const [flippedIndex, setFlippedIndex] = useState(null);
+
+  const handleFlip = (index) => {
+    setFlippedIndex(index === flippedIndex ? null : index);
+  };
+
+  const getProjectDetails = (index) => {
+    switch (index) {
+      case 0:
+        return "Oh, so you've stumbled upon this project? Well, you're in for a treat! Welcome to my personal portfolio, where I showcase my skills and creations.";
+      case 1:
+        return "Project Details for Coming Soon 1";
+      case 2:
+        return "Project Details for Coming Soon";
+      case 3:
+        return "Project Details for Coming Soon";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div id="projects" className="projects-container">
       <div className="projects-heading">Some Things I've Built...</div>
@@ -73,10 +93,42 @@ const Projects = () => {
       <div className="project-line-other-container">
         <div className="project-other-title">other noteworthy projects</div>
         <div className="square-shapes">
-          <div className="square-shape">1</div>
-          <div className="square-shape">2</div>
-          <div className="square-shape">3</div>
-          <div className="square-shape">4</div>
+          <div
+            className={`square-shape ${flippedIndex === 0 ? "flip" : ""}`}
+            onClick={() => handleFlip(0)}
+          >
+            <div className="square-front">sk-v1</div>
+            <div className="square-back">
+              <span>{getProjectDetails(0)}</span>
+            </div>
+          </div>
+          <div
+            className={`square-shape ${flippedIndex === 1 ? "flip" : ""}`}
+            onClick={() => handleFlip(1)}
+          >
+            <div className="square-front">Coming Soon</div>
+            <div className="square-back">
+              <span>{getProjectDetails(1)}</span>
+            </div>
+          </div>
+          <div
+            className={`square-shape ${flippedIndex === 2 ? "flip" : ""}`}
+            onClick={() => handleFlip(2)}
+          >
+            <div className="square-front">Coming Soon</div>
+            <div className="square-back">
+              <span>{getProjectDetails(2)}</span>
+            </div>
+          </div>
+          <div
+            className={`square-shape ${flippedIndex === 3 ? "flip" : ""}`}
+            onClick={() => handleFlip(3)}
+          >
+            <div className="square-front">Coming Soon</div>
+            <div className="square-back">
+              <span>{getProjectDetails(3)}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -86,21 +86,7 @@ video {
   #landing {
     min-height: unset;
     padding-left: unset;
-    margin: 0;
-    align-items: center;
-  }
-
-  .title {
-    font-size: 46px;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  #landing {
-    min-height: unset;
-    padding-left: unset;
-    margin: 0;
-    align-items: center;
+    align-items: flex-end;
   }
 
   .landing-title {

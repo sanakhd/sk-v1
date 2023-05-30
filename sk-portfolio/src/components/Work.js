@@ -32,7 +32,7 @@ const Work = () => {
                 </p>
               </div>
             </div>
-            <div className="arrow-container">
+            {/* <div className="arrow-container">
               <BiRightArrow className="arrow-icon" size={20} />
               <div className="arrow-content">
                 <p>
@@ -50,7 +50,7 @@ const Work = () => {
                   decision-making.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         );
       case "skinopathy":
@@ -62,9 +62,7 @@ const Work = () => {
             <div className="arrow-container">
               <BiRightArrow className="arrow-icon" size={20} />
               <div className="arrow-content">
-                <p>
-                 
-                </p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -75,13 +73,12 @@ const Work = () => {
             Server <span className="job-at">@TurtleJacks</span> <br />
             <span className="date">June 2018-Present</span>
             <div className="arrow-container">
-            <BiRightArrow className="arrow-icon" size={20} />
+              <BiRightArrow className="arrow-icon" size={20} />
               <div className="arrow-content">
                 <p>
-                  Delivered exceptional customer service by warmly greeting and
-                  engaging with patrons, attentively listening to their needs,
-                  and providing personalized recommendations to enhance their
-                  dining experience.
+                  Deliver exceptional customer service by warmly engaging with
+                  clients, and providing personalized recommendations to enhance
+                  their dining experience
                 </p>
               </div>
             </div>
@@ -89,10 +86,10 @@ const Work = () => {
               <BiRightArrow className="arrow-icon" size={20} />
               <div className="arrow-content">
                 <p>
-                  Exhibited a proactive approach to problem-solving by actively
-                  anticipating and resolving customer inquiries, concerns, or
-                  complaints, striving to exceed customer expectations and
-                  maintain a positive and inviting atmosphere for all guests.
+                  Proactively resolves customer inquiries and concerns,
+                  achieving a 95% satisfaction rate and cultivating a welcoming
+                  environment that garners positive feedback and high customer
+                  satisfaction.
                 </p>
               </div>
             </div>
@@ -163,17 +160,26 @@ const Work = () => {
           <div className="vertical-line"></div>
           <ul className="workbar">
             <li className="workbar-item">
-              <a href="#workscotiabank" onClick={() => handleWorkClick("scotiabank")}>
+              <a
+                href="#workscotiabank"
+                onClick={() => handleWorkClick("scotiabank")}
+              >
                 SCOTIABANK
               </a>
             </li>
             <li className="workbar-item">
-              <a href="#workskinopathy" onClick={() => handleWorkClick("skinopathy")}>
+              <a
+                href="#workskinopathy"
+                onClick={() => handleWorkClick("skinopathy")}
+              >
                 SKINOPATHY
               </a>
             </li>
             <li className="workbar-item">
-              <a href="#workturtlejacks" onClick={() => handleWorkClick("turtlejacks")}>
+              <a
+                href="#workturtlejacks"
+                onClick={() => handleWorkClick("turtlejacks")}
+              >
                 TURTLE JACKS
               </a>
             </li>

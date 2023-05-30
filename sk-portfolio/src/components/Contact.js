@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Contact.css";
-import touch from "../images/touch.png";
+
 
 const Contact = () => {
   return (
