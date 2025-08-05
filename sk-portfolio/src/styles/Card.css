@@ -1,0 +1,98 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 650px; /* Adjust the width as desired */
+  height: 650px; /* Adjust the height as desired */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  margin-left: 2%;
+  overflow: hidden;
+  border-radius: 1000px;
+  transform-style: preserve-3d; /* Enable 3D transformations */
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg); /* Apply initial perspective and rotations */
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  padding: 30px; /* Add padding to create space between the text and card edges */
+  box-sizing: border-box; /* Include padding in the total width and height */
+}
+
+.card:hover {
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg); /* Apply the desired 3D rotations on hover */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  color: #e8e8e8;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  text-align: center;
+}
+
+.content .heading {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.content .para {
+  line-height: 1.5;
+}
+
+/*#33bcb7 0%, #113536  */
+.content .btn {
+  color: #e8e8e8;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #040a15, #24679a);
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to bottom, #040a15, #24679a);
+  z-index: -1;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:hover::before {
+  height: 100%;
+}
+
+.card:hover {
+  box-shadow: none;
+}
+
+.card:hover .btn {
+  color: #212121;
+  background: #e8e8e8;
+}
+
+.content .btn:hover {
+  outline: 2px solid #e8e8e8;
+  background: transparent;
+  color: #e8e8e8;
+}
+
+.content .btn:active {
+  box-shadow: none;
+}
+
+@media only screen and (max-width: 700px) {
+  .card {
+    max-width: 700px; /* Adjust the width as desired */
+    max-height: 500px; /* Adjust the height as desired */
+    padding: 50px;
+  }
+}

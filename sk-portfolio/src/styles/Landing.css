@@ -1,0 +1,151 @@
+/* Fresh start - Landing Page CSS */
+
+/* Container for the entire landing page */
+.landing-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #0a0a0a;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem; /* Add padding for mobile */
+}
+
+/* SANA text styling - improved positioning */
+.sana-text {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(60px, 12vw, 200px);
+  font-weight: 800;
+  color: #65b8b5;
+  text-transform: uppercase;
+  line-height: 0.9;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* Trademark symbol - improved positioning */
+.trademark {
+  font-size: 0.4em; /* Relative to parent font size */
+  position: relative;
+  top: -1.5em; /* Moves up relative to text baseline */
+  margin-left: -0.2em; /* Slight overlap for better visual spacing */
+}
+
+/* Image positioned at the very bottom */
+.bottom-image {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-hero-image {
+  width: clamp(280px, 70vw, 600px); /* Better mobile sizing */
+  height: auto;
+  display: block;
+  border-radius: clamp(15px, 2vw, 20px) clamp(15px, 2vw, 20px) 0 0;
+}
+
+/* Pill container - simplified */
+.pill-container {
+  position: absolute;
+  bottom: clamp(15%, 20%, 25%); /* Responsive bottom position */
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(300px, 90vw, 1200px); /* Always visible */
+  height: clamp(60px, 22vh, 160px); /* Scales with screen */
+  z-index: 2;
+}
+
+/* Pill background */
+.pill-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(204, 204, 204, 0.3);
+  border-radius: clamp(30px, 8vw, 80px); /* Responsive border radius */
+}
+
+/* Text positioned relative to pill container */
+.pill-text-left {
+  position: absolute;
+  top: 50%;
+  left: clamp(5%, 8%, 10%);
+  transform: translateY(-50%);
+  font-family: "Inter", sans-serif;
+  font-size: clamp(10px, 2.5vw, 20px); /* Better scaling */
+  font-weight: 500;
+  color: #E68792;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
+
+.pill-text-right {
+  position: absolute;
+  top: 50%;
+  right: clamp(5%, 8%, 10%);
+  transform: translateY(-50%);
+  font-family: "Inter", sans-serif;
+  font-size: clamp(10px, 2.5vw, 20px);
+  font-weight: 500;
+  color: #E68792;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
+
+/* Mobile adjustments - minimal changes */
+@media (max-width: 768px) {
+  .sana-text {
+    top: 20%; /* Move slightly higher on mobile */
+  }
+  
+  .pill-container {
+    bottom: 28%; /* Adjust pill position */
+  }
+}
+
+/* Very small screens - keep it simple */
+@media (max-width: 480px) {
+  .landing-container {
+    padding: 0.5rem;
+  }
+  
+  .sana-text {
+    top: 15%; /* Higher up on very small screens */
+  }
+  
+  .pill-text-left,
+  .pill-text-right {
+    font-size: clamp(8px, 2vw, 14px);
+    letter-spacing: 0.03em;
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 600px) and (orientation: landscape) {
+  .sana-text {
+    top: 10%;
+    font-size: clamp(40px, 8vh, 80px);
+  }
+  
+  .pill-container {
+    bottom: 25%;
+    height: clamp(40px, 8vh, 80px);
+  }
+}
