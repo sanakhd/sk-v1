@@ -1,3 +1,7 @@
-Currently, all the files are located in the "development" branch, as I am still working on making improvements to the portfolio. 
+# Sana Khademi – Portfolio Website
 
-If you want to view the code, please change from the "main" branch to the "development" branch. 
+A personal portfolio showcasing my experience, work, skills, and projects.
+
+🔗 **Live Site:** [https://www.sanakhademi.com](https://www.sanakhademi.com)
+
+
