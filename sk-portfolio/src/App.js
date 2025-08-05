@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Element } from "react-scroll";
-import { motion, AnimatePresence } from "framer-motion";
 
-import LoadingScreen from "./components/LoadingScreen";
 import Landing from "./components/Landing";
 import CustomNavbar from "./components/CustomNavbar";
 import About from "./components/About";
@@ -22,29 +20,23 @@ function App() {
 
   return (
     <div>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <CustomNavbar />
-          <Element name="landing">
-            <Landing />
-          </Element>
-          <Element name="about">
-            <About />
-          </Element>
-          <Element name="projects">
-            <Projects />
-          </Element>
-          <Element name="work">
-            <Work />
-          </Element>
-          <Element name="contact">
-            <Contact />
-          </Element>
-        </>
-      )}
-    </div>
+      <Element name="landing">
+        <Landing />
+      </Element>
+      <CustomNavbar />
+      <Element name="about">
+        <About />
+      </Element>
+      <Element name="projects">
+        <Projects />
+      </Element>
+      <Element name="work">
+        <Work />
+      </Element>
+      <Element name="contact">
+        <Contact />
+      </Element>
+    </div >
   );
 }
 

@@ -1,137 +1,112 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import "../styles/Projects.css";
-import stars from "../images/stars.png";
-import neptune from "../images/neptune.png";
-import jupiter from "../images/jupiter.png";
-import mercury from "../images/mercury.png";
+import spotifyImage from "../images/spotify.png";
+import tipTrendzImage from "../images/tiptrendz.png";
+import offerUpImage from "../images/offerup.png";
+import skImage from "../images/sk-v3.png";
 
 const Projects = () => {
-  const [flippedIndex, setFlippedIndex] = useState(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const handleFlip = (index) => {
-    setFlippedIndex(index === flippedIndex ? null : index);
-  };
-
-  const getProjectDetails = (index) => {
-    switch (index) {
-      case 0:
-        return "Oh, so you've stumbled upon this project? Well, you're in for a treat! Welcome to my personal portfolio, where I showcase my skills and creations.";
-      case 1:
-        return "Project Details for Coming Soon 1";
-      case 2:
-        return "Project Details for Coming Soon";
-      case 3:
-        return "Project Details for Coming Soon";
-      default:
-        return "";
-    }
-  };
+  const projects = [
+    {
+      id: 1,
+      title: "SK-V3",
+      category: "Web Application",
+      description: "A modern, responsive portfolio website showcasing the evolution of my personal brand and technical skills. Built with performance and user experience in mind, featuring smooth animations, mobile-first design, and clean, professional aesthetics.",
+      technologies: ["JavaScript","React", "CSS" ],
+      image: skImage,
+      link: "https://github.com/sanakhd/sk-v1",
+      color: "blue"
+    },
+    {
+      id: 2,
+      title: "Insights Spotify App",
+      category: "Web Application",
+      description: "A personalized music analytics web app that transforms your Spotify listening habits into beautiful visualizations. Discover your top artists, favorite tracks, recent listening history, and dive deep into the audio characteristics that define your musical taste.",
+      technologies: ["React", "Express", "Spotify API"],
+      image: spotifyImage,
+      link: "https://insights-spotify-app.herokuapp.com/",
+      color: "orange"
+    },
+    {
+      id: 3,
+      title: "TipTrendz",
+      category: "Web Application",
+      description: "A comprehensive financial tracking platform built specifically for service workers to gain better visibility into their income patterns and budgeting habits. Features intuitive user dashboards that visualize earnings data, helping users make informed financial decisions.",
+      technologies: ["JavaSpring Boot", "React", "Postgres"],
+      image: tipTrendzImage,
+      link: "#",
+      color: "green"
+    },
+    {
+      id: 4,
+      title: "Offer Up!",
+      category: "E-commerce Web Application",
+      description: "A dynamic auction-based e-commerce platform offering both Forward and Dutch auction formats. Users can seamlessly search, browse, and bid on items through an intuitive interface, complete with streamlined checkout processes and real-time bidding updates.",
+      technologies: ["JavaSpring Boot", "MongoDB", "Docker"],
+      image: offerUpImage,
+      link: "https://github.com/sanakhd/OfferUp",
+      color: "purple"
+    },
+  ]
 
   return (
-    <div id="projects" className="projects-container">
-      <div className="projects-heading">Some Things I've Built...</div>
-      <img src={stars} className="project-stars" alt="Stars" />
-      <img src={neptune} className="project-neptune" alt="Neptune" />
-      <div className="project-line-1-container">
-        <div className="project-line-1"></div>
-        <span className="project-text-1">OfferUp!</span>
-        <div className="project-description-1">
-          An e-commerce web app that offers Forward and Dutch auctions, allowing
-          users to easily search, view and bid on items. With a simple checkout
-          process and a user-friendly interface, the app offers a seamless
-          bidding experience.
-        </div>
-        <div className="oval-shapes-1">
-          <div className="oval-shape-1">React</div>
-          <div className="oval-shape-1">Vite</div>
-          <div className="oval-shape-1">JavaSpring Boot</div>
-          <div className="oval-shape-1">MongoDB</div>
-          <div className="oval-shape-1">Azure VMs</div>
-          <div className="oval-shape-1">Docker</div>
-        </div>
-      </div>
-      <img src={stars} className="project-stars" alt="Stars" />
-      <img src={jupiter} className="project-jupiter" alt="Neptune" />
-      <div className="project-line-2-container">
-        <div className="project-line-2"></div>
-        <span className="project-text-2">HealthVault</span>
-        <div className="project-description-2">
-          HealthVault is a centralized healthcare system that congregates data
-          from various health data repositories in Ontario and provides
-          physicians with access to and visualization of their patient's health
-          data.
-        </div>
-        <div className="oval-shapes-2">
-          <div className="oval-shape-2">React</div>
-          <div className="oval-shape-2">Node.js</div>
-          <div className="oval-shape-2">Vite</div>
-          <div className="oval-shape-2">Python</div>
-          <div className="oval-shape-2">JavaSpring Boot</div>
-          <div className="oval-shape-2">MongoDB</div>
-        </div>
-      </div>
-      <img src={stars} className="project-stars" alt="Stars" />
-      <img src={mercury} className="project-mercury" alt="Mercury" />
-      <div className="project-line-3-container">
-        <div className="project-line-3"></div>
-        <span className="project-text-3">Insights Spotify App</span>
-        <div className="project-description-3">
-          A web app for visualizing personalized Spotify data. View your top
-          artists, top tracks, recently played tracks, and detailed audio
-          information about each track. Create and save new playlists of
-          recommended tracks based on your existing playlists and more.
-        </div>
-        <div className="oval-shapes-3">
-          <div className="oval-shape-3">React</div>
-          <div className="oval-shape-3">Node.js</div>
-          <div className="oval-shape-3">Vite</div>
-          <div className="oval-shape-3">Python</div>
-          <div className="oval-shape-3">JavaSpring Boot</div>
-          <div className="oval-shape-3">MongoDB</div>
-        </div>
-      </div>
-      <div className="project-line-other-container">
-        <div className="project-other-title">other noteworthy projects</div>
-        <div className="square-shapes">
-          <div
-            className={`square-shape ${flippedIndex === 0 ? "flip" : ""}`}
-            onClick={() => handleFlip(0)}
-          >
-            <div className="square-front">sk-v1</div>
-            <div className="square-back">
-              <span>{getProjectDetails(0)}</span>
-            </div>
-          </div>
-          <div
-            className={`square-shape ${flippedIndex === 1 ? "flip" : ""}`}
-            onClick={() => handleFlip(1)}
-          >
-            <div className="square-front">Coming Soon</div>
-            <div className="square-back">
-              <span>{getProjectDetails(1)}</span>
-            </div>
-          </div>
-          <div
-            className={`square-shape ${flippedIndex === 2 ? "flip" : ""}`}
-            onClick={() => handleFlip(2)}
-          >
-            <div className="square-front">Coming Soon</div>
-            <div className="square-back">
-              <span>{getProjectDetails(2)}</span>
-            </div>
-          </div>
-          <div
-            className={`square-shape ${flippedIndex === 3 ? "flip" : ""}`}
-            onClick={() => handleFlip(3)}
-          >
-            <div className="square-front">Coming Soon</div>
-            <div className="square-back">
-              <span>{getProjectDetails(3)}</span>
-            </div>
+    <section className="projects-section">
+      <div className="projects-container">
+        {/* Section Header */}
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8 }}
+          className="projects-header"
+        >
+          <h2 className="projects-title">Featured Projects</h2>
+          <p className="projects-subtitle">
+            Building solutions that bridge technology and real-world problems
+          </p>
+        </motion.div>
+
+        {/* Projects Slider Container */}
+        <div className="projects-slider">
+          <div className="projects-track">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`project-card ${project.color}`}
+              >
+                <div className="project-image">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-thumbnail"
+                  />
+                </div>
+
+                <div className="project-content">
+                  <div className="project-category">{project.category}</div>
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+
+                  <div className="project-technologies">
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} className="tech-badge">{tech}</span>
+                    ))}
+                  </div>
+
+                  <a href={project.link} className="project-link">
+                    View Project →
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

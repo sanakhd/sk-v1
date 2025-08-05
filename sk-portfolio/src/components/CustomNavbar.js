@@ -1,85 +1,122 @@
-import React, { useEffect, useState } from "react";
-import { Navbar, Nav } from "rsuite";
+import React, { useState, useEffect } from "react";
 import "../styles/CustomNavbar.css";
-import logo from "../images/logo.ico";
 import { Link } from "react-scroll";
-import { motion } from "framer-motion";
 
 const CustomNavbar = () => {
-  const [showItems, setShowItems] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  // Handle scroll effect
   useEffect(() => {
-    setShowItems(true);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close menu when clicking on a link
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Toggle mobile menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <div className="navbar">
-      <Nav appearance="subtle">
-        <Navbar>
-          <Navbar.Brand className="navbar-logo">
-            <img src={logo} alt="Logo" className="navbar-logo" />
-          </Navbar.Brand>
-          <Nav className="navbar-items">
-            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Link
-                  activeClass="active"
-                  to="landing"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
-                  home&nbsp;&nbsp;&nbsp;
-                </Link>
-              </motion.div>
-            </Nav.Item>
-            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Link
-                  activeClass="active"
-                  to="about"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
-                  about&nbsp;&nbsp;&nbsp;
-                </Link>
-              </motion.div>
-            </Nav.Item>
-            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Link
-                  activeClass="active"
-                  to="projects"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
-                  projects&nbsp;&nbsp;&nbsp;
-                </Link>
-              </motion.div>
-            </Nav.Item>
-            <Nav.Item className={`navbar-item ${showItems ? "show" : ""}`}>
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Link
-                  activeClass="active"
-                  to="work"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
-                  work&nbsp;&nbsp;&nbsp;
-                </Link>
-              </motion.div>
-            </Nav.Item>
-          </Nav>
-        </Navbar>
-      </Nav>
-    </div>
+    <nav className={`navbar-container ${isScrolled ? 'scrolled' : ''}`}>
+      {/* Desktop Navigation */}
+      <div className="nav-links desktop-nav">
+        <Link to="landing" smooth={true} duration={500} offset={-80}>
+          home
+        </Link>
+        <Link to="about" smooth={true} duration={500} offset={-80}>
+          about
+        </Link>
+        <Link to="work" smooth={true} duration={500} offset={-80}>
+          work
+        </Link>
+        <Link to="projects" smooth={true} duration={500} offset={-80}>
+          projects
+        </Link>
+        <Link to="contact" smooth={true} duration={500} offset={-80}>
+          contact
+        </Link>
+      </div>
+
+      {/* Mobile Hamburger Button */}
+      <button 
+        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
+        <div className="mobile-nav-links">
+          <Link 
+            to="landing" 
+            smooth={true} 
+            duration={500} 
+            offset={-80}
+            onClick={handleLinkClick}
+          >
+            home
+          </Link>
+          <Link 
+            to="work" 
+            smooth={true} 
+            duration={500} 
+            offset={-80}
+            onClick={handleLinkClick}
+          >
+            work
+          </Link>
+          <Link 
+            to="about" 
+            smooth={true} 
+            duration={500} 
+            offset={-80}
+            onClick={handleLinkClick}
+          >
+            about
+          </Link>
+          <Link 
+            to="projects" 
+            smooth={true} 
+            duration={500} 
+            offset={-80}
+            onClick={handleLinkClick}
+          >
+            projects
+          </Link>
+          <Link 
+            to="contact" 
+            smooth={true} 
+            duration={500} 
+            offset={-80}
+            onClick={handleLinkClick}
+          >
+            contact
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Menu Backdrop */}
+      {isMenuOpen && (
+        <div 
+          className="menu-backdrop" 
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+    </nav>
   );
 };
 

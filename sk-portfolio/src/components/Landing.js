@@ -1,40 +1,35 @@
-import React, { useRef } from "react";
-
-
-import space from "../images/space.mp4";
+import React, { useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import heroImage from "../images/landing.png";
 import "../styles/Landing.css";
-import Typewriter from "typewriter-effect";
 
 const Landing = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const { scrollY } = useScroll();
+
+  // Fade the image as user scrolls down
+  const imageOpacity = useTransform(scrollY, [300, 800], [1, 0]);
 
   return (
-    <div className="landing-main" >
-      <video src={space} autoPlay loop muted />
-      <div
-        id="landing"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-      >
-        <span className="landing-title">
-          <span>hello, I'm</span> <br />
-          <span className="landing-name">
-            <span className="text-focus-in">Sana Khademi.</span>
-          </span>
-        </span>
-        <span className="landing-body">
-          <Typewriter
-            onInit={(typewriter) => {
-              typewriter
-                .pauseFor(3500)
-                .start()
-                .typeString("designing a world I want to see")
-                .pauseFor(2500);
-            }}
-          />
-        </span>
+    <div className="landing-container">
+      <div className="sana-text">
+        SANA<span className="trademark">®</span>
       </div>
+
+      <div className="pill-container">
+        <div className="pill-highlight"></div>
+        <div className="pill-text-left">PRODUCT MIND.</div>
+        <div className="pill-text-right">ENGINEERING CORE.</div>
+      </div>
+
+      <motion.div
+        className="bottom-image"
+        style={{ opacity: imageOpacity }}
+      >
+        <img src={heroImage} alt="Sana" className="landing-hero-image" />
+      </motion.div>
     </div>
   );
 };
+
 export default Landing;

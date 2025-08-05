@@ -1,442 +1,250 @@
+/* Projects Section CSS - Learning Step by Step */
+
+/* STEP 1: Container Setup */
+.projects-section {
+  min-height: 100vh; /* Takes up full screen height */
+  padding: 5rem 0; /* Space above and below the section */
+  background: linear-gradient(135deg, #0a0a0a 0%, #0f0a0f 50%, #0a0f0f 100%);/* Dark gradient background */
+  position: relative; /* Allows us to position things inside relative to this container */
+  overflow: hidden; /* Hides anything that goes outside the container */
+}
+
 .projects-container {
-  position: relative;
-  overflow: hidden;
+  max-width: 1400px; /* Maximum width of our content */
+  margin: 0 auto; /* Centers the container horizontally */
+  padding: 0 2rem; /* Space on left and right sides */
 }
 
-.projects-heading {
-  position: absolute;
-  top: 3%;
-  left: 16%;
-  transform: translate(-50%, -50%);
-  font-size: 32px;
-  color: #fff;
-  padding: 10px;
-  z-index: 2;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
+/* STEP 2: Header Styling */
+.projects-header {
+  text-align: center; /* Centers all text inside */
+  margin-bottom: 4rem; /* Space below the header */
 }
 
-.project-stars {
+.projects-title {
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size - grows/shrinks with screen size */
+  font-weight: 700; /* Bold text */
+  margin-bottom: 1.5rem; /* Space below the title */
+  /* Gradient text effect - makes text colorful like a rainbow */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #F4A261 100%);
+  -webkit-background-clip: text; /* Clips the gradient to just the text */
+  background-clip: text;
+  color: transparent; /* Makes the original text color invisible so gradient shows */
+}
+
+.projects-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem); /* Responsive subtitle size */
+  color: #a0a0a0; /* Light gray color */
+  font-weight: 400; /* Normal weight (not bold) */
+  line-height: 1.6; /* Space between lines of text */
+  max-width: 600px; /* Limits how wide the text can get */
+  margin: 0 auto; /* Centers the subtitle */
+}
+
+/* STEP 3: Slider Container */
+.projects-slider {
+  position: relative; /* Allows us to position elements inside */
+  width: 100%; /* Takes full width */
+  overflow-x: auto; /* Allows horizontal scrolling if needed */
+  overflow-y: hidden; /* Hides vertical scrolling */
+  padding: 2rem 0; /* Space above and below */
+}
+
+/* STEP 4: The Track (where cards slide) */
+.projects-track {
+  display: flex; /* Arranges cards in a row */
+  gap: 2rem; /* Space between each card */
+  padding: 0 2rem; /* Space on sides */
+  width: fit-content; /* Width adjusts to content */
+}
+
+/* STEP 5: Individual Project Cards */
+.project-card {
+  /* Size and Layout */
+  width: 350px; /* Fixed width for each card */
+  min-height: 450px; /* Minimum height */
+  flex-shrink: 0; /* Prevents cards from getting squished */
+  
+  /* Visual Styling */
+  background: rgba(255, 255, 255, 0.05); /* Slightly transparent white */
+  backdrop-filter: blur(20px); /* Blurs background behind card */
+  border-radius: 24px; /* Rounded corners */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+  
+  /* Layout Inside Card */
+  display: flex;
+  flex-direction: column; /* Stacks content vertically */
+  
+  /* Effects */
+  transition: all 0.4s ease; /* Smooth animation for changes */
+  position: relative; /* Allows positioning of elements inside */
+  overflow: hidden; /* Keeps content inside the rounded corners */
+}
+
+/* STEP 6: Card Hover Effects */
+.project-card:hover {
+  transform: translateY(-10px) scale(1.02); /* Moves up and grows slightly */
+  background: rgba(255, 255, 255, 0.08); /* Becomes slightly more visible */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); /* Adds shadow for depth */
+  border-color: var(--card-color); /* Border changes to card's theme color */
+}
+
+/* STEP 7: Color Variations for Cards */
+.project-card.blue { --card-color: #3B82F6; } /* Blue theme */
+.project-card.green { --card-color: #10B981; } /* Green theme */
+.project-card.purple { --card-color: #8B5CF6; } /* Purple theme */
+.project-card.orange { --card-color: #F59E0B; } /* Orange theme */
+
+/* STEP 8: Card Top Border (colored line) */
+.project-card::before {
+  content: ''; /* Creates an invisible element */
+  position: absolute; /* Positions it exactly where we want */
+  top: 0; /* At the very top */
+  left: 0; /* Starting from left */
+  right: 0; /* Going to the right */
+  height: 4px; /* 4 pixels tall */
+  background: var(--card-color); /* Uses the card's theme color */
+  border-radius: 24px 24px 0 0; /* Rounded top corners only */
+}
+
+/* STEP 9: Project Image/Icon Area */
+.project-image {
+  height: 200px; /* Fixed height for image area */
+  display: flex; /* Centers content */
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  background: rgba(255, 255, 255, 0.03); /* Subtle background */
+  position: relative; /* For positioning elements inside */
+}
+
+/* ADD THIS NEW SECTION HERE */
+.project-thumbnail {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  transform: rotateY(90deg);
+  object-fit: cover; /* Crops image to fit nicely */
+  transition: transform 0.3s ease;
 }
 
-/* NEPTUNE */
-.project-neptune {
-  position: absolute;
-  top: 8%;
-  left: 20%;
-  transform: translateX(-50%);
-  border-radius: 100%;
-  z-index: 2;
+.project-card:hover .project-thumbnail {
+  transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
-.project-line-1-container {
-  position: absolute;
-  top: 13%;
-  left: 35%;
-  width: 38%;
-  z-index: 2;
-}
-.project-line-1 {
-  position: absolute;
-  top: 0;
-  left: -20%;
-  width: 110%;
-  height: 1px;
-  background-color: #fff;
+/* STEP 10: Card Content Area */
+.project-content {
+  padding: 2rem; /* Space inside the content area */
+  flex-grow: 1; /* Takes up remaining space in the card */
+  display: flex; /* Arranges content */
+  flex-direction: column; /* Stacks content vertically */
+  gap: 1rem; /* Space between each element */
 }
 
-.project-text-1 {
-  position: absolute;
-  top: -24px;
-  left: 73%;
-  color: #6897ff;
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  font-size: 22px;
+/* STEP 11: Category Badge */
+.project-category {
+  background: var(--card-color); /* Uses theme color */
+  color: #000; /* Black text */
+  padding: 0.4rem 1rem; /* Space inside badge */
+  border-radius: 20px; /* Rounded badge */
+  font-size: 0.8rem; /* Small text */
+  font-weight: 600; /* Bold */
+  text-transform: uppercase; /* ALL CAPS */
+  letter-spacing: 0.5px; /* Space between letters */
+  width: fit-content; /* Only as wide as needed */
 }
 
-.project-description-1 {
-  color: #fff;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  text-align: justify;
-  line-height: 1.5;
-  padding-top: 5%;
-  padding-left: 12%;
+/* STEP 12: Project Title */
+.project-title {
+  font-size: 1.5rem; /* Large title */
+  font-weight: 600; /* Semi-bold */
+  color: #fff; /* White text */
+  line-height: 1.3; /* Line spacing */
+  margin: 0; /* No default margins */
 }
 
-.oval-shapes-1 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-  padding-left: 13%;
+/* STEP 13: Project Description */
+.project-description {
+  font-size: 0.95rem; /* Slightly smaller text */
+  color: #b0b0b0; /* Light gray */
+  line-height: 1.5; /* Good line spacing for reading */
+  flex-grow: 1; /* Takes up available space */
 }
 
-.oval-shape-1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  background-color: rgba(104, 151, 255, 0.67);
-  color: white;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
-  border-radius: 50px;
-  margin: 5px;
+/* STEP 14: Technology Badges */
+.project-technologies {
+  display: flex; /* Arranges badges in a row */
+  flex-wrap: wrap; /* Wraps to new line if needed */
+  gap: 0.5rem; /* Space between badges */
+  margin: 0.5rem 0; /* Space above and below */
 }
 
-.oval-shape-1:hover {
-  background-color: #6897ff;
-  transform: scale(1.1) perspective(800px) rotateY(10deg);
+.tech-badge {
+  background: rgba(255, 255, 255, 0.1); /* Subtle background */
+  color: #e0e0e0; /* Light text */
+  padding: 0.3rem 0.8rem; /* Space inside badge */
+  border-radius: 12px; /* Rounded */
+  font-size: 0.75rem; /* Small text */
+  font-weight: 500; /* Medium weight */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+  transition: all 0.3s ease; /* Smooth hover effects */
 }
 
-/* JUPITER */
-.project-jupiter {
-  position: absolute;
-  top: 28%;
-  left: 80%;
-  transform: translateX(-50%);
-  border-radius: 100%;
-  z-index: 2;
-  max-width: 920px;
-  max-height: 920px;
+.tech-badge:hover {
+  background: rgba(255, 255, 255, 0.15); /* Slightly brighter on hover */
+  transform: translateY(-1px); /* Moves up slightly */
 }
 
-.project-line-2-container {
-  position: absolute;
-  top: 35%;
-  left: 32%;
-  width: 34%;
-  z-index: 2;
+/* STEP 15: Project Link */
+.project-link {
+  color: var(--card-color); /* Uses theme color */
+  text-decoration: none; /* No underline */
+  font-weight: 600; /* Bold */
+  font-size: 0.9rem; /* Slightly smaller */
+  transition: all 0.3s ease; /* Smooth effects */
+  align-self: flex-start; /* Aligns to left */
+  padding: 0.5rem 0; /* Some padding for easier clicking */
 }
 
-.project-line-2 {
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 120%;
-  height: 1px;
-  background-color: #fff;
+.project-link:hover {
+  transform: translateX(5px); /* Moves right on hover */
+  opacity: 0.8; /* Slightly faded */
 }
 
-.project-text-2 {
-  position: absolute;
-  top: -24px;
-  left: 10%;
-  color: #b68e68;
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  font-size: 22px;
-}
-
-.project-description-2 {
-  color: #fff;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  text-align: justify;
-  line-height: 1.5;
-  padding-top: 5%;
-  padding-left: 10%;
-}
-
-.oval-shapes-2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-  margin-left: 14%;
-}
-
-.oval-shape-2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  background-color: rgba(182, 142, 104, 0.8);
-  color: white;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
-  border-radius: 50px;
-  margin: 5px;
-}
-
-.oval-shape-2:hover {
-  background-color: #b68e68;
-  transform: scale(1.1) perspective(800px) rotateY(10deg);
-}
-
-/* MERCURY */
-.project-mercury {
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translateX(-50%);
-  border-radius: 100%;
-  z-index: 2;
-  max-width: 500px;
-  max-height: 500px;
-}
-
-.project-line-3-container {
-  position: absolute;
-  top: 55%;
-  left: 35%;
-  width: 38%;
-  z-index: 2;
-}
-
-.project-line-3 {
-  position: absolute;
-  top: 0;
-  left: -12%;
-  width: 110%;
-  height: 1px;
-  background-color: #fff;
-}
-
-.project-text-3 {
-  position: absolute;
-  top: -24px;
-  left: 59%;
-  color: #868686;
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  font-size: 22px;
-}
-
-.project-description-3 {
-  color: #fff;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  text-align: justify;
-  line-height: 1.5;
-  padding-top: 5%;
-  padding-left: 12%;
-}
-
-.oval-shapes-3 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-  margin-left: 14%;
-}
-
-.oval-shape-3 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  background-color: rgba(134, 134, 134, 0.8);
-  color: white;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
-  border-radius: 50px;
-  margin: 5px;
-}
-
-.oval-shape-3:hover {
-  background-color: #868686;
-  transform: scale(1.1) perspective(800px) rotateY(10deg);
-}
-
-.project-line-other-container {
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  text-align: center;
-}
-
-.project-other-title {
-  font-size: 24px;
-  color: #fff;
-  padding: 10px;
-  font-family: "Inter", sans-serif;
-  font-weight: 300;
-  font-size: 28px;
-  text-align: center;
-}
-
-.square-shapes {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.square-shape {
-  width: 200px;
-  height: 200px;
-  background-color: #ffffff;
-  margin: 0 10px;
-  border-radius: 20%;
-  position: relative;
-  transition: transform 0.5s;
-  cursor: pointer;
-}
-
-.square-front {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 20%;
-  font-size: 19px;
-  text-align: center;
-  padding-top: 40%;
-}
-
-.square-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 20%;
-  font-size: 16px;
-  visibility: hidden;
-  text-align: center;
-  padding-top: 20%;
-}
-
-.flip .square-front {
-  visibility: hidden;
-}
-
-.flip .square-back {
-  visibility: visible;
-}
-
-
-
-
-@media only screen and (max-width: 1200px) {
-  .project-text-3 {
-    position: absolute;
-    top: -24px;
-    left: 40%;
-    color: #868686;
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 22px;
+/* STEP 16: Mobile Responsive Design */
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 3rem 0; /* Less padding on mobile */
+  }
+  
+  .projects-container {
+    padding: 0 1rem; /* Less side padding */
+  }
+  
+  .projects-header {
+    margin-bottom: 3rem; /* Less space below header */
+  }
+  
+  .project-card {
+    width: 300px; /* Smaller cards on mobile */
+    min-height: 400px; /* Shorter cards */
+  }
+  
+  .project-content {
+    padding: 1.5rem; /* Less padding inside cards */
+  }
+  
+  .projects-track {
+    padding: 0 1rem; /* Less side padding */
+    gap: 1.5rem; /* Less space between cards */
   }
 }
 
-@media only screen and (max-width: 1000px) {
-  .projects-heading {
-    top: 10%;
-    left: 50%;
-    font-size: 20px;
-    color: #fff;
-    font-family: "Inter", sans-serif;
-    font-weight: 300;
+@media (max-width: 480px) {
+  .project-card {
+    width: 280px; /* Even smaller on tiny screens */
+    min-height: 380px;
+  }
+  
+  .project-image {
+    height: 150px; /* Shorter image area */
   }
 
-  .project-line-1,
-  .project-line-2,
-  .project-line-3 {
-    display: none;
-  }
-
-  .project-neptune,
-  .project-jupiter,
-  .project-mercury {
-    display: none;
-  }
-
-  .project-line-1-container,
-  .project-line-2-container,
-  .project-line-3-container {
-    width: 100%;
-    left: 0;
-    padding-top: 50px;
-  }
-
-  .project-text-1 {
-    position: absolute;
-    top: 30px;
-    left: 5%;
-    color: #6897ff;
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-  }
-
-  .project-text-2 {
-    position: absolute;
-    top: 30px;
-    left: 5%;
-    color: #b68e68;
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-  }
-
-  .project-text-3 {
-    position: absolute;
-    top: 30px;
-    left: 5%;
-    color: #868686;
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-  }
-
-  .project-description-1,
-  .project-description-2,
-  .project-description-3 {
-    color: #fff;
-    font-family: "Inter", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    text-align: justify;
-    line-height: 1.5;
-    padding-top: 20px;
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-
-  .oval-shapes-1,
-  .oval-shapes-2,
-  .oval-shapes-3 {
-    display: none;
-  }
-
-  .project-line-other-container {
-    padding-top: 25%;
-    left: 50%;
-  }
-
-  .project-other-title {
-    font-size: 18px;
-    color: #fff;
-    padding: 10px;
-    font-family: "Inter", sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .square-shapes {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .square-shape {
-    width: 100px;
-    height: 100px;
-    background-color: #ffffff;
-    opacity: 0.7;
-    margin: 0 10px;
-    border-radius: 20%;
-    margin-bottom: 20%;
-  }
 }
