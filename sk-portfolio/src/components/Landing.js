@@ -26,6 +26,10 @@ const Landing = () => {
       >
         <img src={heroImage} alt="Sana" className="landing-hero-image" />
       </motion.div>
+      <div className="mobile-tagline">
+        <p>PRODUCT MIND.</p>
+        <p>ENGINEERING CORE.</p>
+      </div>
     </div>
   );
 };

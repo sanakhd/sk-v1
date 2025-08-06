@@ -9,10 +9,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem; /* Add padding for mobile */
+  padding: 1rem;
 }
 
-/* SANA text styling - improved positioning */
+/* SANA text styling */
 .sana-text {
   font-family: "Inter", sans-serif;
   font-size: clamp(60px, 12vw, 200px);
@@ -25,21 +25,21 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 25%;
+  top: 22%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
 }
 
-/* Trademark symbol - improved positioning */
+/* Trademark symbol */
 .trademark {
-  font-size: 0.4em; /* Relative to parent font size */
+  font-size: 0.4em;
   position: relative;
-  top: -1.5em; /* Moves up relative to text baseline */
-  margin-left: -0.2em; /* Slight overlap for better visual spacing */
+  top: -1.5em;
+  margin-left: -0.2em;
 }
 
-/* Image positioned at the very bottom */
+/* Image positioned at the bottom center (default) */
 .bottom-image {
   position: absolute;
   bottom: 0;
@@ -52,20 +52,20 @@
 }
 
 .landing-hero-image {
-  width: clamp(280px, 70vw, 600px); /* Better mobile sizing */
+  width: clamp(280px, 70vw, 600px);
   height: auto;
   display: block;
   border-radius: clamp(15px, 2vw, 20px) clamp(15px, 2vw, 20px) 0 0;
 }
 
-/* Pill container - simplified */
+/* Pill container */
 .pill-container {
   position: absolute;
-  bottom: clamp(15%, 20%, 25%); /* Responsive bottom position */
+  bottom: clamp(15%, 20%, 25%);
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(300px, 90vw, 1200px); /* Always visible */
-  height: clamp(60px, 22vh, 160px); /* Scales with screen */
+  width: clamp(300px, 90vw, 1200px);
+  height: clamp(60px, 22vh, 160px);
   z-index: 2;
 }
 
@@ -77,17 +77,17 @@
   width: 100%;
   height: 100%;
   background-color: rgba(204, 204, 204, 0.3);
-  border-radius: clamp(30px, 8vw, 80px); /* Responsive border radius */
+  border-radius: clamp(30px, 8vw, 80px);
 }
 
-/* Text positioned relative to pill container */
+/* Pill text */
 .pill-text-left {
   position: absolute;
   top: 50%;
   left: clamp(5%, 8%, 10%);
   transform: translateY(-50%);
   font-family: "Inter", sans-serif;
-  font-size: clamp(10px, 2.5vw, 20px); /* Better scaling */
+  font-size: clamp(10px, 2.5vw, 20px);
   font-weight: 500;
   color: #E68792;
   text-transform: uppercase;
@@ -109,31 +109,85 @@
   z-index: 10;
 }
 
-/* Mobile adjustments - minimal changes */
+/* NEW: Hidden by default — mobile-only tagline */
+.mobile-tagline {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .sana-text {
-    top: 20%; /* Move slightly higher on mobile */
+  body {
+    overflow-x: hidden;
   }
-  
+
+  .landing-container {
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .sana-text {
+    top: 150px;
+    font-size: 79px;
+  }
+
+  .trademark {
+    font-size: 0.4em;
+    top: -1.5em;
+  }
+
   .pill-container {
-    bottom: 28%; /* Adjust pill position */
+    display: none;
+  }
+
+  .mobile-tagline {
+    display: block;
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    color: #E68792;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    line-height: 1.6;
+    z-index: 5;
+  }
+
+  .bottom-image {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+    width: 700px;
+    height: 700px;
+    z-index: 9;
+  }
+
+  .landing-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 }
 
-/* Very small screens - keep it simple */
+
+
+
+/* Very small screens */
 @media (max-width: 480px) {
-  .landing-container {
-    padding: 0.5rem;
+ .bottom-image {
+    top: 220px;
+    left: 60%;
+    transform: translateX(-50%) rotate(90deg); /* ✅ Centers the rotated image */
+    width: 587px;
+    height: 587px;
   }
-  
-  .sana-text {
-    top: 15%; /* Higher up on very small screens */
-  }
-  
-  .pill-text-left,
-  .pill-text-right {
-    font-size: clamp(8px, 2vw, 14px);
-    letter-spacing: 0.03em;
+
+  .landing-hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 }
 
@@ -143,7 +197,7 @@
     top: 10%;
     font-size: clamp(40px, 8vh, 80px);
   }
-  
+
   .pill-container {
     bottom: 25%;
     height: clamp(40px, 8vh, 80px);
