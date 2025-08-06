@@ -19,7 +19,6 @@ const About = () => {
   const zoomStart = aboutStart;
   const zoomEnd = aboutStart + windowHeight * 0.8;
   const contentStart = zoomEnd;
-  const contentEnd = contentStart + windowHeight;
 
   // Transform values for the zoom effect
   const scale = useTransform(scrollY, [zoomStart, zoomEnd], [1, 3]);

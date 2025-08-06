@@ -4,7 +4,6 @@ import heroImage from "../images/landing.png";
 import "../styles/Landing.css";
 
 const Landing = () => {
-  const [isHovered, setIsHovered] = useState(false);
   const { scrollY } = useScroll();
 
   // Fade the image as user scrolls down

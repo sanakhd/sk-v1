@@ -9,15 +9,6 @@ import Work from "./components/Work";
 import Contact from "./components/Contact";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate a loading process
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // Set the desired loading duration
-  }, []);
-
   return (
     <div>
       <Element name="landing">
