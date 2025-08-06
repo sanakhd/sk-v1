@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "../images/landing.png";
 import "../styles/Landing.css";
