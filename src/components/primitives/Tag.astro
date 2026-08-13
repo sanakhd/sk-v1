@@ -1,0 +1,45 @@
+---
+/**
+ * Tag — the mono chip.
+ *
+ * Two uses in the design, and they differ only in fill and padding:
+ *   outline → the skill tags on each Experience row
+ *   accent  → the trait chips in About
+ *
+ * Always JetBrains Mono, always uppercase, always positive tracking. That is
+ * what separates a tag from a Pill.
+ */
+interface Props {
+  variant?: 'outline' | 'accent';
+}
+
+const { variant = 'outline' } = Astro.props;
+---
+
+<span data-variant={variant}><slot /></span>
+
+<style>
+  span {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-xs);
+    font-weight: var(--fw-regular);
+    letter-spacing: var(--track-mono-sm);
+    text-transform: uppercase;
+    line-height: 1;
+    border-radius: var(--r-pill);
+    border: 1px solid transparent;
+  }
+
+  [data-variant='outline'] {
+    padding: var(--space-8) var(--space-12);
+    border-color: var(--line-strong);
+    color: var(--text-muted);
+  }
+
+  [data-variant='accent'] {
+    padding: var(--space-8) var(--space-16);
+    background: var(--accent);
+    color: var(--ink);
+  }
+</style>

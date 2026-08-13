@@ -1,0 +1,188 @@
+/* =============================================================================
+   Design tokens
+   -----------------------------------------------------------------------------
+   Extracted from Claude Design project 3d72336b-b0ec-47ae-82ab-a2e7d7305bbb,
+   file `Portfolio v1.dc.html`. That file is the source of truth — when it and
+   this disagree, it wins and this gets updated.
+
+   Every color, size, radius and spacing step in the site comes from here. If a
+   component needs a value that isn't in this file, add it here first.
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------------------
+     Color — grounds and surfaces
+     ------------------------------------------------------------------------ */
+  --paper: #f2f0ea; /* page ground */
+  --paper-raised: #e6e3db; /* avatar well */
+  --ink: #14150f; /* dark slabs, text on paper */
+  --ink-surface: #1d1e16; /* project card */
+  --ink-surface-hover: #23241b; /* project card, hover */
+  --ink-well: #2a2b22; /* image placeholder behind a loading image */
+
+  /* Accent. Locked to lime — it is what keeps this from reading as another
+     dark-mode developer portfolio. The design exposes three alternates; they are
+     kept here so switching is a one-line change, but they are not shipped.
+       blue  #3b3bef | orange #e2622a | gold #d9a441                            */
+  --accent: oklch(0.78 0.14 128);
+  --accent-punct: #e2622a; /* the period after "BUILD" in the hero. Nowhere else. */
+
+  --nav-scrim: rgb(242 240 234 / 0.86);
+  --nav-blur: 14px;
+
+  /* ---------------------------------------------------------------------------
+     Color — text
+     Two ramps. Which one you use depends on what is behind the text, so they are
+     named for their ground rather than by number.
+     ------------------------------------------------------------------------ */
+  --text: #14150f; /* on paper: headings */
+  --text-body: #33342c; /* on paper: body copy */
+  --text-muted: #4a4a42; /* on paper: secondary */
+  --text-dim: #6a6a60; /* on paper: meta, mono eyebrows */
+
+  --on-ink: #f2f0ea; /* on ink: headings */
+  --on-ink-muted: #b9b8b0; /* on ink: hero body */
+  --on-ink-dim: #a8a99f; /* on ink: card body */
+  --on-ink-faint: #8a8b80; /* on ink: mono eyebrow */
+  --on-ink-meta: #6f7066; /* on ink: stack line */
+
+  /* Text on the accent slab. Ink at reduced alpha rather than a grey, so it
+     stays keyed to the lime behind it. */
+  --on-accent-muted: rgb(20 21 15 / 0.75);
+  --on-accent-faint: rgb(20 21 15 / 0.6);
+
+  /* ---------------------------------------------------------------------------
+     Color — lines
+     All one hue at six alphas. Ordered lightest to heaviest.
+     ------------------------------------------------------------------------ */
+  --line-row: rgb(20 21 15 / 0.03); /* experience row, hover */
+  --line-hover: rgb(20 21 15 / 0.07); /* nav pill, hover */
+  --line-hairline: rgb(20 21 15 / 0.14); /* divider inside a card */
+  --line: rgb(20 21 15 / 0.16); /* default border and rule */
+  --line-strong: rgb(20 21 15 / 0.2); /* tag pill border */
+  --line-heavy: rgb(20 21 15 / 0.35); /* outline button border */
+
+  /* ---------------------------------------------------------------------------
+     Type — families
+     The tension between these two IS the brand. Archivo carries everything;
+     JetBrains Mono is reserved for eyebrows and meta. Never mono for body copy,
+     never Archivo for an eyebrow.
+     ------------------------------------------------------------------------ */
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-extrabold: 800;
+  --fw-black: 900;
+
+  /* ---------------------------------------------------------------------------
+     Type — size
+     Display sizes are fluid; the upper bound of each clamp is the design's fixed
+     value, so at >=1280px the site matches the comp exactly. The lower bounds are
+     provisional and get reviewed per-section in Phase 3, since the design has no
+     mobile comp to check them against.
+     ------------------------------------------------------------------------ */
+  --fs-display-xl: clamp(2.75rem, 1.083rem + 8.33vw, 6.5rem); /* 44 -> 104  contact */
+  --fs-display-l: clamp(2.5rem, 1.167rem + 6.67vw, 5.75rem); /* 40 ->  92  hero */
+  --fs-display-m: clamp(2.25rem, 1.583rem + 3.33vw, 4rem); /* 36 ->  64  section h2 */
+
+  --fs-h3: clamp(1.5rem, 1.167rem + 1.67vw, 2rem); /* 24 ->  32  project title */
+  --fs-h3-sm: clamp(1.5rem, 1.25rem + 1.25vw, 1.875rem); /* 24 ->  30  role title */
+  --fs-lead: clamp(1.25rem, 1rem + 1.25vw, 1.625rem); /* 20 ->  26  "Now" card */
+  --fs-sub: clamp(1.125rem, 0.958rem + 0.83vw, 1.375rem); /* 18 ->  22  about lead */
+
+  --fs-body-l: 1.25rem; /* 20 */
+  --fs-body: 1.125rem; /* 18 */
+  --fs-body-m: 1.0625rem; /* 17 */
+  --fs-body-s: 1rem; /* 16 */
+  --fs-body-xs: 0.9375rem; /* 15 */
+
+  --fs-meta: 0.8125rem; /* 13  nav link */
+  --fs-meta-s: 0.75rem; /* 12  section eyebrow */
+  --fs-meta-xs: 0.6875rem; /* 11  tag, footer */
+
+  /* ---------------------------------------------------------------------------
+     Type — tracking
+     Display tightens as it grows; mono opens up. Sign convention is the tell:
+     negative is Archivo, positive is JetBrains Mono.
+     ------------------------------------------------------------------------ */
+  --track-display-xl: -0.05em;
+  --track-display-l: -0.045em;
+  --track-display-m: -0.04em;
+  --track-h3: -0.03em;
+  --track-h3-sm: -0.025em;
+  --track-lead: -0.02em;
+  --track-sub: -0.015em;
+  --track-tight: -0.01em;
+
+  --track-mono-sm: 0.08em;
+  --track-mono: 0.1em;
+  --track-mono-md: 0.12em;
+  --track-mono-lg: 0.14em;
+  --track-mono-xl: 0.16em;
+  --track-mono-2xl: 0.18em;
+
+  /* ---------------------------------------------------------------------------
+     Type — leading
+     ------------------------------------------------------------------------ */
+  --lh-display-xl: 0.9;
+  --lh-display-m: 0.95;
+  --lh-display-l: 1.04;
+  --lh-lead: 1.3;
+  --lh-snug: 1.45;
+  --lh-sub: 1.5;
+  --lh-body: 1.55;
+  --lh-relaxed: 1.6;
+  --lh-loose: 1.65;
+  --lh-body-loose: 1.7;
+
+  /* ---------------------------------------------------------------------------
+     Shape — exactly three radii. Do not invent a fourth.
+     ------------------------------------------------------------------------ */
+  --r-pill: 999px;
+  --r-slab: 40px; /* inset full-bleed sections (Projects, Contact) */
+  --r-card: 28px; /* every card */
+
+  /* ---------------------------------------------------------------------------
+     Space
+     The steps the design actually uses. Mostly a 4px grid — 18px is the one
+     deliberate exception, and it appears twice.
+     ------------------------------------------------------------------------ */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-100: 100px;
+  --space-120: 120px;
+
+  /* ---------------------------------------------------------------------------
+     Layout
+     ------------------------------------------------------------------------ */
+  --gutter: var(--space-24); /* page edge inset */
+  --gap-card: var(--space-20); /* between cards in a grid */
+  --section-pad-y: var(--space-96);
+  --section-pad-x: var(--space-48);
+
+  /* ---------------------------------------------------------------------------
+     Motion
+     Deliberately small. Anything using these must also honour the
+     prefers-reduced-motion block in global.css.
+     ------------------------------------------------------------------------ */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur: 240ms;
+}

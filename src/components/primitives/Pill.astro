@@ -1,0 +1,117 @@
+---
+/**
+ * Pill — the site's only action shape.
+ *
+ * Covers every sans-serif rounded action in the design: nav links, the nav's
+ * Contact button, "Say hello", and the Email / LinkedIn pair in the Contact slab.
+ * Mono chips are a different thing entirely — use Tag.astro for those.
+ *
+ * v1 defined `.cta-button` in three separate global stylesheets with conflicting
+ * styles. This component is the single answer to that.
+ */
+interface Props {
+  variant?: 'ghost' | 'ink' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  /** Renders an <a> when set, a <button> when not. */
+  href?: string;
+  /** Fill the container and centre the label — used by "Say hello". */
+  block?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'ghost',
+  size = 'sm',
+  href,
+  block = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+// External links get the safe rel. Anchor links and internal paths do not.
+const isExternal = typeof href === 'string' && /^https?:\/\//.test(href);
+const external = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<Tag
+  href={href}
+  data-variant={variant}
+  data-size={size}
+  data-block={block ? '' : undefined}
+  class={className}
+  {...external}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  a,
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    border-radius: var(--r-pill);
+    font-family: var(--font-sans);
+    font-weight: var(--fw-medium);
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition:
+      background-color var(--dur) var(--ease),
+      opacity var(--dur) var(--ease);
+  }
+
+  [data-block] {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Size ------------------------------------------------------------------- */
+  [data-size='sm'] {
+    padding: var(--space-8) var(--space-16);
+    font-size: var(--fs-meta);
+  }
+
+  [data-size='md'] {
+    padding: var(--space-16);
+    font-size: var(--fs-body-xs);
+  }
+
+  [data-size='lg'] {
+    padding: var(--space-18) var(--space-32);
+    font-size: var(--fs-body-s);
+  }
+
+  /* Variant ---------------------------------------------------------------- */
+  [data-variant='ghost'] {
+    background: transparent;
+  }
+
+  [data-variant='ghost']:hover {
+    background: var(--line-hover);
+  }
+
+  [data-variant='ink'] {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+
+  [data-variant='ink']:hover {
+    opacity: 0.85;
+  }
+
+  [data-variant='outline'] {
+    background: transparent;
+    border-color: var(--line-heavy);
+  }
+
+  [data-variant='outline']:hover {
+    opacity: 0.75;
+  }
+</style>
