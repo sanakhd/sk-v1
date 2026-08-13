@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 import { projectSchema, type Project } from './schema';
 
+import lifecurriculum from '../assets/lifecurriculum.png';
 import spotify from '../assets/spotify.png';
 import tiptrendz from '../assets/tiptrendz.png';
 import offerup from '../assets/offerup.png';
@@ -17,16 +18,32 @@ import offerup from '../assets/offerup.png';
  */
 export const projects: Project[] = z.array(projectSchema).parse([
   {
+    title: 'LifeCurriculum',
+    kind: 'Side project · Web app',
+    blurb:
+      "Turns any topic into a two-host conversation you can actually fit into a day. Sessions run two to three minutes, build into progressive five-day programs, and adapt to whether you're at home, working out, or driving.",
+    stack: 'FastAPI · React · TypeScript · GPT-4',
+    image: lifecurriculum,
+    link: 'https://github.com/sanakhd/LifeCurriculumMVP',
+    linkKind: 'code',
+    span: 12,
+    dir: 'row',
+    imgH: '300px',
+    imgW: '46%',
+    // A title card, not a UI screenshot: cropping it eats the wordmark.
+    imgFit: 'contain',
+    imgBg: '#ff4a0a',
+  },
+  {
     title: 'Insights',
     kind: 'Side project · Web app',
     blurb:
       "Turns your Spotify listening history into something you'd actually want to look at — top artists, tracks, and the audio characteristics behind your taste. Built it because the yearly recap wasn't enough.",
     stack: 'React · Express · Spotify API',
     image: spotify,
-    span: 12,
-    dir: 'row',
-    imgH: '300px',
-    imgW: '46%',
+    span: 4,
+    imgH: '240px',
+    imgW: '100%',
   },
   {
     title: 'TipTrendz',
@@ -36,7 +53,7 @@ export const projects: Project[] = z.array(projectSchema).parse([
     stack: 'Spring Boot · React · Postgres',
     image: tiptrendz,
     span: 4,
-    imgH: '200px',
+    imgH: '240px',
     imgW: '100%',
   },
   {
@@ -54,8 +71,8 @@ export const projects: Project[] = z.array(projectSchema).parse([
     image: offerup,
     link: 'https://github.com/sanakhd/OfferUp',
     linkKind: 'code',
-    span: 8,
-    imgH: '260px',
+    span: 4,
+    imgH: '240px',
     imgW: '100%',
   },
   {

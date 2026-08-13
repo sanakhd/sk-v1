@@ -86,6 +86,18 @@ export const projectSchema = z.object({
   dir: z.enum(['row', 'column']).default('column'),
   imgH: z.string(),
   imgW: z.string(),
+  /**
+   * 'cover' fills the frame and crops, which is right for UI screenshots. Use
+   * 'contain' for artwork that must not be cut, and pair it with imgBg so the
+   * letterbox disappears into the image's own ground.
+   */
+  imgFit: z.enum(['cover', 'contain']).default('cover'),
+  /**
+   * The artwork's own background colour. This is a property of the image, not a
+   * design token, which is why it lives with the content rather than in
+   * tokens.css. Defaults to the dark image well.
+   */
+  imgBg: z.string().optional(),
   ...draftable,
 });
 

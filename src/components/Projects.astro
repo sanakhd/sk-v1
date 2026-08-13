@@ -25,7 +25,7 @@ const visible = tile(published(projects));
           <li
             class="card"
             data-dir={project.dir}
-            style={`--span: ${project.span}; --img-h: ${project.imgH}; --img-w: ${project.imgW};`}
+            style={`--span: ${project.span}; --img-h: ${project.imgH}; --img-w: ${project.imgW}; --img-fit: ${project.imgFit}; --img-bg: ${project.imgBg ?? 'var(--ink-well)'};`}
           >
             <div class="shot">
               <Image src={project.image} alt={`${project.title} screenshot`} loading="lazy" />
@@ -92,14 +92,14 @@ const visible = tile(published(projects));
     flex-shrink: 0;
     width: var(--img-w);
     height: var(--img-h);
-    background: var(--ink-well);
+    background: var(--img-bg, var(--ink-well));
     overflow: hidden;
   }
 
   .shot :global(img) {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: var(--img-fit, cover);
   }
 
   .body {
