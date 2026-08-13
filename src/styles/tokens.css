@@ -39,6 +39,7 @@
   --text-body: #33342c; /* on paper: body copy */
   --text-muted: #4a4a42; /* on paper: secondary */
   --text-soft: #5a5b52; /* on paper: rotation scope */
+  --text-tag: #4a4b42; /* on paper: tag label — a hair greener than --text-muted */
   --text-dim: #6a6a60; /* on paper: meta, mono eyebrows */
 
   --on-ink: #f2f0ea; /* on ink: headings */
@@ -162,9 +163,13 @@
      The steps the design actually uses. Mostly a 4px grid — 18px is the one
      deliberate exception, and it appears twice.
      ------------------------------------------------------------------------ */
+  --space-2: 2px;
+  --space-3: 3px;
   --space-4: 4px;
+  --space-6: 6px;
   --space-8: 8px;
   --space-12: 12px;
+  --space-14: 14px;
   --space-16: 16px;
   --space-18: 18px;
   --space-20: 20px;

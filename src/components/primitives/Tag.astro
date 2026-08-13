@@ -26,19 +26,21 @@ const { variant = 'outline' } = Astro.props;
     font-weight: var(--fw-regular);
     letter-spacing: var(--track-mono-sm);
     text-transform: uppercase;
-    line-height: 1;
+    /* The design sets no line-height here, so the chip takes the font's natural
+       leading. Stated explicitly because global.css puts 1.6 on body. */
+    line-height: normal;
     border-radius: var(--r-pill);
     border: 1px solid transparent;
   }
 
   [data-variant='outline'] {
-    padding: var(--space-8) var(--space-12);
+    padding: var(--space-6) var(--space-12);
     border-color: var(--line-strong);
-    color: var(--text-muted);
+    color: var(--text-tag);
   }
 
   [data-variant='accent'] {
-    padding: var(--space-8) var(--space-16);
+    padding: var(--space-8) var(--space-14);
     background: var(--accent);
     color: var(--ink);
   }
