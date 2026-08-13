@@ -93,6 +93,7 @@
   --fs-lead: clamp(1.25rem, 1rem + 1.25vw, 1.625rem); /* 20 ->  26  "Now" card */
   --fs-sub: clamp(1.125rem, 0.958rem + 0.83vw, 1.375rem); /* 18 ->  22  about lead */
 
+  --fs-blurb: 1.1875rem; /* 19  hero profile blurb, "Just me" card only */
   --fs-body-l: 1.25rem; /* 20 */
   --fs-body: 1.125rem; /* 18 */
   --fs-body-m: 1.0625rem; /* 17 */
@@ -176,6 +177,12 @@
   --gap-card: var(--space-20); /* between cards in a grid */
   --section-pad-y: var(--space-96);
   --section-pad-x: var(--space-48);
+
+  /* The hero's "air". The design exposes heroAir as a 0.6–1.6 slider; the saved
+     default is 1.45, resolved here so the value is named rather than magic.
+     56 × 1.45 = 81, 28 × 1.45 = 41. */
+  --hero-pad-block: 81px;
+  --hero-gap: 41px;
 
   /* ---------------------------------------------------------------------------
      Motion
