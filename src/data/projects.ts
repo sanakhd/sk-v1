@@ -55,7 +55,7 @@ export const projects: Project[] = z.array(projectSchema).parse([
     stack: 'React · Express · Spotify API',
     image: spotify,
     span: 4,
-    imgH: '240px',
+    imgH: '220px',
     imgW: '100%',
   },
   {
@@ -66,7 +66,9 @@ export const projects: Project[] = z.array(projectSchema).parse([
     stack: 'Spring Boot · React · Postgres',
     image: tiptrendz,
     span: 4,
-    imgH: '240px',
+    // The design's smallest slot. Kept deliberately short so the row does not
+    // read as three identical blocks.
+    imgH: '170px',
     imgW: '100%',
   },
 ]);
