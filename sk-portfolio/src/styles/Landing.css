@@ -109,7 +109,6 @@
   z-index: 10;
 }
 
-/* NEW: Hidden by default — mobile-only tagline */
 .mobile-tagline {
   display: none;
 }
@@ -179,7 +178,7 @@
  .bottom-image {
     top: 220px;
     left: 60%;
-    transform: translateX(-50%) rotate(90deg); /* ✅ Centers the rotated image */
+    transform: translateX(-50%) rotate(90deg);
     width: 587px;
     height: 587px;
   }
