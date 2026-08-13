@@ -35,6 +35,19 @@ export const projects: Project[] = z.array(projectSchema).parse([
     imgBg: '#ff4a0a',
   },
   {
+    title: 'SANA® v2',
+    kind: 'Portfolio · This site',
+    blurb:
+      "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
+    stack: 'Astro · TypeScript',
+    image: portfolio,
+    link: 'https://github.com/sanakhd/sk-v1',
+    linkKind: 'code',
+    span: 4,
+    imgH: '240px',
+    imgW: '100%',
+  },
+  {
     title: 'Insights',
     kind: 'Side project · Web app',
     blurb:
@@ -52,19 +65,6 @@ export const projects: Project[] = z.array(projectSchema).parse([
       'Income tracking for service workers, whose pay is variable enough that most budgeting tools are useless to them. Dashboards that make an unpredictable month legible.',
     stack: 'Spring Boot · React · Postgres',
     image: tiptrendz,
-    span: 4,
-    imgH: '240px',
-    imgW: '100%',
-  },
-  {
-    title: 'SANA® v2',
-    kind: 'Portfolio · This site',
-    blurb:
-      "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
-    stack: 'Astro · TypeScript',
-    image: portfolio,
-    link: 'https://github.com/sanakhd/sk-v1',
-    linkKind: 'code',
     span: 4,
     imgH: '240px',
     imgW: '100%',
