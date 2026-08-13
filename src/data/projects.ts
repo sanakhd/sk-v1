@@ -4,7 +4,7 @@ import { projectSchema, type Project } from './schema';
 import lifecurriculum from '../assets/lifecurriculum.png';
 import spotify from '../assets/spotify.png';
 import tiptrendz from '../assets/tiptrendz.png';
-import offerup from '../assets/offerup.png';
+import portfolio from '../assets/portfolio.png';
 
 /**
  * The 12-column bento from the design. Each project carries its own span and
@@ -57,46 +57,19 @@ export const projects: Project[] = z.array(projectSchema).parse([
     imgW: '100%',
   },
   {
-    /**
-     * Fills the design's third slot, which already used this screenshot. The
-     * placeholder copy there asked for "a piece of PM work" — swap this out when
-     * there's one to tell, but a real project with a working link beats an empty
-     * slot in the meantime.
-     */
-    title: 'Offer Up!',
-    kind: 'Side project · Web app',
+    title: 'SANA® v2',
+    kind: 'Portfolio · This site',
     blurb:
-      'An auction marketplace with both forward and Dutch formats — browse, bid, and check out, with bidding that updates as it happens.',
-    stack: 'Spring Boot · MongoDB · Docker',
-    image: offerup,
-    link: 'https://github.com/sanakhd/OfferUp',
+      "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
+    stack: 'Astro · TypeScript',
+    // PLACEHOLDER: this is a screenshot of v1, the site currently live. Swap it
+    // for a shot of v2 before cutover, otherwise the card shows the old design.
+    image: portfolio,
+    link: 'https://github.com/sanakhd/sk-v1',
     linkKind: 'code',
     span: 4,
     imgH: '240px',
     imgW: '100%',
-  },
-  {
-    title: 'Project four',
-    kind: 'Placeholder',
-    blurb:
-      'Another slot. Two to three sentences is plenty — what was broken, what you shipped, what it moved.',
-    stack: 'Add stack or metrics',
-    image: spotify,
-    span: 7,
-    imgH: '240px',
-    imgW: '100%',
-    draft: true,
-  },
-  {
-    title: 'Project five',
-    kind: 'Placeholder',
-    blurb: 'Last slot. Good place for something scrappy or personal.',
-    stack: 'Add stack or metrics',
-    image: tiptrendz,
-    span: 5,
-    imgH: '240px',
-    imgW: '100%',
-    draft: true,
   },
 ]);
 
