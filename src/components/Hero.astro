@@ -66,7 +66,7 @@ const lastLine = headlineLines.pop() as string;
     display: grid;
     grid-template-columns: 1.35fr 1fr;
     gap: var(--gap-card);
-    padding: var(--space-12) var(--gutter) var(--gutter);
+    padding: var(--space-12) var(--gutter-fluid) var(--gutter);
     min-height: 700px;
   }
 
@@ -76,7 +76,7 @@ const lastLine = headlineLines.pop() as string;
     flex-direction: column;
     justify-content: center;
     gap: var(--hero-gap);
-    padding: var(--hero-pad-block) var(--space-48);
+    padding: var(--hero-pad-block) var(--hero-pad-inline);
     background: var(--ink);
     color: var(--on-ink);
     border-radius: var(--r-card);
@@ -168,18 +168,12 @@ const lastLine = headlineLines.pop() as string;
   }
 
   /* Responsive ------------------------------------------------------------
-     The design is a 1280px comp with no mobile behaviour, so this is proposed
-     rather than specified. The 1.35fr/1fr split is the first thing to go: below
-     1024px the headline card needs the full width or the type collapses. */
-  @media (max-width: 1024px) {
+     The design collapses the hero to one column at 900px and handles the rest
+     through the clamps above, so there is very little left to do here. */
+  @media (max-width: 900px) {
     .hero {
       grid-template-columns: 1fr;
       min-height: 0;
-    }
-
-    .card {
-      padding: var(--space-56) var(--space-40);
-      gap: var(--space-28);
     }
 
     /* Side by side once stacked, so the pair doesn't become a tall column. */
@@ -193,25 +187,14 @@ const lastLine = headlineLines.pop() as string;
     }
   }
 
-  @media (max-width: 720px) {
-    .hero {
-      padding: var(--space-12) var(--space-12) var(--space-12);
-    }
-
-    .card {
-      padding: var(--space-40) var(--space-24);
-    }
-
+  @media (max-width: 640px) {
     .aside {
       flex-direction: column;
     }
 
-    .now {
-      padding: var(--space-28);
-    }
-
+    .now,
     .profile {
-      padding: var(--space-24);
+      padding: var(--space-28);
     }
 
     .profile-row {

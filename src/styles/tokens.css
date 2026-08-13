@@ -38,6 +38,7 @@
   --text: #14150f; /* on paper: headings */
   --text-body: #33342c; /* on paper: body copy */
   --text-muted: #4a4a42; /* on paper: secondary */
+  --text-soft: #5a5b52; /* on paper: rotation scope */
   --text-dim: #6a6a60; /* on paper: meta, mono eyebrows */
 
   --on-ink: #f2f0ea; /* on ink: headings */
@@ -57,10 +58,13 @@
      ------------------------------------------------------------------------ */
   --line-row: rgb(20 21 15 / 0.03); /* experience row, hover */
   --line-hover: rgb(20 21 15 / 0.07); /* nav pill, hover */
+  --line-faint: rgb(20 21 15 / 0.1); /* earlier-role row */
   --line-hairline: rgb(20 21 15 / 0.14); /* divider inside a card */
   --line: rgb(20 21 15 / 0.16); /* default border and rule */
+  --line-rule: rgb(20 21 15 / 0.18); /* rotation list rule */
   --line-strong: rgb(20 21 15 / 0.2); /* tag pill border */
-  --line-heavy: rgb(20 21 15 / 0.35); /* outline button border */
+  --line-link: rgb(20 21 15 / 0.25); /* inline link underline */
+  --line-heavy: rgb(20 21 15 / 0.35); /* outline button, expander */
 
   /* ---------------------------------------------------------------------------
      Type — families
@@ -84,16 +88,23 @@
      provisional and get reviewed per-section in Phase 3, since the design has no
      mobile comp to check them against.
      ------------------------------------------------------------------------ */
-  --fs-display-xl: clamp(2.75rem, 1.083rem + 8.33vw, 6.5rem); /* 44 -> 104  contact */
-  --fs-display-l: clamp(2.5rem, 1.167rem + 6.67vw, 5.75rem); /* 40 ->  92  hero */
-  --fs-display-m: clamp(2.25rem, 1.583rem + 3.33vw, 4rem); /* 36 ->  64  section h2 */
+  /* These clamps are the design's own, copied verbatim — not derived. */
+  --fs-display-l: clamp(40px, 6.4vw, 92px); /* hero headline */
+  --fs-display-m: clamp(38px, 6.5vw, 64px); /* section h2 */
+  --fs-h3: clamp(24px, 3vw, 32px); /* project title */
+  --fs-lead: clamp(20px, 2.4vw, 26px); /* "Now" card */
 
-  --fs-h3: clamp(1.5rem, 1.167rem + 1.67vw, 2rem); /* 24 ->  32  project title */
-  --fs-h3-sm: clamp(1.5rem, 1.25rem + 1.25vw, 1.875rem); /* 24 ->  30  role title */
-  --fs-lead: clamp(1.25rem, 1rem + 1.25vw, 1.625rem); /* 20 ->  26  "Now" card */
-  --fs-sub: clamp(1.125rem, 0.958rem + 0.83vw, 1.375rem); /* 18 ->  22  about lead */
+  /* The design leaves the Contact headline at a fixed 104px, which overflows a
+     phone. Clamped here on the same curve as the others — flagged for review. */
+  --fs-display-xl: clamp(40px, 8vw, 104px); /* contact headline */
+
+  --fs-h3-sm: 30px; /* role title */
+  --fs-h3-quiet: 21px; /* role title, 'quiet' emphasis */
+  --fs-sub: 22px; /* about lead */
 
   --fs-blurb: 1.1875rem; /* 19  hero profile blurb, "Just me" card only */
+  --fs-rotation: 16px; /* rotation title */
+  --fs-rotation-scope: 15px; /* rotation scope, and 'quiet' blurbs */
   --fs-body-l: 1.25rem; /* 20 */
   --fs-body: 1.125rem; /* 18 */
   --fs-body-m: 1.0625rem; /* 17 */
@@ -174,15 +185,28 @@
      Layout
      ------------------------------------------------------------------------ */
   --gutter: var(--space-24); /* page edge inset */
+  --gutter-fluid: clamp(12px, 2.5vw, 24px); /* hero and slab inset */
   --gap-card: var(--space-20); /* between cards in a grid */
-  --section-pad-y: var(--space-96);
-  --section-pad-x: var(--space-48);
+
+  /* Section padding, from the design. Sections differ only in their vertical
+     ceiling: 96 for Experience and Projects, 120 for About. */
+  --section-pad-y: clamp(64px, 9vw, 96px);
+  --section-pad-x: clamp(20px, 4vw, 48px);
+  --section-pad-y-tall: clamp(72px, 10vw, 120px); /* About */
+  --slab-pad-x: clamp(8px, 2vw, 24px); /* Projects slab */
+
+  --nav-pad-y: var(--space-20);
 
   /* The hero's "air". The design exposes heroAir as a 0.6–1.6 slider; the saved
-     default is 1.45, resolved here so the value is named rather than magic.
-     56 × 1.45 = 81, 28 × 1.45 = 41. */
-  --hero-pad-block: 81px;
+     default is 1.45, so the ceiling is 56 × 1.45 = 81 and the gap 28 × 1.45 = 41. */
+  --hero-pad-block: clamp(36px, 5vw, 81px);
+  --hero-pad-inline: clamp(24px, 4vw, 48px);
   --hero-gap: 41px;
+
+  /* The design collapses every multi-column layout at one breakpoint. Media
+     queries can't read custom properties, so this is documentation — but keeping
+     the number in one place stops it drifting. Value: 900px. */
+  --bp-stack: 900px;
 
   /* ---------------------------------------------------------------------------
      Motion

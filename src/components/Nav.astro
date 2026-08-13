@@ -33,7 +33,8 @@ import { site, nav } from '../data/site';
     justify-content: space-between;
     align-items: center;
     gap: var(--space-16);
-    padding: var(--space-24) var(--space-48);
+    flex-wrap: wrap;
+    padding: var(--nav-pad-y) var(--section-pad-x);
     background: var(--nav-scrim);
     backdrop-filter: blur(var(--nav-blur));
     -webkit-backdrop-filter: blur(var(--nav-blur));
@@ -53,17 +54,13 @@ import { site, nav } from '../data/site';
     gap: var(--space-8);
   }
 
-  /* The four pills plus the wordmark cannot fit on a phone at any honest size.
-     Since this is a single scrolling page, the anchors are a convenience rather
-     than the only way to reach a section — so they drop and Contact stays, which
-     is the one thing a visitor might actually want to act on. */
-  @media (max-width: 720px) {
+  /* No mobile menu — the design wraps the pills onto a second row instead, which
+     keeps every anchor reachable without a hamburger. For a single scrolling page
+     that is the right trade: the overlay menu in v1 was the least accessible
+     thing on the site and it existed to solve a problem this page doesn't have. */
+  @media (max-width: 900px) {
     .bar {
-      padding: var(--space-16) var(--space-20);
-    }
-
-    .anchor-item {
-      display: none;
+      gap: var(--space-12);
     }
   }
 </style>

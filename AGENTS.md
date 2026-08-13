@@ -40,7 +40,11 @@ Defined on `:root` in `src/styles/tokens.css`.
 (lime, locked), accent-punct `#e2622a` (the hero period only).
 Text on paper: `#14150f` / `#33342c` / `#4a4a42` / `#6a6a60`.
 Text on ink: `#f2f0ea` / `#b9b8b0` / `#a8a99f` / `#8a8b80` / `#6f7066`.
-Lines are all `rgba(20,21,15, α)` at `.03 .07 .14 .16 .2 .35`.
+Lines are all `rgb(20 21 15 / α)` at `.03 .07 .1 .14 .16 .18 .2 .25 .35`.
+
+**Responsive** — the design collapses every multi-column layout at a single
+**900px** breakpoint and otherwise relies on `clamp()`. Those clamps are copied
+verbatim into `tokens.css`; do not re-derive them.
 
 **Type** — two families, and the tension between them is the brand.
 `Archivo` for everything; display is weight 900, uppercase, tight negative

@@ -13,18 +13,53 @@ import { z } from 'astro/zod';
  * far less ceremony.
  */
 
+/** Absolute http(s) URL. Avoids z.string().url(), which is deprecated. */
+const httpUrl = z
+  .string()
+  .refine((value) => /^https?:\/\//.test(value), 'must be an absolute http(s) URL');
+
 /** Anything that can be held back from production while it is still being written. */
 const draftable = {
   /** Renders in `npm run dev`, excluded from `npm run build`. */
   draft: z.boolean().default(false),
 };
 
+/** One posting inside a rotational program. */
+export const rotationSchema = z.object({
+  title: z.string(),
+  /**
+   * Present in the design's data but not rendered by it — the rotation list shows
+   * title and scope only. Kept so the detail isn't lost if it's wanted later.
+   */
+  dates: z.string().optional(),
+  scope: z.string(),
+});
+
 export const roleSchema = z.object({
   dates: z.string(),
   title: z.string(),
   org: z.string(),
+  /** Renders the org as an underlined external link when present. */
+  orgHref: httpUrl.optional(),
+  /** Not rendered today. Kept from the design rather than dropped. */
+  orgNote: z.string().optional(),
   blurb: z.string(),
-  tags: z.array(z.string()).min(1),
+  /**
+   * 'quiet' drops the title and blurb a step. The design uses it for the
+   * freelance row so it reads as an aside rather than a fourth headline role.
+   */
+  emphasis: z.enum(['normal', 'quiet']).default('normal'),
+  /** Nested postings, rendered as a ruled sub-list. Empty for most roles. */
+  rotations: z.array(rotationSchema).default([]),
+  tags: z.array(z.string()).default([]),
+  ...draftable,
+});
+
+/** The compact rows behind the "Everything else" toggle. */
+export const earlierRoleSchema = z.object({
+  dates: z.string(),
+  title: z.string(),
+  org: z.string(),
   ...draftable,
 });
 
@@ -35,7 +70,7 @@ export const projectSchema = z.object({
   stack: z.string(),
   image: z.string(),
   /** Omit entirely rather than pointing at "#". A dead link is worse than none. */
-  link: z.string().url().optional(),
+  link: httpUrl.optional(),
   /** Whether `link` goes to a live site or to source — picks the CTA label. */
   linkKind: z.enum(['live', 'code']).default('code'),
 
@@ -48,14 +83,15 @@ export const projectSchema = z.object({
   ...draftable,
 });
 
+export type Rotation = z.infer<typeof rotationSchema>;
 export type Role = z.infer<typeof roleSchema>;
+export type EarlierRole = z.infer<typeof earlierRoleSchema>;
 export type Project = z.infer<typeof projectSchema>;
 
 /**
  * Strip drafts in production, keep them in dev.
  *
- * This is what lets unfinished sections — the Scotiabank role Sana is still
- * designing, the empty project slots — live in the repo without reaching
+ * This is what lets unfinished sections live in the repo without reaching
  * sanakhademi.com.
  */
 export function published<T extends { draft: boolean }>(items: T[]): T[] {

@@ -15,6 +15,12 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth; /* reset by the reduced-motion block below */
+}
+
+/* The nav is sticky, so an anchored section would otherwise land underneath it. */
+section[id] {
+  scroll-margin-top: var(--space-96);
 }
 
 body {

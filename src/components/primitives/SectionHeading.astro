@@ -64,15 +64,22 @@ const { title, eyebrow, tone = 'paper', narrowEyebrow = false, id } = Astro.prop
     flex-shrink: 1;
   }
 
-  /* The eyebrow is supporting text, not structure — below the fold of a phone
-     it costs more than it gives, so it drops rather than wrapping awkwardly. */
-  @media (max-width: 640px) {
+  /* The design stacks the eyebrow under the heading and flushes it left rather
+     than dropping it. (An earlier version of this file hid it below 640px —
+     the design overrules that.) */
+  @media (max-width: 900px) {
     .heading {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-12);
       margin-bottom: var(--space-32);
     }
 
-    .heading :global(.eyebrow) {
-      display: none;
+    .heading :global(.eyebrow),
+    .heading :global(.eyebrow.narrow) {
+      margin-bottom: 0;
+      max-width: none;
+      text-align: left;
     }
   }
 </style>
