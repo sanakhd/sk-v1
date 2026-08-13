@@ -4,7 +4,7 @@ import { projectSchema, type Project } from './schema';
 import lifecurriculum from '../assets/lifecurriculum.png';
 import spotify from '../assets/spotify.png';
 import tiptrendz from '../assets/tiptrendz.png';
-import portfolio from '../assets/portfolio.png';
+import portfolio from '../assets/sk_v2.png';
 
 /**
  * The 12-column bento from the design. Each project carries its own span and
@@ -62,8 +62,6 @@ export const projects: Project[] = z.array(projectSchema).parse([
     blurb:
       "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
     stack: 'Astro · TypeScript',
-    // PLACEHOLDER: this is a screenshot of v1, the site currently live. Swap it
-    // for a shot of v2 before cutover, otherwise the card shows the old design.
     image: portfolio,
     link: 'https://github.com/sanakhd/sk-v1',
     linkKind: 'code',
