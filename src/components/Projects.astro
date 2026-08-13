@@ -1,0 +1,190 @@
+---
+import { Image } from 'astro:assets';
+import Slab from './primitives/Slab.astro';
+import SectionHeading from './primitives/SectionHeading.astro';
+import Eyebrow from './primitives/Eyebrow.astro';
+import { projects, tile } from '../data/projects';
+import { published } from '../data/schema';
+
+const visible = tile(published(projects));
+---
+
+<Slab tone="ink" id="projects" pad="slab" aria-labelledby="projects-heading">
+  <div class="inner">
+    <SectionHeading
+      title="Projects"
+      eyebrow="Things I built because I wanted them to exist"
+      tone="ink"
+      narrowEyebrow
+      id="projects-heading"
+    />
+
+    <ol class="grid">
+      {
+        visible.map((project) => (
+          <li
+            class="card"
+            data-dir={project.dir}
+            style={`--span: ${project.span}; --img-h: ${project.imgH}; --img-w: ${project.imgW};`}
+          >
+            <div class="shot">
+              <Image src={project.image} alt={`${project.title} screenshot`} loading="lazy" />
+            </div>
+
+            <div class="body">
+              <Eyebrow tone="accent" class="kind">
+                {project.kind}
+              </Eyebrow>
+
+              <h3>{project.title}</h3>
+              <p>{project.blurb}</p>
+
+              <div class="foot">
+                <span class="stack">{project.stack}</span>
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    {project.linkKind === 'live' ? 'View ↗' : 'Code ↗'}
+                    <span class="sr-only"> — {project.title}</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Slab>
+
+<style>
+  /* The slab is padded tight; its contents carry their own inset. */
+  .inner {
+    padding-inline: var(--slab-inner-x);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--gap-card);
+    align-items: start;
+  }
+
+  .card {
+    grid-column: span var(--span);
+    display: flex;
+    flex-direction: column;
+    background: var(--ink-surface);
+    border-radius: var(--r-card);
+    overflow: hidden;
+    transition: background-color var(--dur) var(--ease);
+  }
+
+  .card:hover {
+    background: var(--ink-surface-hover);
+  }
+
+  /* The full-width feature card lays its image beside the copy instead of above. */
+  .card[data-dir='row'] {
+    flex-direction: row;
+  }
+
+  .shot {
+    flex-shrink: 0;
+    width: var(--img-w);
+    height: var(--img-h);
+    background: var(--ink-well);
+    overflow: hidden;
+  }
+
+  .shot :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+    padding: var(--space-36) var(--space-36) var(--space-40);
+  }
+
+  .body :global(.kind) {
+    font-size: var(--fs-meta-xs);
+  }
+
+  h3 {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--track-h3);
+    line-height: normal;
+  }
+
+  p {
+    flex: 1;
+    font-size: var(--fs-body-s);
+    line-height: var(--lh-relaxed);
+    color: var(--on-ink-dim);
+    text-wrap: pretty;
+  }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-20);
+    padding-top: var(--space-8);
+  }
+
+  .stack {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-s);
+    color: var(--on-ink-meta);
+  }
+
+  .foot a {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: var(--fw-medium);
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: var(--space-2);
+  }
+
+  /* "Code ↗" repeated across cards is meaningless out of context to a screen
+     reader, so each link carries its project name. */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Responsive ------------------------------------------------------------
+     The design collapses every card to full width and stacks the feature card's
+     image above its copy. */
+  @media (max-width: 900px) {
+    .card,
+    .card[data-dir='row'] {
+      grid-column: span 12;
+      flex-direction: column;
+    }
+
+    .shot {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .inner {
+      padding-inline: var(--space-12);
+    }
+
+    .body {
+      padding: var(--space-28) var(--space-24) var(--space-32);
+    }
+  }
+</style>

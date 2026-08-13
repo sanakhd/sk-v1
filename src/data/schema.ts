@@ -68,7 +68,13 @@ export const projectSchema = z.object({
   kind: z.string(),
   blurb: z.string(),
   stack: z.string(),
-  image: z.string(),
+  /**
+   * An imported image, not a path — Astro needs the ImageMetadata to emit WebP
+   * with srcset and intrinsic dimensions. v1 shipped 4.2 MB of raw PNG.
+   */
+  image: z.custom<ImageMetadata>((value) => typeof value === 'object' && value !== null, {
+    message: 'image must be imported from src/assets, not a string path',
+  }),
   /** Omit entirely rather than pointing at "#". A dead link is worse than none. */
   link: httpUrl.optional(),
   /** Whether `link` goes to a live site or to source — picks the CTA label. */

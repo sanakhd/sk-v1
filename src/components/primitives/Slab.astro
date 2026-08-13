@@ -11,13 +11,18 @@ interface Props {
   id?: string;
   /** Contact is the last block on the page and needs a bottom inset too. */
   flush?: boolean;
+  /**
+   * The two slabs are padded differently in the design: Projects insets its own
+   * grid separately, so the slab itself stays tight; Contact pads generously.
+   */
+  pad?: 'slab' | 'contact';
   'aria-labelledby'?: string;
 }
 
-const { tone, id, flush = false, ...rest } = Astro.props;
+const { tone, id, flush = false, pad = 'slab', ...rest } = Astro.props;
 ---
 
-<section id={id} data-tone={tone} data-flush={flush ? undefined : ''} {...rest}>
+<section id={id} data-tone={tone} data-pad={pad} data-flush={flush ? undefined : ''} {...rest}>
   <slot />
 </section>
 
@@ -25,7 +30,14 @@ const { tone, id, flush = false, ...rest } = Astro.props;
   section {
     margin-inline: var(--gutter);
     border-radius: var(--r-slab);
-    padding: var(--section-pad-y) var(--gutter);
+  }
+
+  [data-pad='slab'] {
+    padding: var(--section-pad-y) var(--slab-pad-x);
+  }
+
+  [data-pad='contact'] {
+    padding: var(--contact-pad-y) var(--contact-pad-x);
   }
 
   [data-flush] {
@@ -48,7 +60,6 @@ const { tone, id, flush = false, ...rest } = Astro.props;
     section {
       margin-inline: var(--space-12);
       border-radius: var(--r-card);
-      padding: var(--space-56) var(--space-20);
     }
   }
 </style>

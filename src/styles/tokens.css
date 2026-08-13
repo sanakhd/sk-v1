@@ -199,6 +199,9 @@
   --section-pad-x: clamp(20px, 4vw, 48px);
   --section-pad-y-tall: clamp(72px, 10vw, 120px); /* About */
   --slab-pad-x: clamp(8px, 2vw, 24px); /* Projects slab */
+  --slab-inner-x: var(--space-24); /* content inset inside the Projects slab */
+  --contact-pad-y: clamp(56px, 8vw, 100px); /* Contact slab — design fixes these */
+  --contact-pad-x: clamp(24px, 5vw, 64px); /*   at 100/64; clamped for phones */
 
   --nav-pad-y: var(--space-20);
 
