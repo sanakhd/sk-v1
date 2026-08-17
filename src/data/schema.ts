@@ -38,7 +38,8 @@ export const rotationSchema = z.object({
 export const roleSchema = z.object({
   dates: z.string(),
   title: z.string(),
-  org: z.string(),
+  /** Optional: an aside like the freelance row carries no employer. */
+  org: z.string().optional(),
   /** Renders the org as an underlined external link when present. */
   orgHref: httpUrl.optional(),
   /** Not rendered today. Kept from the design rather than dropped. */

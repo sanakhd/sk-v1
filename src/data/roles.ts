@@ -17,10 +17,10 @@ export const roles: Role[] = z.array(roleSchema).parse([
     tags: ['Discovery', '0→1', 'Ops workflows'],
   },
   {
-    dates: 'On the side',
-    title: 'Websites for people I like',
-    org: 'Freelance',
-    blurb: "Small sites for friends, small businesses and side hustles. Can't help myself.",
+    dates: 'Ongoing',
+    title: 'Building websites',
+    blurb:
+      'Design is the part I keep coming back to, so I started building sites for friends as a way to actually do it. It’s turning into something I take on properly.',
     emphasis: 'quiet',
   },
   {

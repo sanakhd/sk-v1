@@ -24,15 +24,17 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
 
           <div class="who">
             <h3>{role.title}</h3>
-            <div class="org">
-              {role.orgHref ? (
-                <a href={role.orgHref} target="_blank" rel="noopener noreferrer">
-                  {role.org}
-                </a>
-              ) : (
-                role.org
-              )}
-            </div>
+            {role.org && (
+              <div class="org">
+                {role.orgHref ? (
+                  <a href={role.orgHref} target="_blank" rel="noopener noreferrer">
+                    {role.org}
+                  </a>
+                ) : (
+                  role.org
+                )}
+              </div>
+            )}
           </div>
 
           <div class="what">
@@ -195,6 +197,12 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
 
   [data-emphasis='quiet'] .blurb {
     font-size: var(--fs-rotation-scope);
+  }
+
+  /* A quiet row is an aside, so it takes less vertical room than a headline
+     role as well as smaller type. */
+  [data-emphasis='quiet'] {
+    padding: var(--space-24) 0;
   }
 
   /* Rotations -------------------------------------------------------------
