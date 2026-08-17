@@ -19,7 +19,7 @@ export const roles: Role[] = z.array(roleSchema).parse([
     dates: 'Ongoing',
     title: 'building websites',
     blurb:
-      'Started building sites for friends as a way to design and ship something start to finish. Two live, and counting.',
+      'Started building sites for friends as a way to design and ship something start to finish.',
     emphasis: 'quiet',
     links: [
       { label: 'Aironto', href: 'https://aironto.com/' },
@@ -59,7 +59,7 @@ export const roles: Role[] = z.array(roleSchema).parse([
 export const earlierRoles: EarlierRole[] = z.array(earlierRoleSchema).parse([
   { dates: 'Sep — Dec 2023', title: 'DevOps Engineer, Intern', org: 'Tangerine' },
   { dates: 'May — Aug 2023', title: 'Software Engineer, Intern', org: 'Scotiabank' },
-  { dates: 'Too long', title: 'Server', org: 'Where the TipTrendz idea came from' },
+  { dates: 'Too long', title: 'Server & Bartender', org: 'Where I learned to read a room fast' },
   {
     dates: 'Before that',
     title: 'Gymnastics Coach',

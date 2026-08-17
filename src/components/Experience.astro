@@ -39,6 +39,18 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
           <div class="what">
             <p class="blurb">{role.blurb}</p>
 
+            {role.links.length > 0 && (
+              <ul class="links">
+                {role.links.map((link) => (
+                  <li>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
             {role.rotations.length > 0 && (
               <details class="rot" open data-rotations>
                 <summary>
@@ -55,18 +67,6 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
                   ))}
                 </ol>
               </details>
-            )}
-
-            {role.links.length > 0 && (
-              <ul class="links">
-                {role.links.map((link) => (
-                  <li>
-                    <a href={link.href} target="_blank" rel="noopener noreferrer">
-                      {link.label} <span aria-hidden="true">↗</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
             )}
           </div>
         </li>
@@ -173,6 +173,9 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
     color: var(--text-dim);
   }
 
+  /* Inline links are bare: underline only, no arrow. The arrow is reserved for
+     the project CTAs, where it is an explicit "go look at this" rather than a
+     linked word inside a sentence. */
   .org a {
     border-bottom: 1px solid var(--line-link);
   }
@@ -203,7 +206,7 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
   /* A quiet row is an aside, so it takes less vertical room than a headline
      role as well as smaller type. */
   [data-emphasis='quiet'] {
-    padding: var(--space-24) 0;
+    padding: var(--space-20) 0;
   }
 
   /* Rotations -------------------------------------------------------------
@@ -275,7 +278,9 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
   }
 
   /* Destinations, not labels. A quiet mono row with a hairline underline, so it
-     reads as somewhere to go rather than another chip. */
+     reads as somewhere to go rather than another chip.
+
+     These sit under the blurb, in the body column. */
   .links {
     display: flex;
     flex-wrap: wrap;
