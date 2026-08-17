@@ -46,12 +46,14 @@
   --on-ink-muted: #b9b8b0; /* on ink: hero body */
   --on-ink-dim: #a8a99f; /* on ink: card body */
   --on-ink-faint: #8a8b80; /* on ink: mono eyebrow */
-  --on-ink-meta: #6f7066; /* on ink: stack line */
+  --on-ink-meta: #85867a; /* on ink: stack line. Design has #6f7066, which is
+                             3.35:1 on the card surface at 12px. */
 
   /* Text on the accent slab. Ink at reduced alpha rather than a grey, so it
      stays keyed to the lime behind it. */
   --on-accent-muted: rgb(20 21 15 / 0.75);
-  --on-accent-faint: rgb(20 21 15 / 0.6);
+  /* Design uses 0.6, which is 3.74:1 on the lime at 12px. */
+  --on-accent-faint: rgb(20 21 15 / 0.68);
 
   /* ---------------------------------------------------------------------------
      Color — lines

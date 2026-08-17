@@ -38,7 +38,8 @@ const visible = tile(published(projects));
                 <span class="stack">{project.stack}</span>
                 {project.link && (
                   <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    {project.linkKind === 'live' ? 'View ↗' : 'Code ↗'}
+                    {project.linkKind === 'live' ? 'View' : 'Code'}{' '}
+                    <span aria-hidden="true">↗</span>
                     <span class="sr-only"> — {project.title}</span>
                   </a>
                 )}
