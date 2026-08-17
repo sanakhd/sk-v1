@@ -34,7 +34,7 @@ const lastLine = headlineLines.pop() as string;
       {lastLine}{' '}
       <span class="accent">{hero.headlineAccent}</span><span class="punct">.</span>
     </h1>
-    <p class="lede">{hero.body}</p>
+    {hero.body && <p class="lede">{hero.body}</p>}
   </div>
 
   <div class="aside">

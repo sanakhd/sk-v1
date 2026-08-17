@@ -37,7 +37,7 @@ export const hero = {
   headline: ["I'm Sana.", 'A PM who', 'loves to'],
   headlineAccent: 'build',
 
-  body: "I embed with the people doing the job, find the workaround they've built, and turn it into software. Engineering background, so the first version is usually mine.",
+  body: todo('Hero line'),
 
   now: {
     label: 'Now',
@@ -47,7 +47,7 @@ export const hero = {
   profile: {
     alt: 'Sana Khademi',
     blurb:
-      'Hi — that’s me! Usually somewhere between building something, a Barry’s class, and planning my next trip.',
+      'Hi, that’s me! Usually somewhere between building something, a Barry’s class, and planning my next trip.',
     cta: 'Say hello',
   },
 } as const;
