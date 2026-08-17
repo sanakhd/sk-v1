@@ -1,0 +1,66 @@
+---
+/**
+ * Slab — a full-bleed section inset from the page edge with the large radius.
+ *
+ * Two in the design: the ink Projects block and the lime Contact block. The
+ * inset (--gutter) and the radius (--r-slab) are what make them read as objects
+ * sitting on the paper rather than as bands across it.
+ */
+interface Props {
+  tone: 'ink' | 'accent';
+  id?: string;
+  /** Contact is the last block on the page and needs a bottom inset too. */
+  flush?: boolean;
+  /**
+   * The two slabs are padded differently in the design: Projects insets its own
+   * grid separately, so the slab itself stays tight; Contact pads generously.
+   */
+  pad?: 'slab' | 'contact';
+  'aria-labelledby'?: string;
+}
+
+const { tone, id, flush = false, pad = 'slab', ...rest } = Astro.props;
+---
+
+<section id={id} data-tone={tone} data-pad={pad} data-flush={flush ? undefined : ''} {...rest}>
+  <slot />
+</section>
+
+<style>
+  section {
+    margin-inline: var(--gutter);
+    border-radius: var(--r-slab);
+  }
+
+  [data-pad='slab'] {
+    padding: var(--section-pad-y) var(--slab-pad-x);
+  }
+
+  [data-pad='contact'] {
+    margin-inline: var(--gutter-fluid);
+    padding: var(--contact-pad-y) var(--contact-pad-x);
+  }
+
+  [data-flush] {
+    margin-bottom: var(--gutter);
+  }
+
+  [data-tone='ink'] {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+
+  [data-tone='accent'] {
+    background: var(--accent);
+    color: var(--ink);
+  }
+
+  /* The 40px radius reads as a mistake at phone width — it eats the corner of
+     the content instead of framing it. Step it down to the card radius. */
+  @media (max-width: 640px) {
+    section {
+      margin-inline: var(--space-12);
+      border-radius: var(--r-card);
+    }
+  }
+</style>

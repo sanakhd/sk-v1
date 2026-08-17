@@ -1,0 +1,414 @@
+---
+import Base from '../layouts/Base.astro';
+import Pill from '../components/primitives/Pill.astro';
+import Tag from '../components/primitives/Tag.astro';
+import Eyebrow from '../components/primitives/Eyebrow.astro';
+import SectionHeading from '../components/primitives/SectionHeading.astro';
+import Slab from '../components/primitives/Slab.astro';
+
+/**
+ * Living styleguide. Renders every token and every primitive variant so the
+ * design system can be reviewed on its own, before it is spent on real sections.
+ * Delete this page before cutover if it is not wanted publicly.
+ */
+
+const surfaces = [
+  ['--paper', 'page ground'],
+  ['--paper-raised', 'avatar well'],
+  ['--ink', 'dark slabs'],
+  ['--ink-surface', 'project card'],
+  ['--ink-surface-hover', 'card hover'],
+  ['--ink-well', 'image well'],
+  ['--accent', 'lime — locked'],
+  ['--accent-punct', 'hero period only'],
+];
+
+const onPaper = ['--text', '--text-body', '--text-muted', '--text-dim'];
+const onInk = ['--on-ink', '--on-ink-muted', '--on-ink-dim', '--on-ink-faint', '--on-ink-meta'];
+const lines = [
+  '--line-row',
+  '--line-hover',
+  '--line-hairline',
+  '--line',
+  '--line-strong',
+  '--line-heavy',
+];
+
+const display = [
+  ['--fs-display-xl', 'Contact', '104'],
+  ['--fs-display-l', 'Hero', '92'],
+  ['--fs-display-m', 'Section', '64'],
+];
+
+const body = [
+  ['--fs-body-l', '20'],
+  ['--fs-body', '18'],
+  ['--fs-body-m', '17'],
+  ['--fs-body-s', '16'],
+  ['--fs-body-xs', '15'],
+];
+
+const meta = [
+  ['--fs-meta', '13'],
+  ['--fs-meta-s', '12'],
+  ['--fs-meta-xs', '11'],
+];
+
+const space = [4, 8, 12, 16, 18, 20, 24, 28, 32, 36, 40, 48, 56, 64, 80, 96, 100, 120];
+---
+
+<Base title="Styleguide — Sana Khademi" description="Design system for sanakhademi.com" noindex>
+  <main id="main">
+    <header class="page-head">
+      <Eyebrow>Design system · extracted from Portfolio v1.dc.html</Eyebrow>
+      <h1>Styleguide</h1>
+    </header>
+
+    <section class="block">
+      <SectionHeading title="Color" eyebrow="Grounds and surfaces" />
+      <div class="swatches">
+        {
+          surfaces.map(([token, use]) => (
+            <div class="swatch">
+              <div class="chip" style={`background: var(${token})`} />
+              <code>{token}</code>
+              <span class="note">{use}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="ramps">
+        <div class="ramp">
+          <Eyebrow>Text on paper</Eyebrow>
+          {
+            onPaper.map((token) => (
+              <p style={`color: var(${token})`}>
+                <code>{token}</code> — The spreadsheet they built is the roadmap.
+              </p>
+            ))
+          }
+        </div>
+        <div class="ramp on-ink">
+          <Eyebrow tone="faint">Text on ink</Eyebrow>
+          {
+            onInk.map((token) => (
+              <p style={`color: var(${token})`}>
+                <code>{token}</code> — The spreadsheet they built is the roadmap.
+              </p>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="ramp">
+        <Eyebrow>Lines — one hue, six alphas</Eyebrow>
+        <div class="lines">
+          {
+            lines.map((token) => (
+              <div class="line-row">
+                <code>{token}</code>
+                <div class="rule" style={`background: var(${token})`} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <SectionHeading title="Type" eyebrow="Archivo + JetBrains Mono" />
+
+      <div class="ramp">
+        <Eyebrow>Display — Archivo 900, uppercase, fluid</Eyebrow>
+        {
+          display.map(([token, use, px]) => (
+            <div class="type-row">
+              <div
+                class="display"
+                style={`font-size: var(${token}); letter-spacing: var(--track-display-${token.includes('xl') ? 'xl' : token.includes('-l') ? 'l' : 'm'})`}
+              >
+                Build
+              </div>
+              <code>
+                {token} · {use} · max {px}px
+              </code>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="ramp">
+        <Eyebrow>Body — Archivo</Eyebrow>
+        {
+          body.map(([token, px]) => (
+            <p style={`font-size: var(${token})`}>
+              <code>
+                {token} · {px}px
+              </code>{' '}
+              — I embed with the people doing the job, find the workaround they've built, and turn
+              it into software.
+            </p>
+          ))
+        }
+      </div>
+
+      <div class="ramp">
+        <Eyebrow>Meta — JetBrains Mono, uppercase, positive tracking</Eyebrow>
+        {
+          meta.map(([token, px]) => (
+            <p class="mono" style={`font-size: var(${token})`}>
+              {token} · {px}px · where I've been useful
+            </p>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="block">
+      <SectionHeading title="Shape" eyebrow="Three radii, no more" />
+      <div class="radii">
+        {
+          [
+            ['--r-pill', '999px'],
+            ['--r-slab', '40px'],
+            ['--r-card', '28px'],
+          ].map(([token, px]) => (
+            <div class="radius" style={`border-radius: var(${token})`}>
+              <code>{token}</code>
+              <span class="note">{px}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="block">
+      <SectionHeading title="Space" eyebrow="The steps the design uses" />
+      <div class="space-scale">
+        {
+          space.map((n) => (
+            <div class="space-row">
+              <code>--space-{n}</code>
+              <div class="bar" style={`width: var(--space-${n})`} />
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="block">
+      <SectionHeading title="Pill" eyebrow="Every sans action in the site" />
+      <div class="specimen">
+        <Pill variant="ghost" size="sm">Experience</Pill>
+        <Pill variant="ink" size="sm">Contact</Pill>
+        <Pill variant="ink" size="lg">Email</Pill>
+        <Pill variant="outline" size="lg">LinkedIn</Pill>
+      </div>
+      <div class="specimen narrow">
+        <Pill variant="ink" size="md" block>Say hello</Pill>
+      </div>
+    </section>
+
+    <section class="block">
+      <SectionHeading title="Tag" eyebrow="Mono chips" />
+      <div class="specimen">
+        <Tag>Discovery</Tag>
+        <Tag>0→1</Tag>
+        <Tag>Ops workflows</Tag>
+      </div>
+      <div class="specimen">
+        <Tag variant="accent">Goes to the jobsite</Tag>
+        <Tag variant="accent">Prototypes first</Tag>
+        <Tag variant="accent">Asks the dumb question</Tag>
+      </div>
+    </section>
+
+    <Slab tone="ink">
+      <SectionHeading
+        title="Slab — ink"
+        eyebrow="Things I built because I wanted them to exist"
+        tone="ink"
+        narrowEyebrow
+      />
+      <div class="specimen">
+        <Eyebrow tone="accent">Side project · Web app</Eyebrow>
+      </div>
+    </Slab>
+
+    <div class="spacer"></div>
+
+    <Slab tone="accent" flush>
+      <h2 class="contact-demo">Let's talk about the messy part.</h2>
+      <div class="specimen">
+        <Pill variant="ink" size="lg">Email</Pill>
+        <Pill variant="outline" size="lg">LinkedIn</Pill>
+      </div>
+    </Slab>
+  </main>
+</Base>
+
+<style>
+  .page-head {
+    padding: var(--space-64) var(--section-pad-x) var(--space-40);
+  }
+
+  h1 {
+    font-size: var(--fs-display-l);
+    line-height: var(--lh-display-l);
+    letter-spacing: var(--track-display-l);
+    text-transform: uppercase;
+    margin-top: var(--space-16);
+  }
+
+  .block {
+    padding: var(--space-56) var(--section-pad-x);
+    border-top: 1px solid var(--line);
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-20);
+    margin-bottom: var(--space-48);
+  }
+
+  .chip {
+    height: 88px;
+    border-radius: var(--r-card);
+    border: 1px solid var(--line);
+    margin-bottom: var(--space-12);
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-xs);
+    letter-spacing: var(--track-mono-sm);
+    color: var(--text-dim);
+  }
+
+  .note {
+    display: block;
+    font-size: var(--fs-meta-xs);
+    color: var(--text-muted);
+    margin-top: var(--space-4);
+  }
+
+  .ramps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-20);
+    margin-bottom: var(--space-40);
+  }
+
+  .ramp {
+    padding: var(--space-32);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    margin-bottom: var(--space-20);
+  }
+
+  .ramp p {
+    margin-top: var(--space-12);
+  }
+
+  .on-ink {
+    background: var(--ink);
+    border-color: transparent;
+  }
+
+  .lines {
+    margin-top: var(--space-16);
+  }
+
+  .line-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    gap: var(--space-20);
+    padding: var(--space-8) 0;
+  }
+
+  .rule {
+    height: 3px;
+  }
+
+  .type-row {
+    padding: var(--space-16) 0;
+    border-bottom: 1px solid var(--line-hairline);
+  }
+
+  .display {
+    font-weight: var(--fw-black);
+    line-height: var(--lh-display-m);
+    text-transform: uppercase;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: var(--track-mono-lg);
+    color: var(--text-dim);
+    margin-top: var(--space-12);
+  }
+
+  .radii {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-20);
+  }
+
+  .radius {
+    width: 200px;
+    height: 140px;
+    padding: var(--space-16);
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .space-scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .space-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    gap: var(--space-20);
+  }
+
+  .bar {
+    height: 14px;
+    background: var(--accent);
+    border-radius: var(--space-4);
+  }
+
+  .specimen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-12);
+    margin-top: var(--space-16);
+  }
+
+  .specimen.narrow {
+    max-width: 320px;
+  }
+
+  .contact-demo {
+    font-size: var(--fs-display-xl);
+    line-height: var(--lh-display-xl);
+    letter-spacing: var(--track-display-xl);
+    text-transform: uppercase;
+    max-width: 900px;
+  }
+
+  .spacer {
+    height: var(--space-24);
+  }
+</style>

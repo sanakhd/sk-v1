@@ -1,0 +1,433 @@
+---
+import SectionHeading from './primitives/SectionHeading.astro';
+import Icon from './primitives/Icon.astro';
+import { roles, earlierRoles } from '../data/roles';
+import { published } from '../data/schema';
+
+const visible = published(roles);
+const earlier = published(earlierRoles);
+
+/* The design spells the count out ("See the three rotations"), so the label
+   reads as a sentence rather than a data field. Falls back to the digit. */
+const COUNT_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
+const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
+---
+
+<section id="experience" aria-labelledby="experience-heading">
+  <SectionHeading title="Experience" eyebrow="Where I've been useful" id="experience-heading" />
+
+  <ol class="roles">
+    {
+      visible.map((role) => (
+        <li class="role" data-emphasis={role.emphasis}>
+          <div class="dates">{role.dates}</div>
+
+          <div class="who">
+            <h3>{role.title}</h3>
+            {role.org && (
+              <div class="org">
+                {role.orgHref ? (
+                  <a href={role.orgHref} target="_blank" rel="noopener noreferrer">
+                    {role.org}
+                  </a>
+                ) : (
+                  role.org
+                )}
+              </div>
+            )}
+          </div>
+
+          <div class="what">
+            {role.blurb ? (
+              <p class="blurb">{role.blurb}</p>
+            ) : (
+              role.orgNote && (
+                <p class="org-note">
+                  <span>{role.orgNote}</span>
+                  {role.orgIcons.length > 0 && (
+                    <span class="org-icons">
+                      {role.orgIcons.map((icon) => (
+                        <Icon name={icon} />
+                      ))}
+                    </span>
+                  )}
+                </p>
+              )
+            )}
+
+            {role.links.length > 0 && (
+              <ul class="links">
+                {role.links.map((link) => (
+                  <li>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {role.rotations.length > 0 && (
+              <details class="rot" open data-rotations>
+                <summary>
+                  <span class="label-closed">See the {spell(role.rotations.length)} rotations</span>
+                  <span class="label-open">Hide rotations</span>
+                </summary>
+
+                <ol class="rotations">
+                  {role.rotations.map((rotation) => (
+                    <li>
+                      <span class="rotation-title">{rotation.title}</span>
+                      <span class="rotation-scope">{rotation.scope}</span>
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  {
+    earlier.length > 0 && (
+      /* <details> rather than a scripted button: native, keyboard-accessible,
+         announced correctly, and it keeps the page at zero JavaScript. */
+      <details class="more">
+        <summary>
+          <span class="label-closed">
+            Everything else <span aria-hidden="true">→</span>
+          </span>
+          <span class="label-open">Show less</span>
+        </summary>
+
+        <ol class="earlier">
+          {earlier.map((role) => (
+            <li>
+              <div class="dates">{role.dates}</div>
+              <div class="earlier-title">{role.title}</div>
+              <div class="earlier-org">{role.org}</div>
+            </li>
+          ))}
+        </ol>
+      </details>
+    )
+  }
+</section>
+
+<script>
+  /**
+   * Collapse the rotation lists on small screens only.
+   *
+   * They are authored `open` so that without JavaScript, or on desktop where the
+   * summary is hidden, the content is always readable. This only ever takes the
+   * away when there is a visible control to bring it back.
+   */
+  const SMALL = window.matchMedia('(max-width: 700px)');
+  const lists = document.querySelectorAll<HTMLDetailsElement>('[data-rotations]');
+
+  const sync = (event: MediaQueryList | MediaQueryListEvent) => {
+    lists.forEach((list) => {
+      list.open = !event.matches;
+    });
+  };
+
+  sync(SMALL);
+  SMALL.addEventListener('change', sync);
+</script>
+
+<style>
+  section {
+    padding: var(--section-pad-y) var(--section-pad-x);
+  }
+
+  /* The closing rule under the last row. A border on the list rather than the
+     design's empty spacer div — same result, honest markup. */
+  .roles {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .role {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: var(--space-48);
+    align-items: start;
+    padding: var(--space-40) 0;
+    border-top: 1px solid var(--line);
+    transition: background-color var(--dur) var(--ease);
+  }
+
+  .role:hover {
+    background: var(--line-row);
+  }
+
+  .dates {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-s);
+    letter-spacing: var(--track-mono);
+    color: var(--text-dim);
+    padding-top: var(--space-6);
+  }
+
+  .who {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  h3 {
+    /* Deliberately not the 900 that global.css gives headings — role titles sit
+       at 600 so they read as content, not as another display heading. */
+    font-size: var(--fs-h3-sm);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--track-h3-sm);
+    /* No line-height in the design — stated because global.css puts 1.6 on body. */
+    line-height: normal;
+  }
+
+  .org {
+    font-size: var(--fs-body-m);
+    color: var(--text-dim);
+  }
+
+  /* Inline links are bare: underline only, no arrow. The arrow is reserved for
+     the project CTAs, where it is an explicit "go look at this" rather than a
+     linked word inside a sentence. */
+  .org a {
+    border-bottom: 1px solid var(--line-link);
+  }
+
+  .what {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-18);
+  }
+
+  .blurb,
+  .org-note {
+    font-size: var(--fs-body-m);
+    line-height: var(--lh-relaxed);
+    color: var(--text-body);
+    text-wrap: pretty;
+  }
+
+  /* Stands in for a blurb that is not written yet. Set a step quieter, so it
+     reads as context about the employer rather than as the role's description. */
+  .org-note {
+    display: flex;
+    align-items: center;
+    gap: var(--space-14);
+  }
+
+  .org-icons {
+    display: flex;
+    gap: var(--space-8);
+    color: var(--text-muted);
+  }
+
+  /* 'quiet' — the freelance row. Steps the title and blurb down so an aside
+     doesn't compete with a headline role. */
+  [data-emphasis='quiet'] h3 {
+    font-size: var(--fs-h3-quiet);
+  }
+
+  [data-emphasis='quiet'] .blurb {
+    font-size: var(--fs-rotation-scope);
+  }
+
+  /* A quiet row is an aside, so it takes less vertical room than a headline
+     role as well as smaller type. */
+  [data-emphasis='quiet'] {
+    padding: var(--space-20) 0;
+  }
+
+  /* Rotations -------------------------------------------------------------
+     Always open on desktop, where the summary is hidden and there is nothing to
+     toggle. On phones the script closes it, so the tallest row on the page stops
+     dominating the scroll. Without JS they simply stay open, which is fine. */
+  .rot {
+    display: flex;
+    flex-direction: column;
+    /* Matches .what's spacing: in the design these are siblings in that column,
+       not a nested group with its own rhythm. */
+    gap: var(--space-18);
+  }
+
+  .rot summary {
+    display: none;
+    align-self: flex-start;
+    order: 2;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--line-heavy);
+    font-size: 14px;
+    color: var(--text-body);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .rot summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .rot .label-open {
+    display: none;
+  }
+
+  .rot[open] .label-closed {
+    display: none;
+  }
+
+  .rot[open] .label-open {
+    display: inline;
+  }
+
+  .rotations {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    border-left: 1.5px solid var(--line-rule);
+    padding-left: var(--space-20);
+  }
+
+  .rotations li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-12) 0;
+  }
+
+  .rotation-title {
+    font-size: var(--fs-rotation);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--track-tight);
+  }
+
+  .rotation-scope {
+    font-size: var(--fs-rotation-scope);
+    line-height: var(--lh-sub);
+    color: var(--text-soft);
+    text-wrap: pretty;
+  }
+
+  /* Destinations, not labels. A quiet mono row with a hairline underline, so it
+     reads as somewhere to go rather than another chip.
+
+     These sit under the blurb, in the body column. */
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-20);
+  }
+
+  .links a {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-xs);
+    letter-spacing: var(--track-mono-sm);
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: var(--space-2);
+    transition: color var(--dur) var(--ease);
+  }
+
+  .links a:hover {
+    color: var(--text);
+  }
+
+  /* "Everything else" expander -------------------------------------------- */
+  .more {
+    display: flex;
+    flex-direction: column;
+  }
+
+  summary {
+    /* Ordered after the list so the control sits below it, as designed. The
+       content between is non-interactive, so tab order stays sensible. */
+    order: 2;
+    align-self: flex-end;
+    margin-top: var(--space-24);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--line-heavy);
+    font-size: var(--fs-body-xs);
+    color: var(--text-body);
+    cursor: pointer;
+    list-style: none;
+    transition: opacity var(--dur) var(--ease);
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover {
+    opacity: 0.6;
+  }
+
+  .label-open {
+    display: none;
+  }
+
+  .more[open] .label-closed {
+    display: none;
+  }
+
+  .more[open] .label-open {
+    display: inline;
+  }
+
+  .earlier {
+    padding-top: var(--space-8);
+  }
+
+  .earlier li {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: var(--space-48);
+    align-items: baseline;
+    padding: var(--space-18) 0;
+    border-bottom: 1px solid var(--line-faint);
+  }
+
+  .earlier .dates {
+    padding-top: 0;
+  }
+
+  .earlier-title {
+    font-size: var(--fs-body-m);
+    font-weight: var(--fw-medium);
+  }
+
+  .earlier-org {
+    font-size: var(--fs-body-xs);
+    color: var(--text-dim);
+  }
+
+  /* Responsive ------------------------------------------------------------
+     The design collapses both row grids to a single column at 900px. */
+  @media (max-width: 700px) {
+    .rot summary {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .role,
+    .earlier li {
+      grid-template-columns: 1fr;
+      gap: var(--space-16);
+    }
+
+    .role {
+      padding: var(--space-32) 0;
+    }
+
+    .dates {
+      padding-top: 0;
+    }
+
+    summary {
+      align-self: flex-start;
+    }
+  }
+</style>

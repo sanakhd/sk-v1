@@ -1,0 +1,21 @@
+---
+import { footer } from '../data/site';
+---
+
+<footer>
+  <span>{footer.copyright}</span>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    justify-content: center;
+    padding: 0 var(--section-pad-x) var(--space-40);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-xs);
+    letter-spacing: var(--track-mono-lg);
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: center;
+  }
+</style>

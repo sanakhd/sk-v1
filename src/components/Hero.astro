@@ -1,0 +1,213 @@
+---
+import { Image } from 'astro:assets';
+import Pill from './primitives/Pill.astro';
+import Eyebrow from './primitives/Eyebrow.astro';
+import { hero } from '../data/site';
+import avatar from '../assets/landing.png';
+
+/**
+ * Hero — built to the design's saved defaults:
+ *   cardStyle "Just me"  → 120px avatar, 19px blurb, no Based/Background rows
+ *   heroContrast "Ink"   → dark card, cream text
+ *   heroAnchor "Centered", heroAir 1.45, headlineScale 1
+ *
+ * heroAir 1.45 is baked in as the resolved values (56 × 1.45 = 81px padding,
+ * 28 × 1.45 = 41px gap) rather than left as a runtime knob — the slider was a
+ * design exploration tool, not a feature of the site.
+ */
+
+const [...headlineLines] = hero.headline;
+const lastLine = headlineLines.pop() as string;
+---
+
+<section id="top" class="hero">
+  <div class="card">
+    <h1>
+      {
+        headlineLines.map((line) => (
+          <>
+            {line}
+            <br />
+          </>
+        ))
+      }
+      {lastLine}{' '}
+      <span class="accent">{hero.headlineAccent}</span><span class="punct">.</span>
+    </h1>
+    {hero.body && <p class="lede">{hero.body}</p>}
+  </div>
+
+  <div class="aside">
+    <div class="now">
+      <Eyebrow font="sans" tone="on-accent">{hero.now.label}</Eyebrow>
+      <p>{hero.now.body}</p>
+    </div>
+
+    <div class="profile">
+      <div class="profile-row">
+        <Image
+          class="avatar"
+          src={avatar}
+          alt={hero.profile.alt}
+          width={240}
+          height={240}
+          loading="eager"
+          fetchpriority="high"
+        />
+        <p class="blurb">{hero.profile.blurb}</p>
+      </div>
+      <Pill href="#contact" variant="ink" size="md" block>{hero.profile.cta}</Pill>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: var(--gap-card);
+    padding: var(--space-12) var(--gutter-fluid) var(--gutter);
+    min-height: 700px;
+  }
+
+  /* Headline card -------------------------------------------------------- */
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--hero-gap);
+    padding: var(--hero-pad-block) var(--hero-pad-inline);
+    background: var(--ink);
+    color: var(--on-ink);
+    border-radius: var(--r-card);
+  }
+
+  h1 {
+    font-size: var(--fs-display-l);
+    font-weight: var(--fw-black);
+    line-height: var(--lh-display-l);
+    letter-spacing: var(--track-display-l);
+    text-transform: uppercase;
+    text-wrap: initial; /* the line breaks are authored, not balanced */
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .punct {
+    color: var(--accent-punct);
+  }
+
+  .lede {
+    max-width: 460px;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--on-ink-muted);
+  }
+
+  /* Right column --------------------------------------------------------- */
+  .aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-card);
+  }
+
+  .now {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-32);
+    padding: var(--space-40);
+    background: var(--accent);
+    color: var(--ink);
+    border-radius: var(--r-card);
+  }
+
+  .now p {
+    font-size: var(--fs-lead);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--track-lead);
+    text-wrap: pretty;
+  }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+    padding: var(--space-32) var(--space-40);
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: var(--r-card);
+  }
+
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-18);
+    padding-bottom: var(--space-4);
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: var(--r-pill);
+    object-fit: cover;
+    object-position: center 22%;
+    background: var(--paper-raised);
+  }
+
+  .blurb {
+    font-size: var(--fs-blurb);
+    line-height: var(--lh-snug);
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  /* Responsive ------------------------------------------------------------
+     The design collapses the hero to one column at 900px and handles the rest
+     through the clamps above, so there is very little left to do here. */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    /* Side by side once stacked, so the pair doesn't become a tall column. */
+    .aside {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .aside > * {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .aside {
+      flex-direction: column;
+    }
+
+    .now,
+    .profile {
+      padding: var(--space-28);
+    }
+
+    .profile-row {
+      gap: var(--space-16);
+    }
+
+    .avatar {
+      width: 84px;
+      height: 84px;
+    }
+
+    .blurb {
+      font-size: var(--fs-body-s);
+    }
+  }
+</style>

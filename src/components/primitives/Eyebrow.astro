@@ -1,0 +1,54 @@
+---
+/**
+ * Eyebrow — the small uppercase label above or beside a block.
+ *
+ * Mostly JetBrains Mono (section eyebrows, project kind, footer), but the "Now"
+ * card in the hero uses Archivo at weight 600 with wider tracking. Both are in
+ * the design, so both are here — `font` picks between them.
+ */
+interface Props {
+  font?: 'mono' | 'sans';
+  tone?: 'dim' | 'faint' | 'accent' | 'on-accent';
+  class?: string;
+}
+
+const { font = 'mono', tone = 'dim', class: className } = Astro.props;
+---
+
+<span data-font={font} data-tone={tone} class={className}><slot /></span>
+
+<style>
+  span {
+    display: block;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  [data-font='mono'] {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-s);
+    font-weight: var(--fw-regular);
+    letter-spacing: var(--track-mono-lg);
+  }
+
+  [data-font='sans'] {
+    font-family: var(--font-sans);
+    font-size: var(--fs-meta-s);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--track-mono-xl);
+  }
+
+  /* Tone is named for the ground it sits on, not for a shade. */
+  [data-tone='dim'] {
+    color: var(--text-dim);
+  } /* on paper  */
+  [data-tone='faint'] {
+    color: var(--on-ink-faint);
+  } /* on ink    */
+  [data-tone='accent'] {
+    color: var(--accent);
+  } /* on ink    */
+  [data-tone='on-accent'] {
+    color: var(--on-accent-faint);
+  } /* on lime   */
+</style>

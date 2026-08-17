@@ -1,0 +1,95 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+/**
+ * SectionHeading — the 64px uppercase h2 with its mono eyebrow.
+ *
+ * Used verbatim by Experience and Projects: heading hard left, eyebrow baseline-
+ * aligned to the bottom right. About uses the same h2 with no eyebrow, so the
+ * eyebrow is optional.
+ */
+interface Props {
+  title: string;
+  eyebrow?: string;
+  /** Which ground this sits on — picks the eyebrow's tone. */
+  tone?: 'paper' | 'ink';
+  /** Projects constrains its eyebrow and right-aligns the text. */
+  narrowEyebrow?: boolean;
+  /** Drop the trailing margin, for sections that control their own spacing. */
+  flush?: boolean;
+  id?: string;
+}
+
+const { title, eyebrow, tone = 'paper', narrowEyebrow = false, flush = false, id } = Astro.props;
+---
+
+<div
+  class="heading"
+  data-has-eyebrow={eyebrow ? '' : undefined}
+  data-flush={flush ? '' : undefined}
+>
+  <h2 id={id}>{title}</h2>
+  {
+    eyebrow && (
+      <Eyebrow
+        tone={tone === 'ink' ? 'faint' : 'dim'}
+        class:list={['eyebrow', { narrow: narrowEyebrow }]}
+      >
+        {eyebrow}
+      </Eyebrow>
+    )
+  }
+</div>
+
+<style>
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-40);
+    margin-bottom: var(--space-56);
+  }
+
+  [data-flush] {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: var(--fs-display-m);
+    font-weight: var(--fw-black);
+    line-height: var(--lh-display-m);
+    letter-spacing: var(--track-display-m);
+    text-transform: uppercase;
+  }
+
+  /* Nudges the eyebrow off the heading's baseline, matching the design. */
+  .heading :global(.eyebrow) {
+    margin-bottom: var(--space-8);
+    flex-shrink: 0;
+  }
+
+  .heading :global(.eyebrow.narrow) {
+    max-width: 320px;
+    text-align: right;
+    flex-shrink: 1;
+  }
+
+  /* The design stacks the eyebrow under the heading and flushes it left rather
+     than dropping it. (An earlier version of this file hid it below 640px —
+     the design overrules that.) */
+  @media (max-width: 900px) {
+    .heading {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-12);
+      margin-bottom: var(--space-32);
+    }
+
+    .heading :global(.eyebrow),
+    .heading :global(.eyebrow.narrow) {
+      margin-bottom: 0;
+      max-width: none;
+      text-align: left;
+    }
+  }
+</style>
