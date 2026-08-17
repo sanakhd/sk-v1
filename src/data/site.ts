@@ -42,7 +42,29 @@ export const hero = {
   },
 } as const;
 
+export const about = {
+  heading: 'About',
+  lead: 'I started in engineering and moved into product because I kept wanting to be in the room where the problem was described, not just the one where it got built.',
+  body: [
+    'The way I work is simple and a little unglamorous: go to where the work happens, watch what people actually do, and pay attention to the spreadsheet they built to survive the software they already have. That spreadsheet is the roadmap.',
+    "Because I can build, the loop is short. I'd rather hand someone a rough working thing on Thursday than a polished document next month.",
+  ],
+  traits: [
+    'Goes to the jobsite',
+    'Prototypes first',
+    'Writes the doc after',
+    'Asks the dumb question',
+    'Toronto',
+  ],
+} as const;
+
 export const contact = {
   heading: "Let's talk about the messy part.",
   body: "If you're building something where the users are hard to reach and the workflows are stubborn, that's my favourite kind of problem.",
+  emailLabel: 'Email',
+  linkedinLabel: 'LinkedIn',
+} as const;
+
+export const footer = {
+  copyright: `Sana Khademi © ${new Date().getFullYear()}`,
 } as const;

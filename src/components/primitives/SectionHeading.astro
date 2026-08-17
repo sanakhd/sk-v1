@@ -15,13 +15,19 @@ interface Props {
   tone?: 'paper' | 'ink';
   /** Projects constrains its eyebrow and right-aligns the text. */
   narrowEyebrow?: boolean;
+  /** Drop the trailing margin, for sections that control their own spacing. */
+  flush?: boolean;
   id?: string;
 }
 
-const { title, eyebrow, tone = 'paper', narrowEyebrow = false, id } = Astro.props;
+const { title, eyebrow, tone = 'paper', narrowEyebrow = false, flush = false, id } = Astro.props;
 ---
 
-<div class="heading" data-has-eyebrow={eyebrow ? '' : undefined}>
+<div
+  class="heading"
+  data-has-eyebrow={eyebrow ? '' : undefined}
+  data-flush={flush ? '' : undefined}
+>
   <h2 id={id}>{title}</h2>
   {
     eyebrow && (
@@ -42,6 +48,10 @@ const { title, eyebrow, tone = 'paper', narrowEyebrow = false, id } = Astro.prop
     align-items: flex-end;
     gap: var(--space-40);
     margin-bottom: var(--space-56);
+  }
+
+  [data-flush] {
+    margin-bottom: 0;
   }
 
   h2 {

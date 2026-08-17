@@ -1,0 +1,92 @@
+---
+import SectionHeading from './primitives/SectionHeading.astro';
+import Tag from './primitives/Tag.astro';
+import { about } from '../data/site';
+---
+
+<section id="about" aria-labelledby="about-heading">
+  <div class="cols">
+    <div class="lead-col">
+      <SectionHeading title={about.heading} id="about-heading" flush />
+      <p class="lead">{about.lead}</p>
+    </div>
+
+    <div class="body-col">
+      {about.body.map((paragraph) => <p>{paragraph}</p>)}
+
+      <div class="rule" role="presentation"></div>
+
+      <ul class="traits">
+        {
+          about.traits.map((trait) => (
+            <li>
+              <Tag variant="accent">{trait}</Tag>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* About is the one section with extra vertical air in the design. */
+  section {
+    padding: var(--section-pad-y-tall) var(--section-pad-x);
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-80);
+    align-items: start;
+  }
+
+  .lead-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-28);
+  }
+
+  .lead {
+    font-size: var(--fs-sub);
+    line-height: var(--lh-sub);
+    letter-spacing: var(--track-sub);
+    max-width: 480px;
+    text-wrap: pretty;
+  }
+
+  .body-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+    font-size: var(--fs-body-m);
+    /* The loosest leading in the site. This is the only long-form reading on the
+       page, so it gets more room than the blurbs elsewhere. */
+    line-height: var(--lh-body-loose);
+    color: var(--text-body);
+  }
+
+  .body-col p {
+    text-wrap: pretty;
+  }
+
+  .rule {
+    height: 1px;
+    background: var(--line);
+    margin-block: var(--space-8);
+  }
+
+  .traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+  }
+
+  @media (max-width: 900px) {
+    .cols {
+      grid-template-columns: 1fr;
+      gap: var(--space-40);
+    }
+  }
+</style>

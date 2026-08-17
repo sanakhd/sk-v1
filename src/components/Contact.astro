@@ -1,0 +1,74 @@
+---
+import Slab from './primitives/Slab.astro';
+import Pill from './primitives/Pill.astro';
+import { site, contact } from '../data/site';
+---
+
+<Slab tone="accent" id="contact" pad="contact" aria-labelledby="contact-heading">
+  <div class="stack">
+    <h2 id="contact-heading">{contact.heading}</h2>
+
+    <div class="foot">
+      <p>{contact.body}</p>
+
+      <div class="actions">
+        <Pill variant="ink" size="lg" href={`mailto:${site.email}`}>
+          {contact.emailLabel}
+        </Pill>
+        <Pill variant="outline" size="lg" href={site.linkedin}>
+          {contact.linkedinLabel}
+        </Pill>
+      </div>
+    </div>
+  </div>
+</Slab>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-48);
+  }
+
+  /* The largest type in the site, and the only place it appears. */
+  h2 {
+    font-size: var(--fs-display-xl);
+    font-weight: var(--fw-black);
+    line-height: var(--lh-display-xl);
+    letter-spacing: var(--track-display-xl);
+    text-transform: uppercase;
+    max-width: 900px;
+  }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: var(--space-40);
+  }
+
+  .foot p {
+    font-size: var(--fs-body-l);
+    line-height: var(--lh-body);
+    max-width: 480px;
+    /* Ink at reduced alpha rather than a grey, so it stays keyed to the lime. */
+    color: var(--on-accent-muted);
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--space-12);
+  }
+
+  @media (max-width: 640px) {
+    .actions {
+      width: 100%;
+    }
+
+    /* Two pills side by side get too narrow to read on a phone. */
+    .actions > :global(*) {
+      flex: 1;
+    }
+  }
+</style>

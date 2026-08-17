@@ -1,0 +1,29 @@
+---
+import { site, footer } from '../data/site';
+---
+
+<footer>
+  <span>{footer.copyright}</span>
+  <span>{site.location}</span>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-20);
+    padding: 0 var(--section-pad-x) var(--space-40);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-xs);
+    letter-spacing: var(--track-mono-lg);
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 480px) {
+    footer {
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+  }
+</style>
