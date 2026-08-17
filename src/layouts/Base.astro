@@ -22,8 +22,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
-    {/* Favicon set, web manifest and OG image are Phase 4. */}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {
+      /* v1 referenced three icon files that did not exist, so every page load
+        404'd three times. These all ship. */
+    }
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#f2f0ea" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
