@@ -43,6 +43,7 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
             ) : (
               role.orgNote && (
                 <p class="org-note">
+                  <span>{role.orgNote}</span>
                   {role.orgIcons.length > 0 && (
                     <span class="org-icons">
                       {role.orgIcons.map((icon) => (
@@ -50,7 +51,6 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
                       ))}
                     </span>
                   )}
-                  {role.orgNote}
                 </p>
               )
             )}
@@ -204,7 +204,8 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
     gap: var(--space-18);
   }
 
-  .blurb {
+  .blurb,
+  .org-note {
     font-size: var(--fs-body-m);
     line-height: var(--lh-relaxed);
     color: var(--text-body);
@@ -216,17 +217,13 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
   .org-note {
     display: flex;
     align-items: center;
-    gap: var(--space-12);
-    font-size: var(--fs-rotation-scope);
-    line-height: var(--lh-sub);
-    color: var(--text-soft);
-    text-wrap: pretty;
+    gap: var(--space-14);
   }
 
   .org-icons {
     display: flex;
     gap: var(--space-8);
-    color: var(--text-dim);
+    color: var(--text-muted);
   }
 
   /* 'quiet' — the freelance row. Steps the title and blurb down so an aside
