@@ -16,7 +16,7 @@ export const todo = (note: string): string | undefined =>
 export const site = {
   name: 'Sana Khademi',
   wordmark: 'Sana Khademi',
-  title: 'Sana Khademi — Product Manager',
+  title: 'Sana Khademi | Product Manager',
   description:
     'Product manager in Toronto with an engineering background. I embed with the people doing the job, find the workaround they have built, and turn it into software.',
   location: 'Toronto, ON',
