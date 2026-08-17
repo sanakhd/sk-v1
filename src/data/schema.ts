@@ -71,11 +71,6 @@ export const projectSchema = z.object({
   blurbShort: z.string(),
   stack: z.string(),
   /**
-   * Render an animated component in the media slot instead of `image`.
-   * `image` stays as the still fallback.
-   */
-  media: z.enum(['form']).optional(),
-  /**
    * An imported image, not a path — Astro needs the ImageMetadata to emit WebP
    * with srcset and intrinsic dimensions. v1 shipped 4.2 MB of raw PNG.
    */

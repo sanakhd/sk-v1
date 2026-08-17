@@ -54,9 +54,9 @@ export const projects: Project[] = z.array(projectSchema).parse([
       'A personal training app built for how I actually train: strength work, timed circuits and rehab in one place, with drag-and-drop weekly planning and a rest timer that does not need a second app. Installs like a native app and keeps working offline.',
     blurbShort: 'A training app that plans the week and works offline.',
     stack: 'React · TypeScript · Supabase · PWA',
-    media: 'form',
+    // A title card, in the site's own type and colour.
     image: form,
-    imgBg: '#1d1e16',
+    imgBg: '#101109',
     // No link: the repo is private, so there is nowhere public to send people.
     span: 5,
     imgH: '240px',

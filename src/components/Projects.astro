@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import Slab from './primitives/Slab.astro';
 import SectionHeading from './primitives/SectionHeading.astro';
 import Eyebrow from './primitives/Eyebrow.astro';
-import FormCard from './media/FormCard.astro';
 import { projects, tile } from '../data/projects';
 import { published } from '../data/schema';
 
@@ -28,12 +27,8 @@ const visible = tile(published(projects));
             data-dir={project.dir}
             style={`--span: ${project.span}; --img-h: ${project.imgH}; --img-w: ${project.imgW}; --img-fit: ${project.imgFit}; --img-bg: ${project.imgBg ?? 'var(--ink-well)'};`}
           >
-            <div class="shot" data-media={project.media}>
-              {project.media === 'form' ? (
-                <FormCard />
-              ) : (
-                <Image src={project.image} alt={`${project.title} screenshot`} loading="lazy" />
-              )}
+            <div class="shot">
+              <Image src={project.image} alt={`${project.title} screenshot`} loading="lazy" />
             </div>
 
             <div class="body">
@@ -95,10 +90,6 @@ const visible = tile(published(projects));
   /* The full-width feature card lays its image beside the copy instead of above. */
   .card[data-dir='row'] {
     flex-direction: row;
-  }
-
-  .shot[data-media] {
-    height: auto;
   }
 
   .shot {
