@@ -65,8 +65,23 @@ export const about = {
 } as const;
 
 export const contact = {
-  heading: "Let's talk about the messy part.",
-  body: todo('Contact line'),
+  /**
+   * Headline alternatives considered, kept for reference:
+   *   "Let's talk about the messy part."  original, from the Claude Design file
+   *   "Let's talk."                       neutral, keeps the same opening
+   *   "Tell me what you're building."     invitation, entirely about the reader
+   *   "What are you working on?"          same, as a question
+   *   "Let's talk shop."                  signals conversation, not opportunity
+   */
+  heading: 'Get in touch.',
+
+  /**
+   * Body alternatives:
+   *   "If you're building something where the users are hard to reach and the
+   *    workflows are stubborn, that's my favourite kind of problem."   original
+   *   "...the workflows are stubborn, I'd like to hear about it."      reader-led
+   */
+  body: 'The best problems are usually the ones nobody has tidied up yet.',
   emailLabel: 'Email',
   linkedinLabel: 'LinkedIn',
 } as const;
