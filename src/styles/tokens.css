@@ -30,6 +30,19 @@
   --nav-scrim: rgb(242 240 234 / 0.86);
   --nav-blur: 14px;
 
+  /* Employer colours, for the cursor only. These are the one place on the site
+     where a colour that isn't ours appears, so they are named for whose they
+     are. Each has two values: the true brand hex, used on the cursor disc,
+     which is decorative and carries no contrast obligation; and a darkened
+     partner for the org name, which is 17px and needs 4.5:1 on paper. The true
+     hexes are 2.66:1 and 3.96:1 there, so the text cannot use them.
+       SoilFLO    #ed6f30 -> #bb4910 (4.52:1)
+       Scotiabank #ed0722 -> #dc0720 (4.50:1)                                  */
+  --brand-soilflo: #ed6f30;
+  --brand-soilflo-text: #bb4910;
+  --brand-scotiabank: #ed0722;
+  --brand-scotiabank-text: #dc0720;
+
   /* ---------------------------------------------------------------------------
      Color — text
      Two ramps. Which one you use depends on what is behind the text, so they are
@@ -224,4 +237,18 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur-fast: 140ms;
   --dur: 240ms;
+
+  /* ---------------------------------------------------------------------------
+     Cursor
+     The custom cursor runs on fine pointers only, and never under
+     prefers-reduced-motion. Not in the design file — the design has no cursor,
+     so these are the one set of tokens invented here rather than extracted.
+     ------------------------------------------------------------------------ */
+  --cursor-size: 18px; /* at rest */
+  --cursor-size-over: 28px; /* over anything clickable */
+  --cursor-size-brand: 34px; /* over an employer row */
+  --cursor-disc: #fff; /* difference-blended, so white inverts what is under it */
+  --cursor-alpha-text: 0.45; /* thinned where it sits on words */
+  --cursor-alpha-brand: 0.55; /* brand colours read as a tint, not a blot */
+  --z-cursor: 100;
 }

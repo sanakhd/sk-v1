@@ -62,14 +62,38 @@ sections), card `28px`. Do not invent a fourth.
 No dark mode. The alternate accents in the design (`#3b3bef`, `#e2622a`,
 `#d9a441`) are kept commented in `tokens.css` but not shipped.
 
+**Employer colours are the one exception to "lime is the only accent."** Hovering
+an employer row tints the org name and the cursor in that employer's own colour.
+Each brand has two tokens: the true hex for the cursor disc, which is decorative
+and has no contrast obligation, and a darkened partner for the org name, which is
+17px and needs 4.5:1 on paper. The true hexes do not clear that bar (SoilFLO's is
+2.66:1), so **never put a `--brand-*` value on text** — use its `-text` partner.
+
+## Cursor
+
+`src/components/Cursor.astro` is about 1.1 kB minified. Like the nav toggle and
+the rotations collapse, it is inlined into the page rather than fetched, so the
+site still makes zero JavaScript requests. It removes itself unless the pointer
+is fine and `prefers-reduced-motion` is not set.
+
+It hides the native cursor. That is a deliberate, known cost: no I-beam over text
+and no resize affordances. It is the price of the inverting disc and was chosen
+with that in mind, so do not "fix" it by re-showing the native cursor.
+
+Two companion rules live in the components they affect, not here: `Projects.astro`
+hides the card CTA and `Experience.astro` drops the org underline. Both are gated
+on the same three media queries the script checks. **If you change the gate,
+change all three places**, or a touch visitor loses the only affordance telling
+them a card is tappable.
+
 ## Content and drafts
 
 Content collections are Zod-validated. Every entry supports `draft: true`, which
 renders in `npm run dev` but is **excluded from the production build**. This is how
 unfinished sections live in the repo without reaching the live site.
 
-Currently draft: the Scotiabank role (Sana is designing it in Claude Design) and
-the empty project slots.
+Currently draft: the empty project slots. Every role in `roles.ts` is written and
+shipping, including Scotiabank.
 
 **Never ship a dead link.** Projects that aren't hosted link to their GitHub repo
 and label the action `Code ↗` rather than `View ↗`. Projects with neither ship

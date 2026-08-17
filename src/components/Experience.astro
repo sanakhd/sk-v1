@@ -19,7 +19,7 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
   <ol class="roles">
     {
       visible.map((role) => (
-        <li class="role" data-emphasis={role.emphasis}>
+        <li class="role" data-emphasis={role.emphasis} data-brand={role.brand}>
           <div class="dates">{role.dates}</div>
 
           <div class="who">
@@ -196,6 +196,34 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
      linked word inside a sentence. */
   .org a {
     border-bottom: 1px solid var(--line-link);
+  }
+
+  /* An org that owns a brand colour wears it while the pointer is in its row,
+     and the cursor takes the same colour. `data-brand-hover` is set by
+     Cursor.astro, so this only ever fires where that script runs.
+
+     The darkened partner token, not the true brand hex: this is 17px, which
+     needs 4.5:1 on paper, and #ed6f30 is 2.66:1 there. */
+  .org[data-brand-hover] {
+    transition: color var(--dur) var(--ease);
+  }
+
+  .org[data-brand-hover='soilflo'] {
+    color: var(--brand-soilflo-text);
+  }
+
+  .org[data-brand-hover='scotiabank'] {
+    color: var(--brand-scotiabank-text);
+  }
+
+  /* With the colour doing the work, the hairline is redundant. Gated on the
+     same queries Cursor.astro checks before it runs — on touch there is no
+     hover, so an underline is the only thing marking this as a link and it
+     stays. */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .org a {
+      border-bottom-color: transparent;
+    }
   }
 
   .what {

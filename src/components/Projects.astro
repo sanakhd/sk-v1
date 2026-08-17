@@ -7,6 +7,9 @@ import { projects, tile } from '../data/projects';
 import { published } from '../data/schema';
 
 const visible = tile(published(projects));
+
+/* The label a project's CTA carries, from where the link actually goes. */
+const cta = (project: (typeof visible)[number]) => (project.linkKind === 'live' ? 'View' : 'Code');
 ---
 
 <Slab tone="ink" id="projects" pad="slab" flush aria-labelledby="projects-heading">
@@ -37,10 +40,22 @@ const visible = tile(published(projects));
               <div class="foot">
                 <span class="stack">{project.stack}</span>
                 {project.link && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    {project.linkKind === 'live' ? 'View' : 'Code'}{' '}
-                    <span aria-hidden="true">↗</span>
-                    <span class="sr-only"> — {project.title}</span>
+                  <a
+                    class="go"
+                    href={project.link}
+                    data-kind={project.linkKind}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {/* Split so the visible text can be hidden without taking the
+                        anchor out of the DOM — the ::after that makes the whole
+                        card clickable hangs off it. */}
+                    <span class="go-text" aria-hidden="true">
+                      {cta(project)} <span>↗</span>
+                    </span>
+                    <span class="sr-only">
+                      {cta(project)} — {project.title}
+                    </span>
                   </a>
                 )}
               </div>
@@ -70,6 +85,8 @@ const visible = tile(published(projects));
 
   .card {
     grid-column: span var(--span);
+    /* Anchors the stretched link below. */
+    position: relative;
     display: flex;
     flex-direction: column;
     background: var(--ink-surface);
@@ -152,8 +169,30 @@ const visible = tile(published(projects));
     font-size: 14px;
     font-weight: var(--fw-medium);
     color: var(--accent);
+  }
+
+  .go-text {
     border-bottom: 1px solid var(--accent);
     padding-bottom: var(--space-2);
+  }
+
+  /* The whole card is the target, not just the words. One anchor still, so
+     keyboard focus, middle-click and "open in new tab" all behave. A card
+     without a link has no anchor and stays inert. */
+  .go::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Where the cursor pill names the destination, the card's own CTA is saying
+     it twice. Hidden, not removed: the anchor carries the ::after above, and
+     the screen-reader label inside it. Gated on the same queries Cursor.astro
+     checks, so on touch — where there is no pill — the CTA is still there. */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .go-text {
+      display: none;
+    }
   }
 
   /* "Code ↗" repeated across cards is meaningless out of context to a screen

@@ -11,6 +11,7 @@ export const roles: Role[] = z.array(roleSchema).parse([
     title: 'Product Manager',
     org: 'SoilFLO',
     orgHref: 'https://soilflo.com/',
+    brand: 'soilflo',
     orgNote: 'Software for earthmovers',
     orgIcons: ['hard-hat', 'traffic-cone', 'truck'],
   },
@@ -29,6 +30,8 @@ export const roles: Role[] = z.array(roleSchema).parse([
     dates: '2024 — 2026',
     title: 'Ignition Associate',
     org: 'Scotiabank',
+    orgHref: 'https://www.scotiabank.com/',
+    brand: 'scotiabank',
     blurb:
       'A ten-person technology rotational program. Three six-month rotations took me from engineering to product, across capital markets and cloud security.',
     rotations: [

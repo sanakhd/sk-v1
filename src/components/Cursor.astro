@@ -1,0 +1,203 @@
+---
+/**
+ * Custom cursor.
+ *
+ * A small disc that inverts whatever is under it, tracking the pointer exactly.
+ * It thins out over words so it reads as a tint rather than a blot, becomes a
+ * lime pill over a project card that has somewhere to go, and takes the
+ * employer's colour over an employer row.
+ *
+ * It runs on fine pointers only and never under prefers-reduced-motion, so on a
+ * phone, or for anyone who has asked for less movement, both elements are
+ * removed and nothing else happens.
+ *
+ * The native cursor is hidden. That is a real cost — no I-beam over text, no
+ * resize affordances — and it is the price of the inverting disc. The
+ * companion CSS in Projects.astro and Experience.astro is gated on the same
+ * pointer query this script checks, so the two never disagree.
+ */
+---
+
+{/* `data-away` until the pointer first moves, so it does not flash at the
+    top-left corner on load. */}
+<div id="cursor" data-away aria-hidden="true">
+  <div class="disc"></div>
+  <div class="pill">View code</div>
+</div>
+
+<script>
+  const root = document.getElementById('cursor')!;
+
+  /* Coarse pointers have no cursor to decorate, and anyone who has asked for
+     less motion should not get a thing that chases them around the screen.
+     Matches the media queries the companion CSS is gated on. */
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (!fine.matches || still.matches) {
+    root.remove();
+  } else {
+    document.documentElement.dataset.cursor = 'on';
+
+    /* The disc is driven entirely by CSS off the attributes below, so only the
+       pill needs a handle — its text changes per card. */
+    const pill = root.querySelector<HTMLElement>('.pill')!;
+
+    /* Which org name is currently wearing its brand colour, so it can be put
+       back. Held rather than re-queried, since pointermove runs constantly. */
+    let branded: HTMLElement | null = null;
+
+    const clearBrand = () => {
+      if (branded) branded.removeAttribute('data-brand-hover');
+      branded = null;
+      root.removeAttribute('data-brand');
+    };
+
+    window.addEventListener(
+      'pointermove',
+      (event) => {
+        const el = event.target as HTMLElement;
+
+        /* Position is written straight to the transform. No easing and no
+           animation loop: the lag is what made this feel heavy, and without it
+           there is nothing to interpolate between frames. */
+        root.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+        root.removeAttribute('data-away');
+
+        root.toggleAttribute('data-over', !!el.closest('a, button, summary, [role="button"]'));
+
+        /* Thin the disc out wherever it is actually sitting on top of words. A
+           leaf element with text in it is the cheap, general test — containers
+           and the gaps between them have element children. */
+        root.toggleAttribute(
+          'data-on-text',
+          el.childElementCount === 0 && (el.textContent ?? '').trim().length > 0,
+        );
+
+        /* The pill names the destination rather than the project, so a card
+           that gains a live URL starts saying "View site" on its own. A card
+           with no link has no anchor, gets no pill, and stays inert. */
+        const link = el.closest('#projects .card')?.querySelector<HTMLAnchorElement>('.go');
+        root.toggleAttribute('data-card', !!link);
+        if (link) pill.textContent = link.dataset.kind === 'live' ? 'View site' : 'View code';
+
+        /* Employer rows. Rotations are excluded: that copy is there to be read,
+           and the colour would be claiming the whole block is a destination. */
+        const row = el.closest<HTMLElement>('#experience .role[data-brand]');
+        const org = el.closest('.rot') ? null : row?.querySelector<HTMLElement>('.org');
+
+        if (!org) {
+          clearBrand();
+        } else if (org !== branded) {
+          clearBrand();
+          branded = org;
+          org.dataset.brandHover = row!.dataset.brand!;
+          root.dataset.brand = row!.dataset.brand!;
+        }
+      },
+      { passive: true },
+    );
+
+    /* Fade it out when the pointer leaves the window, rather than leaving it
+       frozen at the edge. */
+    document.addEventListener('pointerleave', () => {
+      root.setAttribute('data-away', '');
+      clearBrand();
+    });
+  }
+</script>
+
+<style is:global>
+  /* The disc replaces the native cursor, so the native one has to go. Scoped to
+     the attribute the script sets, which means it only ever applies once the
+     script has run and decided this pointer qualifies. */
+  html[data-cursor='on'],
+  html[data-cursor='on'] * {
+    cursor: none !important;
+  }
+
+  #cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-cursor);
+    pointer-events: none;
+    will-change: transform;
+    transition: opacity var(--dur-fast) var(--ease);
+  }
+
+  #cursor[data-away] {
+    opacity: 0;
+  }
+
+  #cursor > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    translate: -50% -50%;
+  }
+
+  #cursor .disc {
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    border-radius: var(--r-pill);
+    background: var(--cursor-disc);
+    mix-blend-mode: difference;
+    transition:
+      width var(--dur) var(--ease),
+      height var(--dur) var(--ease),
+      opacity var(--dur-fast) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  #cursor[data-over] .disc {
+    width: var(--cursor-size-over);
+    height: var(--cursor-size-over);
+  }
+
+  #cursor[data-on-text] .disc {
+    opacity: var(--cursor-alpha-text);
+  }
+
+  /* Brand colours are the true hexes here. The disc is translucent and
+     decorative, so it carries no contrast obligation — the org name does, and
+     takes the darkened partner token instead. Difference blending is dropped,
+     since inverting an orange gives some other colour entirely. */
+  #cursor[data-brand] .disc {
+    width: var(--cursor-size-brand);
+    height: var(--cursor-size-brand);
+    opacity: var(--cursor-alpha-brand);
+    mix-blend-mode: normal;
+  }
+
+  #cursor[data-brand='soilflo'] .disc {
+    background: var(--brand-soilflo);
+  }
+
+  #cursor[data-brand='scotiabank'] .disc {
+    background: var(--brand-scotiabank);
+  }
+
+  /* The pill only exists where there is somewhere to go. */
+  #cursor .pill {
+    padding: var(--space-12) var(--space-16);
+    border-radius: var(--r-pill);
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-xs);
+    letter-spacing: var(--track-mono-lg);
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity var(--dur-fast) var(--ease);
+  }
+
+  #cursor[data-card] .pill {
+    opacity: 1;
+  }
+
+  #cursor[data-card] .disc {
+    opacity: 0;
+  }
+</style>
