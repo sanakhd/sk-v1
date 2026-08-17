@@ -1,6 +1,5 @@
 ---
 import SectionHeading from './primitives/SectionHeading.astro';
-import Tag from './primitives/Tag.astro';
 import { roles, earlierRoles } from '../data/roles';
 import { published } from '../data/schema';
 
@@ -58,11 +57,13 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
               </details>
             )}
 
-            {role.tags.length > 0 && (
-              <ul class="tags">
-                {role.tags.map((tag) => (
+            {role.links.length > 0 && (
+              <ul class="links">
+                {role.links.map((link) => (
                   <li>
-                    <Tag>{tag}</Tag>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label} <span aria-hidden="true">↗</span>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -273,10 +274,27 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
     text-wrap: pretty;
   }
 
-  .tags {
+  /* Destinations, not labels. A quiet mono row with a hairline underline, so it
+     reads as somewhere to go rather than another chip. */
+  .links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-8);
+    gap: var(--space-20);
+  }
+
+  .links a {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-xs);
+    letter-spacing: var(--track-mono-sm);
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: var(--space-2);
+    transition: color var(--dur) var(--ease);
+  }
+
+  .links a:hover {
+    color: var(--text);
   }
 
   /* "Everything else" expander -------------------------------------------- */

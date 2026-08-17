@@ -52,7 +52,11 @@ export const roleSchema = z.object({
   emphasis: z.enum(['normal', 'quiet']).default('normal'),
   /** Nested postings, rendered as a ruled sub-list. Empty for most roles. */
   rotations: z.array(rotationSchema).default([]),
-  tags: z.array(z.string()).default([]),
+  /**
+   * Work you can go and look at. Rendered as a quiet inline row, deliberately
+   * not as chips: these are destinations, not labels.
+   */
+  links: z.array(z.object({ label: z.string(), href: httpUrl })).default([]),
   ...draftable,
 });
 

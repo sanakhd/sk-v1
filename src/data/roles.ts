@@ -14,14 +14,17 @@ export const roles: Role[] = z.array(roleSchema).parse([
     orgNote: 'Material tracking software for construction and environmental teams',
     blurb:
       'Own product for a platform used by the people moving material on and off construction sites. Spend real time with dispatchers, site crews and ops teams, then ship against what I saw rather than what was requested.',
-    tags: ['Discovery', '0→1', 'Ops workflows'],
   },
   {
     dates: 'Ongoing',
-    title: 'Building websites',
+    title: 'building websites',
     blurb:
-      'Design is the part I keep coming back to, so I started building sites for friends as a way to actually do it. It’s turning into something I take on properly.',
+      'Started building sites for friends as a way to design and ship something start to finish. Two live so far, more in progress.',
     emphasis: 'quiet',
+    links: [
+      { label: 'Aironto', href: 'https://aironto.com/' },
+      { label: 'Luuna the Label', href: 'https://www.luunathelabel.com/' },
+    ],
   },
   {
     dates: '2024 — 2026',
@@ -49,7 +52,6 @@ export const roles: Role[] = z.array(roleSchema).parse([
           'Commodities, FX options and derivatives tech. Backend systems for FX trading, plus internal tooling that automated QA workflows.',
       },
     ],
-    tags: ['Capital markets', 'Cloud security', '0→1 tooling'],
   },
 ]);
 
