@@ -9,7 +9,7 @@ import { site, contact } from '../data/site';
     <h2 id="contact-heading">{contact.heading}</h2>
 
     <div class="foot">
-      <p>{contact.body}</p>
+      {contact.body ? <p>{contact.body}</p> : <div />}
 
       <div class="actions">
         <Pill variant="ink" size="lg" href={`mailto:${site.email}`}>

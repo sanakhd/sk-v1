@@ -7,16 +7,20 @@ import Projects from '../components/Projects.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import { site, about } from '../data/site';
+
+/* An unfinished About is held back from the build entirely, along with its nav
+   link, rather than shipping a heading with placeholder copy under it. */
+const showAbout = import.meta.env.DEV || about.ready;
 ---
 
 <Base title={site.title} description={site.description}>
-  <Nav />
+  <Nav showAbout={showAbout} />
   <main id="main">
     <Hero />
     <Experience />
     <Projects />
-    <About />
+    {showAbout && <About />}
     <Contact />
   </main>
   <Footer />

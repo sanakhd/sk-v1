@@ -1,6 +1,13 @@
 ---
 import Pill from './primitives/Pill.astro';
 import { site, nav } from '../data/site';
+
+interface Props {
+  showAbout: boolean;
+}
+
+const { showAbout } = Astro.props;
+const items = nav.filter((item) => item.href !== '#about' || showAbout);
 ---
 
 <header class="bar">
@@ -14,7 +21,7 @@ import { site, nav } from '../data/site';
 
     <ul id="nav-links">
       {
-        nav.map((item) => (
+        items.map((item) => (
           <li>
             <Pill href={item.href} variant="ghost" size="sm">
               {item.label}

@@ -37,7 +37,7 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
           </div>
 
           <div class="what">
-            <p class="blurb">{role.blurb}</p>
+            {role.blurb && <p class="blurb">{role.blurb}</p>}
 
             {role.links.length > 0 && (
               <ul class="links">

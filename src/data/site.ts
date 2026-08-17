@@ -3,6 +3,16 @@
  * Sourced from Claude Design `Portfolio v1.dc.html`.
  */
 
+/**
+ * Copy that still needs writing.
+ *
+ * Renders in `npm run dev` so it is visible and easy to find, and resolves to
+ * undefined in the production build so a placeholder can never reach the live
+ * site. Replace the call with the real string when it is written.
+ */
+export const todo = (note: string): string | undefined =>
+  import.meta.env.PROD ? undefined : `[${note}]`;
+
 export const site = {
   name: 'Sana Khademi',
   wordmark: 'Sana Khademi',
@@ -43,24 +53,20 @@ export const hero = {
 } as const;
 
 export const about = {
+  /**
+   * Flip to true once the copy below is written. While false, the whole About
+   * section and its nav link are omitted from the production build, because a
+   * section containing only a heading is worse than no section.
+   */
+  ready: false,
   heading: 'About',
-  lead: 'I started in engineering and moved into product because I kept wanting to be in the room where the problem was described, not just the one where it got built.',
-  body: [
-    'The way I work is simple and a little unglamorous: go to where the work happens, watch what people actually do, and pay attention to the spreadsheet they built to survive the software they already have. That spreadsheet is the roadmap.',
-    "Because I can build, the loop is short. I'd rather hand someone a rough working thing on Thursday than a polished document next month.",
-  ],
-  traits: [
-    'Goes to the jobsite',
-    'Prototypes first',
-    'Writes the doc after',
-    'Asks the dumb question',
-    'Toronto',
-  ],
+  lead: '[About lead]',
+  body: ['[About paragraph one]', '[About paragraph two]'],
 } as const;
 
 export const contact = {
   heading: "Let's talk about the messy part.",
-  body: "If you're building something where the users are hard to reach and the workflows are stubborn, that's my favourite kind of problem.",
+  body: todo('Contact line'),
   emailLabel: 'Email',
   linkedinLabel: 'LinkedIn',
 } as const;

@@ -44,7 +44,8 @@ export const roleSchema = z.object({
   orgHref: httpUrl.optional(),
   /** Not rendered today. Kept from the design rather than dropped. */
   orgNote: z.string().optional(),
-  blurb: z.string(),
+  /** Optional so a role can ship without one while the copy is being written. */
+  blurb: z.string().optional(),
   /**
    * 'quiet' drops the title and blurb a step. The design uses it for the
    * freelance row so it reads as an aside rather than a fourth headline role.

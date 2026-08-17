@@ -1,6 +1,5 @@
 ---
 import SectionHeading from './primitives/SectionHeading.astro';
-import Tag from './primitives/Tag.astro';
 import { about } from '../data/site';
 ---
 
@@ -13,18 +12,6 @@ import { about } from '../data/site';
 
     <div class="body-col">
       {about.body.map((paragraph) => <p>{paragraph}</p>)}
-
-      <div class="rule" role="presentation"></div>
-
-      <ul class="traits">
-        {
-          about.traits.map((trait) => (
-            <li>
-              <Tag variant="accent">{trait}</Tag>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </div>
 </section>
@@ -69,18 +56,6 @@ import { about } from '../data/site';
 
   .body-col p {
     text-wrap: pretty;
-  }
-
-  .rule {
-    height: 1px;
-    background: var(--line);
-    margin-block: var(--space-8);
-  }
-
-  .traits {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-8);
   }
 
   @media (max-width: 900px) {

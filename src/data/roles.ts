@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { roleSchema, earlierRoleSchema, type Role, type EarlierRole } from './schema';
+import { todo } from './site';
 
 /**
  * Work history, from Claude Design `Portfolio v1.dc.html`.
@@ -12,8 +13,7 @@ export const roles: Role[] = z.array(roleSchema).parse([
     org: 'SoilFLO',
     orgHref: 'https://soilflo.com/',
     orgNote: 'Material tracking software for construction and environmental teams',
-    blurb:
-      'Own product for a platform used by the people moving material on and off construction sites. Spend real time with dispatchers, site crews and ops teams, then ship against what I saw rather than what was requested.',
+    blurb: todo('SoilFLO blurb'),
   },
   {
     dates: 'Ongoing',
