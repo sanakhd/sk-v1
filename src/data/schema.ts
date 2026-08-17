@@ -43,6 +43,12 @@ export const roleSchema = z.object({
   /** Renders the org as an underlined external link when present. */
   orgHref: httpUrl.optional(),
   /**
+   * Opts the row into the employer's own colour on hover, which the cursor
+   * picks up too. Only for orgs whose colour is in tokens.css, hence the enum:
+   * a typo here should fail the build rather than silently do nothing.
+   */
+  brand: z.enum(['soilflo', 'scotiabank']).optional(),
+  /**
    * The employer's own public description of itself. Shown in place of the
    * blurb when there isn't one, so the row is not empty.
    */
