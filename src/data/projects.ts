@@ -34,7 +34,7 @@ export const projects: Project[] = z.array(projectSchema).parse([
     imgBg: '#ff4a0a',
   },
   {
-    title: 'SANA® v2',
+    title: 'sanakhademi.com',
     kind: 'Portfolio · This site',
     blurb:
       "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
@@ -54,9 +54,9 @@ export const projects: Project[] = z.array(projectSchema).parse([
       'A personal training app built for how I actually train: strength work, timed circuits and rehab in one place, with drag-and-drop weekly planning and a rest timer that does not need a second app. Installs like a native app and keeps working offline.',
     blurbShort: 'A training app that plans the week and works offline.',
     stack: 'React · TypeScript · Supabase · PWA',
-    // A title card, standing in until the Claude Design phone render lands.
+    media: 'form',
     image: form,
-    imgBg: '#101109',
+    imgBg: '#1d1e16',
     // No link: the repo is private, so there is nowhere public to send people.
     span: 5,
     imgH: '240px',
