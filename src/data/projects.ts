@@ -36,9 +36,8 @@ export const projects: Project[] = z.array(projectSchema).parse([
   {
     title: 'sanakhademi.com',
     kind: 'Portfolio · This site',
-    blurb:
-      "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
-    blurbShort: 'This site. Designed first, then built on a token layer.',
+    blurb: "The site you're on. The old one was well overdue a rebrand, so I started over.",
+    blurbShort: "The site you're on. The old one was overdue a rebrand.",
     stack: 'Astro · TypeScript',
     // The tokens themselves rather than a screenshot of the site: it shows what
     // the blurb claims, and a full-page shot is an unreadable sliver at this size.
@@ -54,8 +53,8 @@ export const projects: Project[] = z.array(projectSchema).parse([
     title: 'FORM',
     kind: 'Side project · Web app',
     blurb:
-      'A personal training app built for how I actually train: strength work, timed circuits and rehab in one place, with drag-and-drop weekly planning and a rest timer that does not need a second app. Installs like a native app and keeps working offline.',
-    blurbShort: 'A training app that plans the week and works offline.',
+      'Most fitness apps are built around strength, and I could never find one that handled interval training the way I wanted, so I made my own. It covers lifting, rehab and timed circuits, plans out the week, and still works when there is no signal in the gym.',
+    blurbShort: 'An interval-first training app I built for myself.',
     stack: 'React · TypeScript · Supabase · PWA',
     // A title card, in the site's own type and colour.
     image: form,
