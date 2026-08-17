@@ -19,7 +19,7 @@ export const roles: Role[] = z.array(roleSchema).parse([
     dates: 'Ongoing',
     title: 'building websites',
     blurb:
-      'Started building sites for friends as a way to design and ship something start to finish. Two live so far, more in progress.',
+      'Started building sites for friends as a way to design and ship something start to finish. Two live, and counting.',
     emphasis: 'quiet',
     links: [
       { label: 'Aironto', href: 'https://aironto.com/' },
