@@ -7,7 +7,7 @@ import { roleSchema, earlierRoleSchema, type Role, type EarlierRole } from './sc
  */
 export const roles: Role[] = z.array(roleSchema).parse([
   {
-    dates: '2025 — Now',
+    dates: '2026 — Now',
     title: 'Product Manager',
     org: 'SoilFLO',
     orgHref: 'https://soilflo.com/',
