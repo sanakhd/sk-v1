@@ -2,7 +2,7 @@ import { z } from 'astro/zod';
 import { projectSchema, type Project } from './schema';
 
 import lifecurriculum from '../assets/lifecurriculum.png';
-import tiptrendz from '../assets/tiptrendz.png';
+import form from '../assets/form.png';
 import portfolio from '../assets/sk_v2.png';
 
 /**
@@ -10,9 +10,9 @@ import portfolio from '../assets/sk_v2.png';
  * proportions, so the grid follows the content rather than the content being
  * poured into a fixed grid.
  *
- * Links: the design ships `link: "#"` for TipTrendz and there is no public repo
- * for it, so it goes out link-less rather than pointing somewhere broken. Add
- * `link` + `linkKind` as soon as there is somewhere real to send people.
+ * Links: FORM has no public repo yet, so it ships link-less rather than pointing
+ * somewhere broken. Add `link` + `linkKind` once there is somewhere real to send
+ * people.
  */
 export const projects: Project[] = z.array(projectSchema).parse([
   {
@@ -48,13 +48,16 @@ export const projects: Project[] = z.array(projectSchema).parse([
     imgW: '100%',
   },
   {
-    title: 'TipTrendz',
+    title: 'FORM',
     kind: 'Side project · Web app',
     blurb:
-      'Income tracking for service workers, whose pay is variable enough that most budgeting tools are useless to them. Dashboards that make an unpredictable month legible.',
-    blurbShort: 'Tip tracking for service workers, built from five years of serving.',
-    stack: 'Spring Boot · React · Postgres',
-    image: tiptrendz,
+      'A personal training app built for how I actually train: strength work, timed circuits and rehab in one place, with drag-and-drop weekly planning and a rest timer that does not need a second app. Installs like a native app and keeps working offline.',
+    blurbShort: 'A training app that plans the week and works offline.',
+    stack: 'React · TypeScript · Supabase · PWA',
+    // A title card, standing in until the Claude Design phone render lands.
+    image: form,
+    imgBg: '#101109',
+    // No link: the repo is private, so there is nowhere public to send people.
     span: 5,
     imgH: '240px',
     imgW: '100%',

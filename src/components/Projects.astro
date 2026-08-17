@@ -67,7 +67,10 @@ const visible = tile(published(projects));
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--gap-card);
-    align-items: start;
+    /* Stretch, not the design's `start`: cards sharing a row match heights even
+       when their copy differs. The footer's margin-top:auto pins the stack line
+       and CTA to the bottom, so the extra height reads as deliberate. */
+    align-items: stretch;
   }
 
   .card {
