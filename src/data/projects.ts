@@ -53,7 +53,7 @@ export const projects: Project[] = z.array(projectSchema).parse([
     title: 'FORM',
     kind: 'Side project · Web app',
     blurb:
-      'Most fitness apps are built around strength, and I could never find one that handled interval training the way I wanted, so I made my own. It covers lifting, rehab and timed circuits, plans out the week, and still works when there is no signal in the gym.',
+      'Most fitness apps are built around strength, and none handled interval training the way I wanted, so I made my own. Now I use it for everything: lifting, rehab, and the interval sessions that started it.',
     blurbShort: 'An interval-first training app I built for myself.',
     stack: 'React · TypeScript · Supabase · PWA',
     // A title card, in the site's own type and colour.
