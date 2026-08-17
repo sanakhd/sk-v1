@@ -4,16 +4,27 @@ import { about } from '../data/site';
 ---
 
 <section id="about" aria-labelledby="about-heading">
-  <div class="cols">
-    <div class="lead-col">
-      <SectionHeading title={about.heading} id="about-heading" flush />
-      <p class="lead">{about.lead}</p>
-    </div>
+  {
+    about.ready ? (
+      <div class="cols">
+        <div class="lead-col">
+          <SectionHeading title={about.heading} id="about-heading" flush />
+          <p class="lead">{about.lead}</p>
+        </div>
 
-    <div class="body-col">
-      {about.body.map((paragraph) => <p>{paragraph}</p>)}
-    </div>
-  </div>
+        <div class="body-col">
+          {about.body.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div class="lead-col">
+        <SectionHeading title={about.heading} id="about-heading" flush />
+        <p class="soon">{about.soon}</p>
+      </div>
+    )
+  }
 </section>
 
 <style>
@@ -33,6 +44,14 @@ import { about } from '../data/site';
     display: flex;
     flex-direction: column;
     gap: var(--space-28);
+  }
+
+  /* The unwritten state: heading and one line, no second column to leave empty. */
+  .soon {
+    font-size: var(--fs-sub);
+    line-height: var(--lh-sub);
+    letter-spacing: var(--track-sub);
+    color: var(--text-dim);
   }
 
   .lead {

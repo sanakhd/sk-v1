@@ -54,12 +54,12 @@ export const hero = {
 
 export const about = {
   /**
-   * Flip to true once the copy below is written. While false, the whole About
-   * section and its nav link are omitted from the production build, because a
-   * section containing only a heading is worse than no section.
+   * Flip to true once the copy below is written. While false the section still
+   * renders, showing `soon` in place of the lead and body.
    */
   ready: false,
   heading: 'About',
+  soon: 'Still writing this one.',
   lead: '[About lead]',
   body: ['[About paragraph one]', '[About paragraph two]'],
 } as const;
