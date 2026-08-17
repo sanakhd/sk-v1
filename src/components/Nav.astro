@@ -6,11 +6,16 @@ import { site, nav } from '../data/site';
 <header class="bar">
   <a class="wordmark" href="#top">{site.wordmark}</a>
 
-  <nav aria-label="Primary">
-    <ul>
+  <nav aria-label="Primary" data-nav>
+    <button class="toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+      <span class="label-closed">Menu</span>
+      <span class="label-open">Close</span>
+    </button>
+
+    <ul id="nav-links">
       {
         nav.map((item) => (
-          <li class="anchor-item">
+          <li>
             <Pill href={item.href} variant="ghost" size="sm">
               {item.label}
             </Pill>
@@ -23,6 +28,48 @@ import { site, nav } from '../data/site';
     </ul>
   </nav>
 </header>
+
+<script>
+  /**
+   * Mobile menu.
+   *
+   * Progressive enhancement: the `data-js` flag is only set once this runs, and
+   * every CSS rule that hides the links is scoped behind it. Without JavaScript
+   * the links stay visible and wrap onto a second row, which is a working nav
+   * rather than a dead button.
+   */
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const toggle = nav?.querySelector<HTMLButtonElement>('.toggle');
+
+  if (nav && toggle) {
+    nav.dataset.js = '';
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.toggleAttribute('data-open', open);
+    };
+
+    toggle.addEventListener('click', () =>
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true'),
+    );
+
+    // Anchor links do not navigate, so the panel has to be closed explicitly.
+    nav
+      .querySelectorAll('a')
+      .forEach((link) => link.addEventListener('click', () => setOpen(false)));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.hasAttribute('data-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (nav.hasAttribute('data-open') && !nav.contains(event.target as Node)) setOpen(false);
+    });
+  }
+</script>
 
 <style>
   .bar {
@@ -48,19 +95,80 @@ import { site, nav } from '../data/site';
     white-space: nowrap;
   }
 
+  nav {
+    position: relative;
+  }
+
   ul {
     display: flex;
     align-items: center;
     gap: var(--space-8);
   }
 
-  /* No mobile menu — the design wraps the pills onto a second row instead, which
-     keeps every anchor reachable without a hamburger. For a single scrolling page
-     that is the right trade: the overlay menu in v1 was the least accessible
-     thing on the site and it existed to solve a problem this page doesn't have. */
+  /* The toggle only exists on small screens, and only once JS is running. */
+  .toggle {
+    display: none;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-14);
+    border: 1px solid rgb(20 21 15 / 0.22);
+    border-radius: var(--r-pill);
+    font-family: var(--font-sans);
+    font-size: var(--fs-meta);
+    font-weight: var(--fw-medium);
+    color: var(--text);
+  }
+
+  .label-open {
+    display: none;
+  }
+
   @media (max-width: 900px) {
     .bar {
       gap: var(--space-12);
+    }
+  }
+
+  @media (max-width: 700px) {
+    [data-js] .toggle {
+      display: inline-flex;
+    }
+
+    [data-js][data-open] .label-closed {
+      display: none;
+    }
+
+    [data-js][data-open] .label-open {
+      display: inline;
+    }
+
+    /* A panel rather than a full-screen overlay. Four links do not warrant
+       taking over the viewport, and it keeps the page visible behind it. */
+    [data-js] ul {
+      display: none;
+      position: absolute;
+      top: calc(100% + var(--space-12));
+      right: 0;
+      z-index: 60;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-4);
+      min-width: 180px;
+      padding: var(--space-8);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgb(20 21 15 / 0.16);
+    }
+
+    [data-js][data-open] ul {
+      display: flex;
+    }
+
+    [data-js] ul :global(a) {
+      justify-content: flex-start;
+      padding: var(--space-14);
+      font-size: var(--fs-body-xs);
     }
   }
 </style>

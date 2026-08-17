@@ -40,7 +40,10 @@ export const projects: Project[] = z.array(projectSchema).parse([
       "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
     blurbShort: 'This site. Designed first, then built on a token layer.',
     stack: 'Astro · TypeScript',
+    // The tokens themselves rather than a screenshot of the site: it shows what
+    // the blurb claims, and a full-page shot is an unreadable sliver at this size.
     image: portfolio,
+    imgBg: '#1d1e16',
     link: 'https://github.com/sanakhd/sk-v1',
     linkKind: 'code',
     span: 7,

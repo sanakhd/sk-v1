@@ -34,14 +34,21 @@ const earlier = published(earlierRoles);
             <p class="blurb">{role.blurb}</p>
 
             {role.rotations.length > 0 && (
-              <ol class="rotations">
-                {role.rotations.map((rotation) => (
-                  <li>
-                    <span class="rotation-title">{rotation.title}</span>
-                    <span class="rotation-scope">{rotation.scope}</span>
-                  </li>
-                ))}
-              </ol>
+              <details class="rot" open data-rotations>
+                <summary>
+                  <span class="label-closed">See the {role.rotations.length} rotations</span>
+                  <span class="label-open">Hide rotations</span>
+                </summary>
+
+                <ol class="rotations">
+                  {role.rotations.map((rotation) => (
+                    <li>
+                      <span class="rotation-title">{rotation.title}</span>
+                      <span class="rotation-scope">{rotation.scope}</span>
+                    </li>
+                  ))}
+                </ol>
+              </details>
             )}
 
             {role.tags.length > 0 && (
@@ -82,6 +89,27 @@ const earlier = published(earlierRoles);
     )
   }
 </section>
+
+<script>
+  /**
+   * Collapse the rotation lists on small screens only.
+   *
+   * They are authored `open` so that without JavaScript, or on desktop where the
+   * summary is hidden, the content is always readable. This only ever takes the
+   * away when there is a visible control to bring it back.
+   */
+  const SMALL = window.matchMedia('(max-width: 700px)');
+  const lists = document.querySelectorAll<HTMLDetailsElement>('[data-rotations]');
+
+  const sync = (event: MediaQueryList | MediaQueryListEvent) => {
+    lists.forEach((list) => {
+      list.open = !event.matches;
+    });
+  };
+
+  sync(SMALL);
+  SMALL.addEventListener('change', sync);
+</script>
 
 <style>
   section {
@@ -164,7 +192,44 @@ const earlier = published(earlierRoles);
     font-size: var(--fs-rotation-scope);
   }
 
-  /* Rotations ------------------------------------------------------------- */
+  /* Rotations -------------------------------------------------------------
+     Always open on desktop, where the summary is hidden and there is nothing to
+     toggle. On phones the script closes it, so the tallest row on the page stops
+     dominating the scroll. Without JS they simply stay open, which is fine. */
+  .rot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .rot summary {
+    display: none;
+    align-self: flex-start;
+    order: 2;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--line-heavy);
+    font-size: 14px;
+    color: var(--text-body);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .rot summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .rot .label-open {
+    display: none;
+  }
+
+  .rot[open] .label-closed {
+    display: none;
+  }
+
+  .rot[open] .label-open {
+    display: inline;
+  }
+
   .rotations {
     display: flex;
     flex-direction: column;
@@ -269,6 +334,12 @@ const earlier = published(earlierRoles);
 
   /* Responsive ------------------------------------------------------------
      The design collapses both row grids to a single column at 900px. */
+  @media (max-width: 700px) {
+    .rot summary {
+      display: inline-flex;
+    }
+  }
+
   @media (max-width: 900px) {
     .role,
     .earlier li {
