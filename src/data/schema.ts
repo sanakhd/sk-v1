@@ -67,6 +67,8 @@ export const projectSchema = z.object({
   title: z.string(),
   kind: z.string(),
   blurb: z.string(),
+  /** Shown instead of `blurb` on the mobile rail, where cards are 76vw wide. */
+  blurbShort: z.string(),
   stack: z.string(),
   /**
    * An imported image, not a path — Astro needs the ImageMetadata to emit WebP

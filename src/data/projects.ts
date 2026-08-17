@@ -2,7 +2,6 @@ import { z } from 'astro/zod';
 import { projectSchema, type Project } from './schema';
 
 import lifecurriculum from '../assets/lifecurriculum.png';
-import spotify from '../assets/spotify.png';
 import tiptrendz from '../assets/tiptrendz.png';
 import portfolio from '../assets/sk_v2.png';
 
@@ -11,10 +10,9 @@ import portfolio from '../assets/sk_v2.png';
  * proportions, so the grid follows the content rather than the content being
  * poured into a fixed grid.
  *
- * Links: the design ships `link: "#"` for TipTrendz and a Heroku URL for Insights
- * that now returns 503 (free dynos were retired in 2022). Neither has a public
- * repo, so both go out link-less rather than pointing somewhere broken. Add
- * `link` + `linkKind` to either as soon as there's somewhere real to send people.
+ * Links: the design ships `link: "#"` for TipTrendz and there is no public repo
+ * for it, so it goes out link-less rather than pointing somewhere broken. Add
+ * `link` + `linkKind` as soon as there is somewhere real to send people.
  */
 export const projects: Project[] = z.array(projectSchema).parse([
   {
@@ -22,14 +20,15 @@ export const projects: Project[] = z.array(projectSchema).parse([
     kind: 'Side project · Web app',
     blurb:
       "Turns any topic into a two-host conversation you can actually fit into a day. Sessions run two to three minutes, build into progressive five-day programs, and adapt to whether you're at home, working out, or driving.",
+    blurbShort: 'Any topic, turned into a two-host conversation that fits your day.',
     stack: 'FastAPI · React · TypeScript · GPT-4',
     image: lifecurriculum,
     link: 'https://github.com/sanakhd/LifeCurriculumMVP',
     linkKind: 'code',
     span: 12,
     dir: 'row',
-    imgH: '300px',
-    imgW: '46%',
+    imgH: '440px',
+    imgW: '52%',
     // A title card, not a UI screenshot: cropping it eats the wordmark.
     imgFit: 'contain',
     imgBg: '#ff4a0a',
@@ -39,23 +38,13 @@ export const projects: Project[] = z.array(projectSchema).parse([
     kind: 'Portfolio · This site',
     blurb:
       "The site you're on. Rebuilt from scratch after the first version turned into a few thousand lines of CSS nobody could safely touch. Designed first, then translated into a token layer so every colour, size and space in the code traces back to the design.",
+    blurbShort: 'This site. Designed first, then built on a token layer.',
     stack: 'Astro · TypeScript',
     image: portfolio,
     link: 'https://github.com/sanakhd/sk-v1',
     linkKind: 'code',
-    span: 4,
+    span: 7,
     imgH: '240px',
-    imgW: '100%',
-  },
-  {
-    title: 'Insights',
-    kind: 'Side project · Web app',
-    blurb:
-      "Turns your Spotify listening history into something you'd actually want to look at — top artists, tracks, and the audio characteristics behind your taste. Built it because the yearly recap wasn't enough.",
-    stack: 'React · Express · Spotify API',
-    image: spotify,
-    span: 4,
-    imgH: '220px',
     imgW: '100%',
   },
   {
@@ -63,12 +52,11 @@ export const projects: Project[] = z.array(projectSchema).parse([
     kind: 'Side project · Web app',
     blurb:
       'Income tracking for service workers, whose pay is variable enough that most budgeting tools are useless to them. Dashboards that make an unpredictable month legible.',
+    blurbShort: 'Tip tracking for service workers, built from five years of serving.',
     stack: 'Spring Boot · React · Postgres',
     image: tiptrendz,
-    span: 4,
-    // The design's smallest slot. Kept deliberately short so the row does not
-    // read as three identical blocks.
-    imgH: '170px',
+    span: 5,
+    imgH: '240px',
     imgW: '100%',
   },
 ]);

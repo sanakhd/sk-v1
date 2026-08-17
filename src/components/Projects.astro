@@ -37,7 +37,8 @@ const visible = tile(published(projects));
               </Eyebrow>
 
               <h3>{project.title}</h3>
-              <p>{project.blurb}</p>
+              <p class="long">{project.blurb}</p>
+              <p class="short">{project.blurbShort}</p>
 
               <div class="foot">
                 <span class="stack">{project.stack}</span>
@@ -121,8 +122,11 @@ const visible = tile(published(projects));
     line-height: normal;
   }
 
+  .short {
+    display: none;
+  }
+
   p {
-    flex: 1;
     font-size: var(--fs-body-s);
     line-height: var(--lh-relaxed);
     color: var(--on-ink-dim);
@@ -134,7 +138,8 @@ const visible = tile(published(projects));
     justify-content: space-between;
     align-items: center;
     gap: var(--space-20);
-    padding-top: var(--space-8);
+    padding-top: var(--space-18);
+    margin-top: auto;
   }
 
   .stack {
@@ -145,6 +150,7 @@ const visible = tile(published(projects));
 
   .foot a {
     flex-shrink: 0;
+    white-space: nowrap;
     font-size: 14px;
     font-weight: var(--fw-medium);
     color: var(--accent);
@@ -178,13 +184,60 @@ const visible = tile(published(projects));
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 700px) {
+    /* A vertical stack of four tall cards is a long scroll past content the
+       visitor may not want. The design turns it into a swipeable rail instead. */
     .inner {
-      padding-inline: var(--space-12);
+      padding-inline: 0;
+    }
+
+    .inner :global(.heading) {
+      padding-inline: var(--space-20);
+    }
+
+    .grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      align-items: stretch;
+      gap: 14px;
+      padding: var(--space-4) var(--space-20) var(--space-20);
+      scrollbar-width: none;
+    }
+
+    .grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card,
+    .card[data-dir='row'] {
+      flex: 0 0 76vw;
+      scroll-snap-align: center;
+      min-height: 400px;
+    }
+
+    /* One height for every card on the rail, whatever the desktop value. */
+    .shot {
+      height: 170px;
     }
 
     .body {
       padding: var(--space-28) var(--space-24) var(--space-32);
+    }
+
+    /* Long blurbs and the stack line do not earn their space at 76vw. */
+    .long,
+    .stack {
+      display: none;
+    }
+
+    .short {
+      display: block;
+    }
+
+    .foot {
+      justify-content: flex-end;
     }
   }
 </style>

@@ -95,9 +95,7 @@
   --fs-h3: clamp(24px, 3vw, 32px); /* project title */
   --fs-lead: clamp(20px, 2.4vw, 26px); /* "Now" card */
 
-  /* The design leaves the Contact headline at a fixed 104px, which overflows a
-     phone. Clamped here on the same curve as the others — flagged for review. */
-  --fs-display-xl: clamp(40px, 8vw, 104px); /* contact headline */
+  --fs-display-xl: clamp(38px, 8.5vw, 104px); /* contact headline */
 
   --fs-h3-sm: 30px; /* role title */
   --fs-h3-quiet: 21px; /* role title, 'quiet' emphasis */
@@ -200,8 +198,8 @@
   --section-pad-y-tall: clamp(72px, 10vw, 120px); /* About */
   --slab-pad-x: clamp(8px, 2vw, 24px); /* Projects slab */
   --slab-inner-x: var(--space-24); /* content inset inside the Projects slab */
-  --contact-pad-y: clamp(56px, 8vw, 100px); /* Contact slab — design fixes these */
-  --contact-pad-x: clamp(24px, 5vw, 64px); /*   at 100/64; clamped for phones */
+  --contact-pad-y: clamp(56px, 9vw, 100px); /* Contact slab */
+  --contact-pad-x: clamp(24px, 5vw, 64px);
 
   --nav-pad-y: var(--space-20);
 
