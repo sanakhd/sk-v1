@@ -12,7 +12,8 @@ export const roles: Role[] = z.array(roleSchema).parse([
     title: 'Product Manager',
     org: 'SoilFLO',
     orgHref: 'https://soilflo.com/',
-    orgNote: 'Material tracking software for construction and environmental teams',
+    orgNote: 'Software for earthmovers',
+    orgIcons: ['hard-hat', 'traffic-cone', 'truck'],
     blurb: todo('SoilFLO blurb'),
   },
   {

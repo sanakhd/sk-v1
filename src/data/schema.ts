@@ -42,8 +42,13 @@ export const roleSchema = z.object({
   org: z.string().optional(),
   /** Renders the org as an underlined external link when present. */
   orgHref: httpUrl.optional(),
-  /** Not rendered today. Kept from the design rather than dropped. */
+  /**
+   * The employer's own public description of itself. Shown in place of the
+   * blurb when there isn't one, so the row is not empty.
+   */
   orgNote: z.string().optional(),
+  /** Decorative icons shown beside orgNote. Names come from Icon.astro. */
+  orgIcons: z.array(z.enum(['hard-hat', 'traffic-cone', 'truck'])).default([]),
   /** Optional so a role can ship without one while the copy is being written. */
   blurb: z.string().optional(),
   /**

@@ -1,5 +1,6 @@
 ---
 import SectionHeading from './primitives/SectionHeading.astro';
+import Icon from './primitives/Icon.astro';
 import { roles, earlierRoles } from '../data/roles';
 import { published } from '../data/schema';
 
@@ -37,7 +38,22 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
           </div>
 
           <div class="what">
-            {role.blurb && <p class="blurb">{role.blurb}</p>}
+            {role.blurb ? (
+              <p class="blurb">{role.blurb}</p>
+            ) : (
+              role.orgNote && (
+                <p class="org-note">
+                  {role.orgIcons.length > 0 && (
+                    <span class="org-icons">
+                      {role.orgIcons.map((icon) => (
+                        <Icon name={icon} />
+                      ))}
+                    </span>
+                  )}
+                  {role.orgNote}
+                </p>
+              )
+            )}
 
             {role.links.length > 0 && (
               <ul class="links">
@@ -193,6 +209,24 @@ const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
     line-height: var(--lh-relaxed);
     color: var(--text-body);
     text-wrap: pretty;
+  }
+
+  /* Stands in for a blurb that is not written yet. Set a step quieter, so it
+     reads as context about the employer rather than as the role's description. */
+  .org-note {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    font-size: var(--fs-rotation-scope);
+    line-height: var(--lh-sub);
+    color: var(--text-soft);
+    text-wrap: pretty;
+  }
+
+  .org-icons {
+    display: flex;
+    gap: var(--space-8);
+    color: var(--text-dim);
   }
 
   /* 'quiet' — the freelance row. Steps the title and blurb down so an aside
