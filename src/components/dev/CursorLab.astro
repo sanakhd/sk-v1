@@ -1,0 +1,241 @@
+---
+/**
+ * Cursor lab. Development only.
+ *
+ * Renders four common custom-cursor treatments plus off, with a switcher, so
+ * they can be compared on the real page rather than described. Base.astro only
+ * mounts this when import.meta.env.DEV, so none of it reaches the build.
+ *
+ * Nothing here is a commitment. Whichever one wins gets rebuilt properly as a
+ * shipping component, with the switcher and the localStorage dropped.
+ */
+---
+
+<div id="cursor-lab" data-variant="off" aria-hidden="true">
+  <div class="ring"></div>
+  <div class="dot"></div>
+  <div class="label">View</div>
+</div>
+
+<div id="cursor-panel" role="group" aria-label="Cursor style (development only)">
+  <span class="title">Cursor</span>
+  <button type="button" data-set="off">Off</button>
+  <button type="button" data-set="dot">Dot</button>
+  <button type="button" data-set="ring">Ring</button>
+  <button type="button" data-set="blend">Blend</button>
+  <button type="button" data-set="label">Label</button>
+</div>
+
+<script>
+  const lab = document.getElementById('cursor-lab')!;
+  const panel = document.getElementById('cursor-panel')!;
+
+  /* Coarse pointers have no cursor to decorate, and anyone who has asked for
+     less motion should not get a thing that chases them around the screen. */
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (!fine.matches || still.matches) {
+    lab.remove();
+    panel.remove();
+  } else {
+    const ring = lab.querySelector<HTMLElement>('.ring')!;
+    const dot = lab.querySelector<HTMLElement>('.dot')!;
+    const label = lab.querySelector<HTMLElement>('.label')!;
+
+    let variant = localStorage.getItem('cursor-variant') ?? 'off';
+    const setVariant = (next: string) => {
+      variant = next;
+      lab.dataset.variant = next;
+      document.documentElement.dataset.cursor = next;
+      localStorage.setItem('cursor-variant', next);
+      panel.querySelectorAll('button').forEach((b) => {
+        b.toggleAttribute('data-on', b.dataset.set === next);
+      });
+    };
+    setVariant(variant);
+
+    panel.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>('[data-set]');
+      if (b) setVariant(b.dataset.set!);
+    });
+
+    /* Target position from the pointer, rendered position eased toward it. The
+       dot tracks exactly; the ring lags, which is what reads as "weight". */
+    let tx = -100,
+      ty = -100,
+      rx = -100,
+      ry = -100;
+    let over = false,
+      overCard = false;
+
+    window.addEventListener(
+      'pointermove',
+      (e) => {
+        tx = e.clientX;
+        ty = e.clientY;
+        const el = e.target as HTMLElement;
+        over = !!el.closest('a, button, summary, [role="button"]');
+        overCard = !!el.closest('#projects .card');
+        lab.toggleAttribute('data-over', over);
+        lab.toggleAttribute('data-over-card', overCard);
+      },
+      { passive: true },
+    );
+
+    document.addEventListener('pointerleave', () => {
+      tx = -100;
+      ty = -100;
+    });
+
+    const frame = () => {
+      rx += (tx - rx) * 0.18;
+      ry += (ty - ry) * 0.18;
+      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+      label.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+      dot.style.transform = `translate3d(${tx}px, ${ty}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }
+</script>
+
+<style is:global>
+  /* Only the blend variant takes the native cursor away. Doing that is a real
+     accessibility cost, so it is opt-in and never the default. */
+  html[data-cursor='blend'],
+  html[data-cursor='blend'] * {
+    cursor: none !important;
+  }
+
+  #cursor-lab {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  #cursor-lab > * {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    will-change: transform;
+  }
+
+  #cursor-lab .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--accent);
+    transition: transform 120ms ease;
+  }
+
+  #cursor-lab .ring {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1.5px solid var(--accent);
+    transition:
+      width 200ms var(--ease),
+      height 200ms var(--ease),
+      background-color 200ms var(--ease);
+  }
+
+  #cursor-lab .label {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 160ms var(--ease);
+  }
+
+  /* dot: a small lime dot that tracks exactly and grows on anything clickable */
+  #cursor-lab[data-variant='dot'] .dot {
+    display: block;
+  }
+  #cursor-lab[data-variant='dot'][data-over] .dot {
+    transform-origin: center;
+    scale: 2.4;
+  }
+
+  /* ring: the classic trailing outline, scaling over interactive elements */
+  #cursor-lab[data-variant='ring'] .ring,
+  #cursor-lab[data-variant='ring'] .dot {
+    display: block;
+  }
+  #cursor-lab[data-variant='ring'][data-over] .ring {
+    width: 60px;
+    height: 60px;
+    background: rgb(157 200 97 / 0.12);
+  }
+
+  /* blend: a solid disc that inverts whatever is under it. Native cursor off. */
+  #cursor-lab[data-variant='blend'] .ring {
+    display: block;
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: #fff;
+    mix-blend-mode: difference;
+  }
+  #cursor-lab[data-variant='blend'][data-over] .ring {
+    width: 76px;
+    height: 76px;
+  }
+
+  /* label: nothing at all until you are over a project card */
+  #cursor-lab[data-variant='label'] .label {
+    display: block;
+  }
+  #cursor-lab[data-variant='label'][data-over-card] .label {
+    opacity: 1;
+  }
+
+  #cursor-panel {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    background: var(--ink);
+    color: var(--on-ink);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgb(20 21 15 / 0.3);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  #cursor-panel .title {
+    color: var(--on-ink-faint);
+    padding-right: 4px;
+  }
+
+  #cursor-panel button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: var(--on-ink-dim);
+    background: transparent;
+    border: 1px solid rgb(242 240 234 / 0.18);
+    border-radius: 999px;
+    padding: 5px 9px;
+    cursor: pointer;
+  }
+
+  #cursor-panel button[data-on] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+</style>
