@@ -6,6 +6,11 @@ import { published } from '../data/schema';
 
 const visible = published(roles);
 const earlier = published(earlierRoles);
+
+/* The design spells the count out ("See the three rotations"), so the label
+   reads as a sentence rather than a data field. Falls back to the digit. */
+const COUNT_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
+const spell = (n: number) => COUNT_WORDS[n] ?? String(n);
 ---
 
 <section id="experience" aria-labelledby="experience-heading">
@@ -36,7 +41,7 @@ const earlier = published(earlierRoles);
             {role.rotations.length > 0 && (
               <details class="rot" open data-rotations>
                 <summary>
-                  <span class="label-closed">See the {role.rotations.length} rotations</span>
+                  <span class="label-closed">See the {spell(role.rotations.length)} rotations</span>
                   <span class="label-open">Hide rotations</span>
                 </summary>
 
@@ -199,7 +204,9 @@ const earlier = published(earlierRoles);
   .rot {
     display: flex;
     flex-direction: column;
-    gap: var(--space-16);
+    /* Matches .what's spacing: in the design these are siblings in that column,
+       not a nested group with its own rhythm. */
+    gap: var(--space-18);
   }
 
   .rot summary {
